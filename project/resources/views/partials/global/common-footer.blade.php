@@ -20,11 +20,12 @@
             </div>
         </div>
     </div>
-    <!--==================== Newsleter Section End ====================-->
+    <!--==================== Newsleter Section  End ====================-->
 @endif
 <!--==================== Newslatter Section End ====================-->
 
 <!--==================== Footer Section Start ====================-->
+
 <footer class="full-row bg-white border-footer p-0">
     <div class="container">
         <div class="row row-cols-xl-4 row-cols-md-2 row-cols-1">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="widget-ecommerce-contact">
                         @if($ps->phone != null)
-                        <span class="font-medium font-500 text-dark">{{ __('Got Questions ? Call us 24/7!') }}</span>
+                        <span class="font-medium font-500 text-dark">{{ __('Got Questions ? Call us 24/8!') }}</span>
                         <div class="text-dark h4 font-400 ">{{ $ps->phone }}</div>
                         @endif
                         @if($ps->street != null)
