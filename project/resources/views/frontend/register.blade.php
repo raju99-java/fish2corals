@@ -3,89 +3,121 @@
 @section('content')
 @include('partials.global.common-header')
 
- <!-- breadcrumb -->
- <div class="full-row bg-light overlay-dark py-5" style="background-image: url({{ $gs->breadcrumb_banner ? asset('assets/images/'.$gs->breadcrumb_banner):asset('assets/images/noimage.png') }}); background-position: center center; background-size: cover;">
-    <div class="container">
-        <div class="row text-center text-white">
-            <div class="col-12">
-                <h3 class="mb-2 text-white">{{ __('Register') }}</h3>
-            </div>
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 d-inline-flex bg-transparent p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Register') }}</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- breadcrumb -->
-
-        <!--==================== Registration Form Start ====================-->
-        <div class="full-row">
-            <div class="container">
+        <!-- Breadcrumb Section Start -->
+        <section class="breadscrumb-section pt-0">
+            <div class="container-fluid-lg">
                 <div class="row">
-                    <div class="col">
-                        <div class="woocommerce">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-8 col-12 mx-auto">
-                                    <div class="registration-form border">
-                                        @include('includes.admin.form-login')
-                                        <h3>{{ __('Signup Now') }}</h3>
-                                        <form id="registerform" action="{{route('user-register-submit')}}" method="POST">
-                                            @csrf
-                                            <p>
-
-                                                <input type="text" name="name" class="form-control" placeholder="{{ __('Full Name') }}"  >
-                                            </p>
-                                            <p>
-
-                                                <input type="email" name="email" class="form-control" required=""  placeholder="{{ __('Email Address') }}" >
-                                            </p>
-                                            <p>
-
-                                                <input type="text" name="phone" class="form-control" required=""  placeholder="{{ __('Phone Number') }}" >
-                                            </p>
-                                            <p>
-                                                <input type="text" name="address" class="form-control" required=""  placeholder="{{ __('Address') }}" >
-                                            </p>
-
-                                            <p>
-                                                <input type="password" name="password" class="form-control" required=""  placeholder="{{ __('Password') }}" >
-                                            </p>
-                                            <p>
-                                                <input type="password" name="password_confirmation" class="form-control" required=""  placeholder="{{ __('Confirm Password') }}" >
-                                            </p>
-
-                                            @if($gs->is_capcha == 1)
-                                            <div class="form-input mb-3">
-                                                 {!! NoCaptcha::display() !!}
-                                                 {!! NoCaptcha::renderJs() !!}
-                                                 @error('g-recaptcha-response')
-                                                 <p class="my-2">{{$message}}</p>
-                                                 @enderror
-                                             </div>
-                                             @endif
-
-                                            <input id="processdata" type="hidden" value="{{ __('Processing...') }}">
-                                                <button type="submit" class="btn btn-primary float-none w-100 rounded-0 submit-btn" name="register" value="Register">{{ __('Register') }}</button>
-                                            </p>
-                                        </form>
-                                        <p>
-                                                {{ __("Do have any account?") }}<a href="{{ route('user.login') }}"  class="text-secondary">{{__(' Login')}}</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="col-12">
+                        <div class="breadscrumb-contain">
+                            <h2>{{ __('Register') }}</h2>
+                            <nav>
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="{{ route('front.index') }}">
+                                            <i class="fa-solid fa-house"></i>
+                                        </a>
+                                    </li>
+                                    <li class="breadcrumb-item active">{{ __('Register') }}</li>
+                                </ol>
+                            </nav>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--==================== Registration Form Start ====================-->
+        </section>
+        <!-- Breadcrumb Section End -->
+
+
+        <section class="log-in-section section-b-space">
+            <div class="container-fluid-lg w-100">
+                <div class="row">
+                    <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                        <div class="image-contain">
+                            <img src="{{asset('assets/front-end/assets/images/inner-page/sign-up.png')}}" class="img-fluid" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-6 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                        <div class="log-in-box">
+                            <div class="log-in-title">
+                                <h3>Welcome To Fish2 Corals Shop</h3>
+                                <h4>Create New Account</h4>
+                            </div>
+
+                            <div class="input-box">
+                                @include('includes.admin.form-login')
+                                <form class="row g-4" id="registerform" action="{{route('user-register-submit')}}" method="POST">
+                                    @csrf
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="text" class="form-control" id="fullname" name="name" placeholder="Full Name">
+                                            <label for="fullname">Full Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+                                            <label for="email">Email Address</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="text" class="form-control" id="tel" name="phone" placeholder="Phone Number">
+                                            <label for="tel">Phone Number</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="text" class="form-control" id="address" name="address" placeholder="Address">
+                                            <label for="address">Address</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                            <label for="password">Password</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating">
+                                            <input type="password" class="form-control" id="cpassword" name="password_confirmation" placeholder="Confirm Password">
+                                            <label for="cpassword">Confirm Password</label>
+                                        </div>
+                                    </div>
+
+                                    @if($gs->is_capcha == 1)
+                                    <div class="col-12">
+                                        {!! NoCaptcha::display() !!}
+                                        {!! NoCaptcha::renderJs() !!}
+                                        @error('g-recaptcha-response')
+                                        <p class="my-2">{{$message}}</p>
+                                        @enderror
+                                    </div>
+                                    @endif
+
+                                    <input id="processdata" type="hidden" value="{{ __('Processing...') }}">
+
+                                    <div class="col-12">
+                                        <button class="btn btn-animation w-100" type="submit">Sign Up</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="sign-up-box">
+                                <h4>Already have an account?</h4>
+                                <a href="{{ route('user.login') }}">Log In</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xxl-7 col-xl-6 col-lg-6"></div>
+                </div>
+            </div>
+        </section>
 
 
 @include('partials.global.common-footer')

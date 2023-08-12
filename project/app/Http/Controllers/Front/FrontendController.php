@@ -101,9 +101,19 @@ public function currency($id)
         $data['products']=Product::get();
         $data['ratings']=Rating::get();
 
+        $data['feature_products']=Product::where('featured',1)->where('status',1)->take(50)->get();
+        $data['top_products']=Product::where('top',1)->where('status',1)->take(50)->get();
+        $data['sale_products']=Product::where('sale',1)->where('status',1)->take(50)->get();
+
+        $data['blogs']=Blog::where('status',1)->take(20)->get();
 
 	    return view('frontend.index',$data);
 	}
+
+    public function about(){
+        $data=[];
+        return view('frontend.about',$data);
+    }
 
     // Home Page Ajax Display
 

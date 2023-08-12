@@ -3,113 +3,109 @@
 @section('content')
 @include('partials.global.common-header')
 
-<!-- breadcrumb -->
-<div class="full-row bg-light overlay-dark py-5" style="background-image: url({{ $gs->breadcrumb_banner ? asset('assets/images/'.$gs->breadcrumb_banner):asset('assets/images/noimage.png') }}); background-position: center center; background-size: cover;">
-    <div class="container">
-        <div class="row text-center text-white">
-            <div class="col-12">
-                <h3 class="mb-2 text-white">{{ __('Login Page') }}</h3>
-            </div>
-            <div class="col-12">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb mb-0 d-inline-flex bg-transparent p-0">
-                        <li class="breadcrumb-item"><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-
-                        <li class="breadcrumb-item active" aria-current="page">{{ __('Login') }}</li>
-                    </ol>
-                </nav>
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2 class="mb-2">{{ __('Login') }}</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('front.index') }}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">{{ __('Login') }}</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<!-- breadcrumb -->
-        <!--==================== Login Form Start ====================-->
-        <div class="full-row">
-            <div class="container">
+    </section>
+    <!-- Breadcrumb Section End -->
+
+       <!-- log in section start -->
+        <section class="log-in-section background-image-2 section-b-space">
+            <div class="container-fluid-lg w-100">
                 <div class="row">
-                    <div class="col">
-                        <div class="woocommerce">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-8 col-12 mx-auto">
-                                    <div class="sign-in-form border">
-                                        <h3>{{ __('User Login') }}</h3>
+                    <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+                        <div class="image-contain">
+                            <img src="{{asset('assets/front-end/assets/images/inner-page/log-in.png')}}" class="img-fluid" alt="">
+                        </div>
+                    </div>
 
-                                    @include('alerts.admin.form-login')
+                    <div class="col-xxl-6 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+                        <div class="log-in-box">
+                            <div class="log-in-title">
+                                <h3>Welcome To Fish2 CoralsShop</h3>
+                                
+                                <h4>Log In Your Account</h4>
+                            </div>
 
+                                @if(Session::has('auth-modal'))
+                            <div class="alert alert-danger alert-dismissible">
+
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            {{ Session::get('auth-modal') }}
+                            </div>
+                            @endif
+
+                            @if(Session::has('forgot-modal'))
+                            <div class="alert alert-success alert-dismissible">
+
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                            {{ Session::get('forgot-modal') }}
+                            </div>
+                            @endif
+
+                            <div class="input-box">
+                                @include('includes.admin.form-login')
+                                <form class="row g-4 woocommerce-form-login" id="loginform" action="{{ route('user.login.submit') }}" method="POST">
+                                    @csrf
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating log-in-form">
+                                            <input type="email" class="form-control" name="email" id="username" placeholder="{{ __('Type Email Address') }}" required="">
+                                            <label for="email">Email Address</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <div class="form-floating theme-form-floating log-in-form">
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="{{ __('Type Password') }}" required="">
+                                            <label for="password">Password</label>
+                                        </div>
+                                    </div>
+
+                                    <input type="hidden" name="modal" value="1">
                                     @if(Session::has('auth-modal'))
-                                    <div class="alert alert-danger alert-dismissible">
-
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                  {{ Session::get('auth-modal') }}
-                                    </div>
+                                    <input type="hidden" name="auth_modal" value="1">
                                     @endif
+                                    <input id="authdata" type="hidden" value="{{ __('Authenticating...') }}">
 
-                                    @if(Session::has('forgot-modal'))
-                                    <div class="alert alert-success alert-dismissible">
-
-                                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                                  {{ Session::get('forgot-modal') }}
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-animation w-100 justify-content-center woocommerce-form-login__submit btn btn-primary border-0 rounded-0 submit-btn float-none w-100" name="login" value="Log in">LogIn</button>
                                     </div>
-                                    @endif
-                                        <form class="woocommerce-form-login" id="loginform" action="{{ route('user.login.submit') }}" method="POST">
-                                            @csrf
-                                            <p>
-                                                <label for="username">{{ __('Email address') }}<span class="required">*</span></label>
-                                                <input type="email" class="form-control" name="email" id="username" placeholder="{{ __('Type Email Address') }}" required="" > </p>
-                                            <p>
-                                                <label for="password">{{ __('Password') }}<span class="required">*</span></label>
-                                                <input class="form-control" type="password" name="password" id="password" placeholder="{{ __('Type Password') }}" required="">
-                                            </p>
-                                            <div class="d-flex justify-content-between">
-                                                <p>
-                                                    <a href="{{ route('user.register') }}"  class="text-secondary">{{ __("Don't have any account?") }}</a>
-                                                </p>
-                                                <p>
-                                                    <a href="{{ route('user.forgot') }}"  class="text-secondary">{{ __('Lost your password?') }}</a>
-                                                </p>
+                                </form>
 
-                                            </div>
+                            </div>
 
+                            <div class="sign-up-box">
+                                <a href="{{ route('user.forgot') }}" class="forgot-password">Forgot Password?</a>
+                            </div>
 
-                                            <input type="hidden" name="modal" value="1">
-                                            @if(Session::has('auth-modal'))
-                                            <input type="hidden" name="auth_modal" value="1">
-                                            @endif
-                                            <input id="authdata" type="hidden" value="{{ __('Authenticating...') }}">
-
-                                            <button type="submit" class="woocommerce-form-login__submit btn btn-primary border-0 rounded-0 submit-btn float-none w-100" name="login" value="Log in">{{ __('Log in') }}</button>
-                                            @if($socialsetting->f_check == 1 || $socialsetting->g_check == 1)
-                                                    <div class="social-area text-center">
-                                                        <h3 class="title  mt-3">{{ ('OR') }}</h3>
-                                                        <p class="text">{{ __('Sign In with social media') }}</p>
-                                                        <ul class="social-links">
-                                                            @if($socialsetting->f_check == 1)
-                                                            <li>
-                                                            <a href="{{ route('social-provider','facebook') }}">
-                                                                <i class="fab fa-facebook-f"></i>
-                                                            </a>
-                                                            </li>
-                                                            @endif
-                                                            @if($socialsetting->g_check == 1)
-                                                            <li>
-                                                            <a href="{{ route('social-provider','google') }}">
-                                                                <i class="fab fa-google-plus-g"></i>
-                                                            </a>
-                                                            </li>
-                                                            @endif
-                                                        </ul>
-                                                    </div>
-					              @endif
-                                        </form>
-                                    </div>
-                                </div>
+                            <div class="sign-up-box">
+                                <h4>Don't have an account?</h4>
+                                <a href="{{ route('user.register') }}">Sign Up</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--==================== Login Form Start ====================-->
+        </section>
+      <!-- log in section end -->
 
 
 

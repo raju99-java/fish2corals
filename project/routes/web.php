@@ -1371,6 +1371,8 @@ Route::get('/forgot','Auth\User\ForgotController@index')->name('user.forgot');
 Route::post('/item/report', 'Front\CatalogController@report')->name('product.report');
 
     Route::get('/', 'Front\FrontendController@index')->name('front.index');
+    Route::get('/about-us', 'Front\FrontendController@about')->name('front.about');
+
     Route::get('/view','Front\CartController@view_cart')->name('front.cart-view');
     Route::get('/extras', 'Front\FrontendController@extraIndex')->name('front.extraIndex');
     Route::get('/currency/{id}', 'Front\FrontendController@currency')->name('front.currency');

@@ -52,73 +52,31 @@
                         </li>
 
                         <li class="onhover-dropdown">
-                            <a href="javascript:void(0)" class="header-icon swap-icon">
-                                <i class="iconly-Heart icli"></i>
+                            <a href="{{ route('front.cart') }}" class="header-icon bag-icon">
+                                <small class="badge-number badge-light" id="cart-count">{{ Session::has('cart') ? count(Session::get('cart')->items) : '0' }}</small>
+                                <i class="iconly-Bag-2 icli"></i>
                             </a>
 
-                            <div class="onhover-div">
-                                <ul class="cart-list">
-                                    <li>
-                                        <div class="drop-cart">
-                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                <img src="../assets/images/vegetable/product/1.png"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="drop-contain">
-                                                <a href="product-left-thumbnail.html">
-                                                    <h5>Fantasy Crunchy Choco Chip Cookies</h5>
-                                                </a>
-                                                <h6><span>1 x</span> $80.58</h6>
-                                                <button class="close-button">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="drop-cart">
-                                            <a href="product-left-thumbnail.html" class="drop-image">
-                                                <img src="../assets/images/vegetable/product/2.png"
-                                                    class="blur-up lazyload" alt="">
-                                            </a>
-
-                                            <div class="drop-contain">
-                                                <a href="product-left-thumbnail.html">
-                                                    <h5>Peanut Butter Bite Premium Butter Cookies 600 g</h5>
-                                                </a>
-                                                <h6><span>1 x</span> $25.68</h6>
-                                                <button class="close-button">
-                                                    <i class="fa-solid fa-xmark"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-
-                                <div class="price-box">
-                                    <h5>Price :</h5>
-                                    <h4 class="theme-color fw-bold">$106.58</h4>
-                                </div>
-
-                                <div class="button-group">
-                                    <a href="cart.html" class="btn btn-sm cart-button">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-sm cart-button theme-bg-color
-                                        text-white">Checkout</a>
-                                </div>
-                            </div>
+                            @include('load.cart')
                         </li>
 
                         <li>
-                            <a href="cart.html" class="header-icon bag-icon">
-                                <small class="badge-number badge-light">2</small>
-                                <i class="iconly-Bag-2 icli"></i>
-                            </a>
+                            @if (Auth::check())
+                                <a href="{{ route('user-wishlists') }}" class="header-icon swap-icon">
+                                    <small class="badge-number badge-light" id="wishlist-count">{{ Auth::user()->wishlistCount() }}</small>
+                                    <i class="iconly-Heart icli"></i>
+                                </a>
+                            @else
+                                <a href="{{ route('user.login') }}" class="header-icon swap-icon">
+                                    <small class="badge-number badge-light" id="wishlist-count">{{ 0 }}</small>
+                                    <i class="iconly-Heart icli"></i>
+                                </a>
+                            @endif
                         </li>
                     </ul>
 
-                    <a href="user-dashboard.html" class="user-box">
+                    @if (Auth::user())
+                    <a href="{{ route('user-dashboard') }}" class="user-box onhover-dropdown">
                         <span class="header-icon">
                             <i class="iconly-Profile icli"></i>
                         </span>
@@ -127,6 +85,17 @@
                             <h4 class="mt-1">Jennifer V. Ward</h4>
                         </div>
                     </a>
+                    @else
+                    <a href="{{ route('user.login') }}" class="user-box onhover-dropdown">
+                        <span class="header-icon">
+                            <i class="iconly-Profile icli"></i>
+                        </span>
+                        <div class="user-name">
+                            <h6 class="text-content">My Account</h6>
+                            <h4 class="mt-1">Jennifer V. Ward</h4>
+                        </div>
+                    </a>
+                    @endif
 
                     <!-- <a target="_blank" class="btn mobile-app d-xxl-flex d-none"
                         href="https://play.google.com/store/games?utm_source=apac_med&utm_medium=hasem&utm_content=Oct0121&utm_campaign=Evergreen&pcampaignid=MKT-EDR-apac-in-1003227-med-hasem-py-Evergreen-Oct0121-Text_Search_BKWS-BKWS%7CONSEM_kwid_43700065205026415_creativeid_535350509927_device_c&gclid=Cj0KCQjw8uOWBhDXARIsAOxKJ2H1K3VqdJFHodt0-XSnQzcuOuTP-s2aPBE6lG0QVOf8D5cJBsB-DxQaAkNAEALw_wcB&gclsrc=aw.ds">
