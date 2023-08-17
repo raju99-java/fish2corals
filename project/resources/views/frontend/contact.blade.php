@@ -1,110 +1,200 @@
 @extends('layouts.front')
 @section('content')
 @include('partials.global.common-header')
-<!-- breadcrumb -->
-<div class="full-row bg-light overlay-dark py-5" style="background-image: url({{ $gs->breadcrumb_banner ? asset('assets/images/'.$gs->breadcrumb_banner):asset('assets/images/noimage.png') }}); background-position: center center; background-size: cover;">
-   <div class="container">
-      <div class="row text-center text-white">
-         <div class="col-12">
-            <h3 class="mb-2 text-white">{{ __('Contact') }}</h3>
-         </div>
-         <div class="col-12">
-            <nav aria-label="breadcrumb">
-               <ol class="breadcrumb mb-0 d-inline-flex bg-transparent p-0">
-                  <li class="breadcrumb-item"><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ __('Contact') }}</li>
-               </ol>
-            </nav>
+
+   <!-- Breadcrumb Section Start -->
+   <section class="breadscrumb-section pt-0">
+      <div class="container-fluid-lg">
+         <div class="row">
+               <div class="col-12">
+                  <div class="breadscrumb-contain">
+                     <h2>Contact Us</h2>
+                     <nav>
+                           <ol class="breadcrumb mb-0">
+                              <li class="breadcrumb-item">
+                                 <a href="{{ route('front.index') }}">
+                                       <i class="fa-solid fa-house"></i>
+                                 </a>
+                              </li>
+                              <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
+                           </ol>
+                     </nav>
+                  </div>
+               </div>
          </div>
       </div>
-   </div>
-</div>
-<!-- breadcrumb -->
-<!--==================== Contact Section Start ====================-->
-<div class="full-row">
-   <div class="container">
-      <div class="row">
-         <div class="col-lg-7 col-md-7">
-            <h3 class="down-line mb-5">{{ __('Send Message') }}</h3>
-            <div class="form-simple mb-5">
-               <form class="contactform"  id="contact-form" action="#" method="POST">
-                  @csrf
-                  <div class="row">
-                     <div class="col-md-6">
-                        <div class="mb-3">
-                           <label>{{ __('Full Name') }}:</label>
-                           <input type="text" class="form-control bg-gray" name="name" placeholder="{{ __('Name *') }}" required="">
-                        </div>
-                     </div>
-                     <div class="col-md-6">
-                        <div class="mb-3">
-                           <label>{{ __('Your Email') }}:</label>
-                           <input type="email" class="form-control bg-gray" name="email" placeholder="{{ __('Email Address *') }}" required="">
-                        </div>
-                     </div>
-                     <div class="col-md-12">
-                        <div class="mb-3">
-                           <label>{{ __('Phone Number') }}:</label>
-                           <input type="text" class="form-control bg-gray" name="phone" placeholder="{{ __('Phone Number *') }}" required="">
-                        </div>
-                     </div>
-                     <div class="col-md-12">
-                        <div class="mb-3">
-                           <label>{{ __('Message') }}:</label>
-                           <textarea class="form-control bg-gray" name="text" rows="8" placeholder="{{ __('Your Message *') }}" required=""></textarea>
-                        </div>
-                     </div>
+   </section>
+   <!-- Breadcrumb Section End -->
 
-                     @if($gs->is_capcha == 1)
-                     <div class="form-input">
-                        {!! NoCaptcha::display() !!}
-                        {!! NoCaptcha::renderJs() !!}
-                        @error('g-recaptcha-response')
-                        <p class="my-2">{{$message}}</p>
-                        @enderror
-                     </div>
-                     @endif
-                     <input type="hidden" name="to" value="{{ $ps->contact_email }}">
-                     <div class="col-md-12 mt-3">
-                        <button class="btn btn-primary submit-btn mybtn1" name="submit" type="submit">{{ __('Send Message') }}</button>
+   <!--==================== Contact Section Start ====================-->
+   <section class="contact-box-section">
+      <div class="container-fluid-lg">
+         <div class="row g-lg-5 g-3">
+               <div class="col-lg-6">
+                  <div class="left-sidebar-box">
+                     <div class="row">
+                           <div class="col-xl-12">
+                              <div class="contact-image">
+                                 <img src="{{asset('assets/front-end/assets/images/inner-page/contact-us.png')}}"
+                                       class="img-fluid blur-up lazyloaded" alt="">
+                              </div>
+                           </div>
+                           <div class="col-xl-12">
+                              <div class="contact-title">
+                                 <h3>Get In Touch</h3>
+                              </div>
+
+                              <div class="contact-detail">
+                                 <div class="row g-4">
+                                       <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                          <div class="contact-detail-box">
+                                             <div class="contact-icon">
+                                                   <i class="fa-solid fa-phone"></i>
+                                             </div>
+                                             <div class="contact-detail-title">
+                                                   <h4>Phone</h4>
+                                             </div>
+
+                                             <div class="contact-detail-contain">
+                                                   <p>{{ $ps->phone }}</p>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                          <div class="contact-detail-box">
+                                             <div class="contact-icon">
+                                                   <i class="fa-solid fa-envelope"></i>
+                                             </div>
+                                             <div class="contact-detail-title">
+                                                   <h4>Email</h4>
+                                             </div>
+
+                                             <div class="contact-detail-contain">
+                                                   <p>{{ $ps->email }}</p>
+                                             </div>
+                                          </div>
+                                       </div>
+
+                                       <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                          <div class="contact-detail-box">
+                                             <div class="contact-icon">
+                                                   <i class="fa-solid fa-location-dot"></i>
+                                             </div>
+                                             <div class="contact-detail-title">
+                                                   <h4>Address</h4>
+                                             </div>
+
+                                             <div class="contact-detail-contain">
+                                                   <p>{{ $ps->street }}</p>
+                                             </div>
+                                          </div>
+                                       </div>
+                                 </div>
+                              </div>
+                           </div>
                      </div>
                   </div>
-               </form>
-            </div>
-         </div>
-         <div class="col-lg-5 col-md-5">
-            <h3 class="down-line mb-5">{{ __('Get In Touch') }}</h3>
-            <div class="d-flex mb-3">
-               <ul>
-                  @if($ps->street != null)
-                  <li class="mb-3">
-                     <strong>{{ __('Office Address') }} :</strong><br> {{ $ps->street }}
-                  </li>
-                  @endif
-                  @if($ps->phone != null )
-                  <li class="mb-3">
-                     <strong>Contact Number :</strong><br> {{ $ps->phone }}
-                  </li>
-                  @endif
-                  @if($ps->fax != null )
-                  <li class="mb-3">
-                     <strong>Fax :</strong><br> {{ $ps->fax }}
-                  </li>
-                  @endif
-                  @if($ps->email != null)
-                  <li class="mb-3">
-                     <strong>{{ __('Email Address') }} :</strong><br>
-                     <p class="email">{{ $ps->email }}</p>
-                  </li>
-                  @endif
-               </ul>
-            </div>
+               </div>
 
+               <div class="col-lg-6">
+                  <div class="title d-xxl-none d-block">
+                     <h2>Contact Us</h2>
+                  </div>
+                  <div class="right-sidebar-box">
+                  <!-- @include('includes.admin.form-login') -->
+                  <form class="contactform"  id="contact-form" action="#" method="POST">
+                     @csrf
+                     <div class="row">
+                           <div class="col-xxl-6 col-lg-12 col-sm-6">
+                              <div class="mb-md-4 mb-3 custom-form">
+                                 <label for="exampleFormControlInput" class="form-label">First Name</label>
+                                 <div class="custom-input">
+                                       <input type="text" class="form-control" id="exampleFormControlInput"
+                                       name="first_name" placeholder="{{ __('First Name *') }}" required="">
+                                       <i class="fa-solid fa-user"></i>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-xxl-6 col-lg-12 col-sm-6">
+                              <div class="mb-md-4 mb-3 custom-form">
+                                 <label for="exampleFormControlInput1" class="form-label">Last Name</label>
+                                 <div class="custom-input">
+                                       <input type="text" class="form-control" id="exampleFormControlInput1"
+                                       name="last_name" placeholder="{{ __('Last Name *') }}" required="">
+                                       <i class="fa-solid fa-user"></i>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-xxl-6 col-lg-12 col-sm-6">
+                              <div class="mb-md-4 mb-3 custom-form">
+                                 <label for="exampleFormControlInput2" class="form-label">Email Address</label>
+                                 <div class="custom-input">
+                                       <input type="email" class="form-control" id="exampleFormControlInput2"
+                                       name="email" placeholder="{{ __('Email Address *') }}" required="">
+                                       <i class="fa-solid fa-envelope"></i>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-xxl-6 col-lg-12 col-sm-6">
+                              <div class="mb-md-4 mb-3 custom-form">
+                                 <label for="exampleFormControlInput3" class="form-label">Phone Number</label>
+                                 <div class="custom-input">
+                                       <input type="text" class="form-control" id="exampleFormControlInput3"
+                                       name="phone" placeholder="{{ __('Phone Number *') }}" required="">
+                                       <i class="fa-solid fa-mobile-screen-button"></i>
+                                 </div>
+                              </div>
+                           </div>
+
+                           <div class="col-12">
+                              <div class="mb-md-4 mb-3 custom-form">
+                                 <label for="exampleFormControlTextarea" class="form-label">Message</label>
+                                 <div class="custom-textarea">
+                                       <textarea class="form-control" id="exampleFormControlTextarea"
+                                       name="text" rows="6" placeholder="{{ __('Your Message *') }}" required=""></textarea>
+                                       <i class="fa-solid fa-message"></i>
+                                 </div>
+                              </div>
+                           </div>
+
+                           @if($gs->is_capcha == 1)
+                           <div class="form-input">
+                              {!! NoCaptcha::display() !!}
+                              {!! NoCaptcha::renderJs() !!}
+                              @error('g-recaptcha-response')
+                              <p class="my-2">{{$message}}</p>
+                              @enderror
+                           </div>
+                           @endif
+
+                           <input type="hidden" name="to" value="{{ $ps->contact_email }}">
+                     </div>
+                     <button class="btn btn-animation btn-md fw-bold ms-auto" name="submit" type="submit">Send Message</button>
+                  </form>
+                  </div>
+               </div>
          </div>
       </div>
-   </div>
-</div>
-<!--======================== Contact Section End ==========================-->
+   </section>
+   <!--======================== Contact Section End ==========================-->
+
+   <!-- Map Section Start -->
+   <section class="map-section">
+        <div class="container-fluid p-0">
+            <div class="map-box">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d2994.3803116994895!2d55.29773782339708!3d25.222534631321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m5!1s0x3e5f43496ad9c645%3A0xbde66e5084295162!2sDubai%20-%20United%20Arab%20Emirates!3m2!1d25.2048493!2d55.2707828!4m0!5e1!3m2!1sen!2sin!4v1652217109535!5m2!1sen!2sin"
+                    style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+   </section>
+   <!-- Map Section End -->
+
 @include('partials.global.common-footer')
 @endsection
 @section('script')

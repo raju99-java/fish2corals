@@ -246,7 +246,10 @@ public function currency($id)
             if($request->ajax()){
                 return view('front.ajax.blog',compact('blogs'));
             }
-		return view('frontend.blog',compact('blogs','bcats','tags'));
+
+        $trend_products = Product::where('trending',1)->where('status',1)->take(3)->get();
+
+		return view('frontend.blog',compact('blogs','bcats','tags', 'trend_products'));
 	}
 
     public function blogcategory(Request $request, $slug)
@@ -314,7 +317,10 @@ public function currency($id)
             if($request->ajax()){
                 return view('frontend.ajax.blog',compact('blogs'));
             }
-        return view('frontend.blog',compact('blogs','search','bcats','tags'));
+
+        $trend_products = Product::where('trending',1)->where('status',1)->take(3)->get();
+
+        return view('frontend.blog',compact('blogs','search','bcats','tags','trend_products'));
     }
 
     public function blogshow($slug)
@@ -341,7 +347,10 @@ public function currency($id)
         // BLOG META TAG
         $blog_meta_tag = $blog->meta_tag;
         $blog_meta_description = $blog->meta_description;
-        return view('frontend.blogshow',compact('blog','bcats','tags','blog_meta_tag','blog_meta_description'));
+
+        $trend_products = Product::where('trending',1)->where('status',1)->take(3)->get();
+
+        return view('frontend.blogshow',compact('blog','bcats','tags','blog_meta_tag','blog_meta_description','trend_products'));
     }
 
     // -------------------------------- BLOG SECTION ENDS----------------------------------------

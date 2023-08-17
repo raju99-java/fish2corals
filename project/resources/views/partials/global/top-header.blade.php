@@ -33,7 +33,7 @@
                                     <button class="btn search-icon" type="submit">
                                        <i class="iconly-Search icli"></i>
                                     </button>
-                                    <input type="text" class="form-control" name="search" placeholder="Search for products, category,brands..." value="{{ request()->input('search') }}" />
+                                    <input type="text" id="prod_name" class="form-control" name="search" placeholder="Search for products, category,brands..." value="{{ request()->input('search') }}" />
                                     <button class="btn search-button" type="submit">Search</button>
                                  
                               </div>

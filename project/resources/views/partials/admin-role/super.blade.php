@@ -198,7 +198,7 @@
         </ul>
     </li> -->
 
-    <!-- <li>
+    <li>
         <a href="#blog" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="fas fa-fw fa-newspaper"></i>{{ __('Blog') }}
         </a>
@@ -213,7 +213,7 @@
                 <a href="{{ route('admin-gs-blog-settings') }}"><span>{{ __('Blog Settings') }}</span></a>
             </li>
         </ul>
-    </li> -->
+    </li>
 
     <li>
         <a href="#general" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">

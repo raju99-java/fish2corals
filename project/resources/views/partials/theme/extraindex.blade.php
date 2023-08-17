@@ -93,19 +93,19 @@
                     </div>
                     <ul class="footer-list footer-contact footer-list-light">
                         <li>
-                            <a href="/" class="light-text">Home</a>
+                            <a href="{{ route('front.index') }}" class="light-text">Home</a>
                         </li>
                         <li>
-                            <a href="about-us.html" class="light-text">About Us</a>
+                            <a href="{{route('front.about')}}" class="light-text">About Us</a>
                         </li>
                         <li>
-                            <a href="shop.html" class="light-text">Shop</a>
+                            <a href="{{ route('front.category') }}" class="light-text">Shop</a>
                         </li>
                         <li>
-                            <a href="blog.html" class="light-text">Blog</a>
+                            <a href="{{ route('front.blog') }}" class="light-text">Blog</a>
                         </li>
                         <li>
-                            <a href="contact-us.html" class="light-text">Contact Us</a>
+                            <a href="{{ route('front.contact') }}" class="light-text">Contact Us</a>
                         </li>
                     </ul>
                 </div>
@@ -116,13 +116,13 @@
                     </div>
                     <ul class="footer-list footer-list-light footer-contact">
                         <li>
-                            <a href="order-tracking.html" class="light-text">Your Order</a>
+                            <a href="{{ route('user-orders') }}" class="light-text">Your Order</a>
                         </li>
                         <li>
-                            <a href="user-dashboard.html" class="light-text">Your Account</a>
+                            <a href="{{ route('user-dashboard') }}" class="light-text">Your Account</a>
                         </li>
                         <li>
-                            <a href="faq.html" class="light-text">FAQ</a>
+                            <a href="{{ route('front.faq') }}" class="light-text">FAQ</a>
                         </li>
                     </ul>
                 </div>

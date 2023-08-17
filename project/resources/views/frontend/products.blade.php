@@ -1,57 +1,84 @@
 @extends('layouts.front')
 @section('content')
 @includeIf('partials.global.common-header')
-<!-- breadcrumb -->
-<div class="full-row bg-light overlay-dark py-5" style="background-image: url({{ $gs->breadcrumb_banner ? asset('assets/images/'.$gs->breadcrumb_banner):asset('assets/images/noimage.png') }}); background-position: center center; background-size: cover;">
-   <div class="container">
-      <div class="row text-center text-white">
-         <div class="col-12">
-            <h3 class="mb-2 text-white">{{ __('Product') }}</h3>
-         </div>
-         <div class="col-12">
-            <nav aria-label="breadcrumb">
-               <ol class="breadcrumb mb-0 d-inline-flex bg-transparent p-0">
-                  <li class="breadcrumb-item"><a href="{{ route('front.index') }}">{{ __('Home') }}</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">{{ __('Product') }}</li>
-               </ol>
-            </nav>
-         </div>
-      </div>
-   </div>
-</div>
-<!-- breadcrumb -->
-{{-- There are two product page. you have to give condition here --}}
-<div class="full-row">
-   <div class="container">
-      <div class="row">
-         @includeIf('partials.catalog.catalog')
-         @if (count($prods) > 0)
-         <div class="col-xl-9">
-             <div class="mb-4 d-xl-none">
-            <button class="dashboard-sidebar-btn btn bg-primary rounded">
-                <i class="fas fa-bars"></i>
-            </button>
+
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadscrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadscrumb-contain">
+                        <h2>Shop</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{{ route('front.index') }}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Shop</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
         </div>
-            @includeIf('frontend.category')
-            <div class="showing-products pt-30 pb-50 border-2 border-bottom border-light" id="ajaxContent">
-               @includeIf('partials.product.product-different-view')
-            </div>
-            @include('frontend.pagination.product')
-         </div>
-         @else
-         <div class="col-lg-9">
-            <div class="card">
-               <div class="card-body">
-                  <div class="page-center">
-                     <h4 class="text-center">{{ __('No Product Found.') }}</h4>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+{{-- There are two product page. you have to give condition here --}}
+<!-- Shop Section Start -->
+<section class="section-b-space shop-section">
+  <div class="container-fluid-lg">
+    <div class="row">
+
+         @includeIf('partials.catalog.catalog')
+
+          @if (count($prods) > 0)
+
+              <div class="col-custome-9">
+
+                  <div class="show-button">
+
+                    <div class="filter-button-group">
+                        <div class="filter-button d-inline-block d-lg-none">
+                            <a><i class="fa-solid fa-filter"></i> Filter Menu</a>
+                        </div>
+                    </div>
+
+                    @includeIf('frontend.category')
+
                   </div>
-               </div>
-            </div>
-         </div>
-         @endif
+
+                 <div id="ajaxContent">
+                     @includeIf('partials.product.product-different-view')
+                 </div>
+                  
+
+                  @include('frontend.pagination.product')
+
+              </div>
+
+          @else
+
+              <div class="col-custome-9">
+
+                <div class="card">
+                  <div class="card-body">
+                      <div class="page-center">
+                        <h4 class="text-center">{{ __('No Product Found.') }}</h4>
+                      </div>
+                  </div>
+                </div>
+
+              </div>
+          @endif
+
       </div>
    </div>
-</div>
+</section>
+
 {{-- @includeIf('partials.product.grid') --}}
 @includeIf('partials.global.common-footer')
 @endsection
@@ -71,12 +98,14 @@
 
    // when dynamic attribute changes
    $(".attribute-input, #sortby, #pageby").on('change', function() {
+       
      $(".ajax-loader").show();
      filter();
    });
 
 
    function filter() {
+       
    let filterlink = '';
 
    if ($("#prod_name").val() != '') {
@@ -102,9 +131,12 @@
    });
 
    if ($("#sortby").val() != '') {
+       
      if (filterlink == '') {
+         
        filterlink += '{{route('front.category', [Request::route('category'), Request::route('subcategory'), Request::route('childcategory')])}}' + '?'+$("#sortby").attr('name')+'='+$("#sortby").val();
      } else {
+          
        filterlink += '&'+$("#sortby").attr('name')+'='+$("#sortby").val();
      }
    }
@@ -168,6 +200,7 @@
 
      if ($("#sortby").val() != '') {
        fullUrl += '&sort='+encodeURI($("#sortby").val());
+       console.log(fullUrl);
      }
 
      if ($("#min_price").val() != '') {

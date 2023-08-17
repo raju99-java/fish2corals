@@ -84,6 +84,8 @@
         <!-- Template css -->
         <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/style.css')}}">
 
+        <link rel="stylesheet" href="{{ asset('assets/front/css/toastr.min.css') }}">
+
     <!-- new front-end  -->
 
     <!-- <link rel="stylesheet" href="{{ asset('assets/front/css/styles.php?color='.str_replace('#','', $gs->colors).'&header_color='.$gs->header_color) }}">

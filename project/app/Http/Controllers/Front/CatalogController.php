@@ -32,7 +32,7 @@ class CatalogController extends FrontBaseController
           session::put('view',$request->view_check);
       }
 
-    //   dd(session::get('view'));
+      //   dd(session::get('view'));
 
       $cat = null;
       $subcat = null;
