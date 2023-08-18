@@ -9,7 +9,7 @@
          <div class="row">
                <div class="col-12">
                   <div class="breadscrumb-contain">
-                     <h2>{{$productt->name}}</h2>
+                     <h2>Product Details</h2>
                      <nav>
                            <ol class="breadcrumb mb-0">
                               <li class="breadcrumb-item">
@@ -18,7 +18,7 @@
                                  </a>
                               </li>
 
-                              <li class="breadcrumb-item active">{{$productt->name}}</li>
+                              <li class="breadcrumb-item active">Product Details</li>
                            </ol>
                      </nav>
                   </div>
@@ -99,68 +99,82 @@
    </section>
    <!-- Releted Product Section End -->
 
-@includeIf('partials.global.common-footer')
+   @includeIf('partials.global.common-footer')
 
+   <!-- Sticky Cart Box Start -->
+   <div class="sticky-bottom-cart">
+      <div class="container-fluid-lg">
+         <div class="row">
+               <div class="col-12">
+                  <div class="cart-content product-packege">
+                     <div class="product-image">
+                           <img src="{{asset('assets/images/products/'.$productt->photo)}}" class="img-fluid blur-up lazyload"
+                              alt="">
+                           <div class="content">
+                              <h5>{{ $productt->name }}</h5>
+                              <h6>{{ $productt->showPrice() }}<del class="text-danger">{{ $productt->showPreviousPrice() }}</del><span>{{ round($productt->offPercentage() )}}% off</span></h6>
+                           </div>
+                     </div>
 
-@if($gs->is_report)
-
-@if(Auth::check())
-
-{{-- REPORT MODAL SECTION --}}
-
-<div class="modal fade report" id="report-modal" tabindex="-1" role="dialog" aria-labelledby="report-modal-Title" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
- <div class="gocover" style="background: url({{ asset('assets/images/'.$gs->loader) }}) no-repeat scroll center center rgba(45, 45, 45, 0.5);"></div>
-
-                    <div class="login-area">
-                        <div class="header-area forgot-passwor-area">
-                            <h4 class="title text-center">{{ __(('REPORT PRODUCT'))}}</h4>
-                            <p class="text">{{ __('Please give the following details')}}</p>
+                     @if($productt->emptyStock())
+                        <div class="add-btn">
+                              <a class="btn theme-bg-color text-white" href="javascript:;" ><i
+                                    class="fas fa-shopping-cart"></i> {{ __('Out Of Stock') }}</a>
                         </div>
-                        <div class="login-form">
+                     @else
 
-                            <form id="reportform" action="{{ route('product.report') }}" method="POST">
+                        
+                        @if(!empty($productt->size))
+                        <input type="hidden" id="stock" value="{{ $productt->size_qty[0] }}">
+                        @elseif(!$productt->emptyStock())
+                           <input type="hidden" id="stock" value="{{ $productt->stock }}">
+                        @elseif($productt->type != 'Physical')
+                           <input type="hidden" id="stock" value="0">
+                        @else
+                           <input type="hidden" id="stock" value="">
+                        @endif
 
-                              @include('includes.admin.form-login')
+                        <div class="cart_qty qty-box product-qty">
+                           <div class="input-group">
+                              <button type="button" class="qty-right-plus qtplus" >
+                                 <i class="fa fa-plus" aria-hidden="true"></i>
+                              </button>
 
-                                {{ csrf_field() }}
-                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                <input type="hidden" name="product_id" value="{{ $productt->id }}">
-                                <div class="form-input">
-                                    <input type="text" name="title" class="User Name form-control border" placeholder="{{ __('Enter Report Title') }}" required="">
+                              <!-- <input class="form-control input-number qty-input" type="text" name="quantity" value="0"> -->
 
-                                </div>
-                                <br>
+                              <input class="form-control qttotal" type="text" id="order-qty" value="{{ $productt->minimum_qty == null ? '1' : (int)$productt->minimum_qty }}">
+                              
+                              <input type="hidden" id="affilate_user" value="{{ $affilate_user }}">
+                              <input type="hidden" id="product_minimum_qty" value="{{ $productt->minimum_qty == null ? '0' : $productt->minimum_qty }}">
 
-                                <div class="form-input">
-                                  <textarea name="note" class="User Name form-control border" placeholder="{{ __('Enter Report Note') }}" required=""></textarea>
-                                </div>
-
-                                <button type="submit" class="submit-btn">{{ __('SUBMIT') }}</button>
-                            </form>
+                              <button type="button" class="qty-left-minus qtminus" >
+                                 <i class="fa fa-minus" aria-hidden="true"></i>
+                              </button>
+                           </div>
                         </div>
-                    </div>
+
+                        <input type="hidden" id="product_id" value="{{ $productt->id }}">
+
+                        <div class="add-btn">
+                              <a class="btn theme-bg-color text-white" href="javascript:;" id="addcrt"><i
+                                    class="fas fa-shopping-cart"></i> Add To Cart</a>
+                        </div>
+
+                     @endif
+
+                  </div>
+               </div>
+         </div>
       </div>
-    </div>
-  </div>
-</div>
+   </div>
+   <!-- Sticky Cart Box End -->
 
-{{-- REPORT MODAL SECTION ENDS --}}
-
-@endif
-
-@endif
 @endsection
 
 @section('script')
+
+<!-- Sticky-bar js -->
+<script src="{{ asset('assets/front-end/assets/js/sticky-cart-bottom.js')}}"></script>
 
 <script src="{{ asset('assets/front/js/jquery.elevatezoom.js') }}"></script>
 

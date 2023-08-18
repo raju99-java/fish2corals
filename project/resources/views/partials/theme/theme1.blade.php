@@ -286,7 +286,7 @@
                                                     {{ App\Models\Product::find($feature_product->id)->showPrice()}}
                                                     <del>{{ App\Models\Product::find($feature_product->id)->showPreviousPrice()}}</del>
                                                 </h5>
-                                                <button onclick="location.href = '{{ route('front.category') }}';" class="btn home-shop-button" tabindex="0">
+                                                <button onclick="location.href = '{{route('front.product',['slug'=>$feature_product->slug])}}';" class="btn home-shop-button" tabindex="0">
                                                     <span>Shop Now </span>
                                                     <i class="fas fa-angle-right"></i>
                                                 </button>
@@ -602,7 +602,7 @@
                                                         <del>{{ App\Models\Product::find($product->id)->showPreviousPrice()}}</del>
                                                     </h5>
 
-                                                    <button onclick="location.href = '{{ route('front.category') }}';" class="btn home-shop-button" tabindex="0">
+                                                    <button onclick="location.href = '{{route('front.product',['slug'=>$product->slug])}}';" class="btn home-shop-button" tabindex="0">
                                                         <span>Shop Now </span>
                                                         <i class="fas fa-angle-right"></i>
                                                     </button>
@@ -662,7 +662,7 @@
                                                         <del>{{ App\Models\Product::find($product->id)->showPreviousPrice()}}</del>
                                                     </h5>
 
-                                                    <button onclick="location.href = '{{ route('front.category') }}';" class="btn home-shop-button" tabindex="0">
+                                                    <button onclick="location.href = '{{route('front.product',['slug'=>$product->slug])}}';" class="btn home-shop-button" tabindex="0">
                                                         <span>Shop Now </span>
                                                         <i class="fas fa-angle-right"></i>
                                                     </button>
@@ -769,7 +769,7 @@
                                             </h5>
 
 
-                                            <button onclick="location.href = '{{ route('front.category') }}';" class="btn home-shop-button" tabindex="0">
+                                            <button onclick="location.href = '{{route('front.product',['slug'=>$product->slug])}}';" class="btn home-shop-button" tabindex="0">
                                                 <span>Shop Now </span>
                                                 <i class="fas fa-angle-right"></i>
                                             </button>

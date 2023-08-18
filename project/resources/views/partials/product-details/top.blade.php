@@ -76,22 +76,22 @@
                         @endif
 
                         <div class="cart_qty qty-box product-qty">
-                        <div class="input-group">
-                            <button type="button" class="qty-right-plus qtplus" >
-                                <i class="fa fa-plus" aria-hidden="true"></i>
-                            </button>
+                            <div class="input-group">
+                                <button type="button" class="qty-right-plus qtplus" >
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                </button>
 
-                            <!-- <input class="form-control input-number qty-input" type="text" name="quantity" value="0"> -->
+                                <!-- <input class="form-control input-number qty-input" type="text" name="quantity" value="0"> -->
 
-                            <input class="form-control qttotal" type="text" id="order-qty" value="{{ $productt->minimum_qty == null ? '1' : (int)$productt->minimum_qty }}">
-                            
-                            <input type="hidden" id="affilate_user" value="{{ $affilate_user }}">
-                            <input type="hidden" id="product_minimum_qty" value="{{ $productt->minimum_qty == null ? '0' : $productt->minimum_qty }}">
+                                <input class="form-control qttotal" type="text" id="order-qty" value="{{ $productt->minimum_qty == null ? '1' : (int)$productt->minimum_qty }}">
+                                
+                                <input type="hidden" id="affilate_user" value="{{ $affilate_user }}">
+                                <input type="hidden" id="product_minimum_qty" value="{{ $productt->minimum_qty == null ? '0' : $productt->minimum_qty }}">
 
-                            <button type="button" class="qty-left-minus qtminus" >
-                                <i class="fa fa-minus" aria-hidden="true"></i>
-                            </button>
-                        </div>
+                                <button type="button" class="qty-left-minus qtminus" >
+                                    <i class="fa fa-minus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
 
                         
@@ -103,6 +103,43 @@
 
                     @endif
 
+                </div>
+
+                <div class="table-details">
+                    <div class="table-heading bg-brand-color-primary p-2">
+                        <h3 class="h5 mb-0 text-white">Care Facts</h3>
+                    </div>
+                    <div class="table-body p-0">
+                        <table class="table table-sm care-facts mb-0">
+                            <tbody>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Care Level:</th>
+                                    <td class="bg-brand-color-secondary-light">Easy</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Temperament:</th>
+                                    <td class="bg-brand-color-secondary-light">Semi-aggressive</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Diet:</th>
+                                    <td class="bg-brand-color-secondary-light">Omnivore</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Reef Safe:</th>
+                                    <td class="bg-brand-color-secondary-light">Yes</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Minimum Tank Size:
+                                    </th>
+                                    <td class="bg-brand-color-secondary-light">30 gallons</td>
+                                </tr>
+                                <tr>
+                                    <th class="bg-brand-color-primary-light w-50">Max Size:</th>
+                                    <td class="bg-brand-color-secondary-light">3 inches</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <div class="pickup-box">
@@ -127,31 +164,31 @@
                     <ul>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="{{asset('assets/front-end/images/product/payment/1.svg')}}"
+                                <img src="{{asset('assets/front-end/assets/images/product/payment/1.svg')}}"
                                     class="blur-up lazyload" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="{{asset('assets/front-end/images/product/payment/2.svg')}}"
+                                <img src="{{asset('assets/front-end/assets/images/product/payment/2.svg')}}"
                                     class="blur-up lazyload" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="{{asset('assets/front-end/images/product/payment/3.svg')}}"
+                                <img src="{{asset('assets/front-end/assets/images/product/payment/3.svg')}}"
                                     class="blur-up lazyload" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="{{asset('assets/front-end/images/product/payment/4.svg')}}"
+                                <img src="{{asset('assets/front-end/assets/images/product/payment/4.svg')}}"
                                     class="blur-up lazyload" alt="">
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0)">
-                                <img src="{{asset('assets/front-end/images/product/payment/5.svg')}}"
+                                <img src="{{asset('assets/front-end/assets/images/product/payment/5.svg')}}"
                                     class="blur-up lazyload" alt="">
                             </a>
                         </li>

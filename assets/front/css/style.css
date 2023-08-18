@@ -68,7 +68,7 @@ ul li {
 	list-style: none;
 }
 .checkout-area .checkout-process li a.active {
-	background: #c9030f;
+	background: #ff7f50;
 	color: #fff !important;
 }
 .checkout-area .checkout-process li a {
@@ -92,7 +92,7 @@ a:active {
 	outline: none;
 }
 .checkout-area .checkout-process li a.active::before {
-	border-left: 20px solid #c9030f;
+	border-left: 20px solid #ff7f50;
 }
 .checkout-area .checkout-process li a::before {
 	position: absolute;
@@ -903,7 +903,7 @@ button.filter-btn.btn.btn-primary {
 	z-index: 99;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	background: #c9030f;
+	background: #ff7f50;
 	-webkit-transition: all 0.3s ease-in;
 	transition: all 0.3s ease-in;
 }
@@ -7693,7 +7693,7 @@ table.cart {
 	position: absolute;
 	left: 0px;
 	top: -1px;
-	color: #c9030f;
+	color: #ff7f50;
 	line-height: 30px;
 	font-size: 14px;
 }
@@ -7978,7 +7978,7 @@ input[type="checkbox"]:checked:disabled + label:before {
 	z-index: 99;
 	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
-	background: #c9030f;
+	background: #ff7f50;
 	-webkit-transition: all 0.3s ease-in;
 	transition: all 0.3s ease-in;
 }
@@ -9761,3 +9761,13 @@ select.form-control {
 .h--150 {
 	height: 150px;
 }
+
+/* my code */
+
+.header-3 .top-nav .middle-box .searchbar-box-2 .search-icon {
+    font-size: 12px;
+    background-color: #fff;
+    padding-left: 16px;
+    padding-right: 5px;
+}
+

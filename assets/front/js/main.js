@@ -407,6 +407,8 @@
 							lang.cart_empty +
 							"</h3>"
 					);
+					
+					$(".cart-collaterals").html("");
 					$(".cart-popup").html(
 						'<p class="mt-1 pl-3 text-left">' + lang.cart_empty + "</p>"
 					);
@@ -648,6 +650,7 @@
 		// COMMENT FORM ENDS
 		$(document).on("click", "#addcrt", function () {
 			var qty = $(".qttotal").val() ? $(".qttotal").val() : 1;
+			
 			var pid = $("#product_id").val();
 
 			if ($(".product-attr").length > 0) {
@@ -803,10 +806,18 @@
 					size_price: size_price,
 				},
 				success: function (data) {
-					$(".gocover").hide();
+					// $(".gocover").hide();
 					if (data == 0) {
 						toastr.error(lang.cart_out);
 					} else {
+						$("#cart-count").html(data['qty']);
+						$("#cart-count1").html(data['item_price']);
+						$("#total-cost").html(data['price']);
+						$(".cart-popup").load(mainurl + "/carts/view");
+
+						toastr.success(lang.cart_success);
+						console.log('data'+data);
+
 						$.get(mainurl + "/carts", function (response) {
 							$(".load_cart").html(response);
 						});
@@ -819,31 +830,36 @@
 
 		// Product Add Qty
 		$(document).on("click", ".qtplus", function () {
-			var el = $(this);
-			var $tselector = el.parent().parent().find(".qttotal");
-			total = $($tselector).val();
+			// var el = $(this);
+			// var $tselector = el.parent().find(".qttotal");
+			// total = $($tselector).val();
+			total = $(".qttotal").val();
 			if (stock != "") {
 				var stk = parseInt(stock);
 				if (total < stk) {
 					total++;
-					$($tselector).val(total);
+					// $($tselector).val(total);
+					$(".qttotal").val(total);
 				}
 			} else {
 				total++;
 			}
 
-			$($tselector).val(total);
+			// $($tselector).val(total);
+			$(".qttotal").val(total);
 		});
 
 		// Product Minus Qty
 		$(document).on("click", ".qtminus", function () {
-			var el = $(this);
-			var $tselector = el.parent().parent().find(".qttotal");
-			total = $($tselector).val();
+			// var el = $(this);
+			// var $tselector = el.parent().find(".qttotal");
+			// total = $($tselector).val();
+			total = $(".qttotal").val();
 			if (total > 1) {
 				total--;
 			}
-			$($tselector).val(total);
+			// $($tselector).val(total);
+			$(".qttotal").val(total);
 		});
 
 		$(".qttotal").keypress(function (e) {

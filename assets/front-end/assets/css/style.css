@@ -30110,3 +30110,52 @@ header .offcanvas-backdrop {
     padding: 5px 10px 5px 20px !important;
     background-color: #F5F8FB !important;
 }
+
+/* my code */
+
+.quantity {
+    display: inline-block;
+    margin: 0 0px;
+    position: relative;
+}
+
+input.qttotal1 {
+  display: table;
+  width: 70px;
+  height: 40px;
+  text-align: center;
+  margin-right: 1px;
+  margin-left: 1px;
+  position: relative;
+  z-index: 0;
+}
+
+.quantity-nav {
+  position: absolute;
+  height: 42px;
+  width: calc(100% + 90px);
+  left: -45px;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+}
+
+.quantity .quantity-button {
+    width: calc(29px + (35 - 29) * ((100vw - 320px) / (1920 - 320)));
+    height: calc(29px + (35 - 29) * ((100vw - 320px) / (1920 - 320)));
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    border: none;
+    background-color: #e3e0e0;
+    border-radius: 100% !important;
+    padding: 0;
+    font-size: 24px;
+    cursor: pointer;
+}

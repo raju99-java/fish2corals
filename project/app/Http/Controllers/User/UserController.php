@@ -22,7 +22,9 @@ class UserController extends UserBaseController
     public function index()
     {
         $user = $this->user;
-        return view('user.dashboard',compact('user'));
+        
+        $orders = Order::where('user_id',$user->id)->orderBy('id','desc')->paginate(6);
+        return view('user.dashboard',compact('user','orders'));
     }
 
     public function profile()
