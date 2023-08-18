@@ -5,7 +5,7 @@
             <div>
                 <div class="service-contain-2">
                     <svg class="icon-width">
-                        <use xlink:href="../assets/svg/svg/service-icon-4.svg#shipping"></use>
+                        <use xlink:href="{{asset('assets/front-end/assets/svg/svg/service-icon-4.svg')}}#shipping"></use>
                     </svg>
                     <div class="service-detail">
                         <h3>Free Shipping</h3>
@@ -16,7 +16,7 @@
             <div>
                 <div class="service-contain-2">
                     <svg class="icon-width">
-                        <use xlink:href="../assets/svg/svg/service-icon-4.svg#service"></use>
+                        <use xlink:href="{{asset('assets/front-end/assets/svg/svg/service-icon-4.svg')}}#service"></use>
                     </svg>
                     <div class="service-detail">
                         <h3>24 x 7 Service</h3>
@@ -27,7 +27,7 @@
             <div>
                 <div class="service-contain-2">
                     <svg class="icon-width">
-                        <use xlink:href="../assets/svg/svg/service-icon-4.svg#pay"></use>
+                        <use xlink:href="{{asset('assets/front-end/assets/svg/svg/service-icon-4.svg')}}#pay"></use>
                     </svg>
                     <div class="service-detail">
                         <h3>Online Pay</h3>
@@ -38,7 +38,7 @@
             <div>
                 <div class="service-contain-2">
                     <svg class="icon-width">
-                        <use xlink:href="../assets/svg/svg/service-icon-4.svg#offer"></use>
+                        <use xlink:href="{{asset('assets/front-end/assets/svg/svg/service-icon-4.svg')}}#offer"></use>
                     </svg>
                     <div class="service-detail">
                         <h3>Festival Offer</h3>
@@ -49,7 +49,7 @@
             <div>
                 <div class="service-contain-2">
                     <svg class="icon-width">
-                        <use xlink:href="../assets/svg/svg/service-icon-4.svg#return"></use>
+                        <use xlink:href="{{asset('assets/front-end/assets/svg/svg/service-icon-4.svg')}}#return"></use>
                     </svg>
                     <div class="service-detail">
                         <h3>100% Original</h3>

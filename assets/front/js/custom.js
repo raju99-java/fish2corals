@@ -282,9 +282,9 @@
             if ($header.length) {
                 var windowpos = $window.scrollTop();
                 if (windowpos >= 200) {
-                    $header.addClass('fixed-top');
+                    // $header.addClass('fixed-top');
                 } else {
-                    $header.removeClass('fixed-top');
+                    // $header.removeClass('fixed-top');
                     $page_wrapper.removeClass('overlay');
                     $sidenav.removeClass('visible');
                 }
@@ -312,7 +312,7 @@
             jQuery('.nav-on-top').next().css('margin-top', get_height);
         }
         $window.on('resize', function() {
-            $header.removeClass('fixed-top');
+            // $header.removeClass('fixed-top');
             $page_wrapper.removeClass('overlay');
             $sidenav.removeClass('visible');
             var get_height = jQuery('.nav-on-top').height();
@@ -332,7 +332,7 @@
 				.css("padding-top", get_height);
 		}
 		$window.on("resize", function () {
-			$header.removeClass("fixed-top");
+			// $header.removeClass("fixed-top");
 			$page_wrapper.removeClass("overlay");
 			$sidenav.removeClass("visible");
 			var get_height = jQuery(".nav-on-banner").height();

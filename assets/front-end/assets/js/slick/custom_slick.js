@@ -612,6 +612,9 @@ $('.slider-4-banner').slick({
 
 $('.slider-5').slick({
     infinite: true,
+    loop: true,
+    autoplay: true,
+    autoplaySpeed: 1000,
     slidesToScroll: 1,
     slidesToShow: 5,
     arrows: false,
@@ -1179,7 +1182,7 @@ $('.category-slider-1').slick({
     responsive: [{
             breakpoint: 1661,
             settings: {
-                slidesToShow: 7,
+                slidesToShow: 6,
             }
         },
         {
