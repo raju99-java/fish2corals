@@ -58,6 +58,10 @@ class CheckoutController extends FrontBaseController
     public function checkout()
     {
 
+        if(!Auth::check()){
+            return redirect()->route('user.login')->with('success',__("Login to continue."));
+        }
+
         if (!Session::has('cart')) {
             return redirect()->route('front.cart')->with('success',__("You don't have any product to checkout."));
         }

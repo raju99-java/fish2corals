@@ -36,7 +36,7 @@
                                                 <h2 class="owl-title w-100 text-uppercase poster-1">{{$data->title_text}} <span
                                                     class="daily">{{$data->subtitle_text}}</span>
                                                 </h2>
-                                                <p class="w-58 d-none d-sm-block text-black">{{$data->details_text}}</p>
+                                                <p class="w-58 d-none d-sm-block text-white">{{$data->details_text}}</p>
                                                 <button onclick="location.href = '{{$data->link}}';" class="btn btn-animation mt-xxl-4 mt-2 home-button mend-auto">Shop Now <i class="fa-solid fa-right-long ms-2 icon"></i></button>    
                                             </div>
                                             <img class="owl-img" src="{{asset('assets/images/sliders/'.$data->photo)}}">
@@ -93,8 +93,8 @@
                                         </a>
                                         <div class="banner-detail p-center-left w-75 banner-p-sm mend-auto">
                                             <div>
-                                                <h5 class="fw-light mb-2">50% Discount</h5>
-                                                <h4 class="fw-bold mb-0">Summer Ice Cream</h4>
+                                                <h5 class="fw-light mb-2">{{$arrival->title}}</h5>
+                                                <h4 class="fw-bold mb-0">{{$arrival->header}}</h4>
                                                 <button onclick="location.href = '{{ route('front.category') }}';" class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now 
                                                     <i class="fa-solid fa-chevron-right"></i>
                                                 </button>
@@ -309,33 +309,27 @@
             <section class="banner-section">
                 <div class="container-fluid-lg">
                     <div class="row gy-lg-0 gy-3">
+
+                        @forelse ($arrivals2 as $key=>$arrival)
                         <div class="col-lg-6">
-                            <div class="banner-contain-3 hover-effect bg-size blur-up lazyloaded" style="background-image: url({{asset('assets/front-end/assets/images/grocery/banner/6.jpg')}}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
-                                <img src="{{asset('assets/front-end/assets/images/grocery/banner/6.jpg')}}" class="bg-img blur-up lazyload" alt="" style="display: none;">
+                            <div class="banner-contain-3 hover-effect bg-size blur-up lazyloaded" style="background-image: url({{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                <img src="{{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
                                 <div class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
                                     <div>
-                                        <h2 class="text-great fw-normal text-danger">Special hot sale</h2>
-                                        <h3 class="mb-1 fw-bold text-white">Golden Fish <br> With Bowl</h3>
-                                        <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4>
+                                        <h2 class="text-great fw-normal text-danger">{{$arrival->title}}</h2>
+                                        <br>
+                                        <h3 class="mb-1 fw-bold text-white">{{$arrival->header}}</h3>
+                                        <br>
+                                        <!-- <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4> -->
                                         <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="banner-contain-3 hover-effect bg-size blur-up lazyloaded" style="background-image: url({{asset('assets/front-end/assets/images/grocery/banner/7.jpg')}}'); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
-                                <img src="{{asset('assets/front-end/assets/images/grocery/banner/7.jpg')}}" class="bg-img blur-up lazyload" alt="" style="display: none;">
-                                <div class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
-                                    <div>
-                                        <h2 class="text-great fw-normal text-danger">Special hot sale</h2>
-                                        <h3 class="mb-1 fw-bold text-white">Fighter Fish <br> With Bowl</h3>
-                                        <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4>
-                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @empty
+                        @endforelse
+
                     </div>
                 </div>
             </section>
@@ -689,11 +683,25 @@
             <section class="offer-section">
                 <div class="container-fluid-lg">
                     <div class="row">
-                        <div class="col-12">
-                            <div class="offer-box hover-effect">
-                                <h2><span>FREE GIFT ANY ORDER</span> 70% oFF</h2>
+
+                        @forelse ($arrivals3 as $key=>$arrival)
+                            <div class="col-12">
+                                <div class="banner-contain-3 hover-effect bg-size blur-up lazyloaded" style="background-image: url({{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                    <img src="{{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
+                                    <div class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
+                                        <div>
+                                            <h2 class="text-center">
+                                                <span class="text-great fw-normal text-danger">{{$arrival->title}}</span> 
+                                                <span class="mb-1 fw-bold text-white">{{$arrival->header}}</span>
+                                            </h2>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                        @empty
+                        @endforelse
+
                     </div>
                 </div>
             </section>
@@ -791,37 +799,26 @@
         <section class="banner-section">
             <div class="container-fluid-lg">
                 <div class="row gy-lg-0 gy-3">
-                    <div class="col-lg-6">
-                        <div class="banner-contain-3 hover-effect">
-                            <img src="{{asset('assets/front-end/assets/images/grocery/banner/6.jpg')}}" class="bg-img blur-up lazyload" alt="">
-                            <div
-                                class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
-                                <div>
-                                    <h2 class="text-great fw-normal text-danger">Special hot sale</h2>
-                                    <h3 class="mb-1 fw-bold text-white">Golden Fish <br> With Bowl</h3>
-                                    <h4 class="text-content text-white">Choose a Nutritious & Healthy Breakfast.</h4>
-                                    <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto"
-                                        onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
+                        @forelse ($arrivals4 as $key=>$arrival)
+                        <div class="col-lg-6">
+                            <div class="banner-contain-3 hover-effect bg-size blur-up lazyloaded" style="background-image: url({{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}); background-size: cover; background-position: center center; background-repeat: no-repeat; display: block;">
+                                <img src="{{ $arrival->photo ?  asset('assets/images/arrival/'.$arrival->photo): '' }}" class="bg-img blur-up lazyload" alt="" style="display: none;">
+                                <div class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
+                                    <div>
+                                        <h2 class="text-great fw-normal text-danger">{{$arrival->title}}</h2>
+                                        <br>
+                                        <h3 class="mb-1 fw-bold text-white">{{$arrival->header}}</h3>
+                                        <br>
+                                        <!-- <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4> -->
+                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="col-lg-6">
-                        <div class="banner-contain-3 hover-effect">
-                            <img src="{{asset('assets/front-end/assets/images/grocery/banner/7.jpg')}}" class="bg-img blur-up lazyload" alt="">
-                            <div
-                                class="banner-detail banner-detail-2 text-dark p-center-left w-75 banner-p-sm position-relative mend-auto">
-                                <div>
-                                    <h2 class="text-great fw-normal text-danger">Special hot sale</h2>
-                                    <h3 class="mb-1 fw-bold text-white">Fighter Fish <br> With Bowl</h3>
-                                    <h4 class="text-content text-white">Choose a Nutritious & Healthy Breakfast.</h4>
-                                    <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto"
-                                        onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        @empty
+                        @endforelse
+
                 </div>
             </div>
         </section>

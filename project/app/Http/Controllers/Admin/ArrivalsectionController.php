@@ -51,6 +51,7 @@ class ArrivalsectionController extends Controller
         //--- Validation Section
 
         $rules = [
+                'position' => 'required',
                'photo'      => 'required|mimes:jpeg,jpg,png,svg',
                 ];
 
@@ -93,6 +94,7 @@ class ArrivalsectionController extends Controller
     {
         //--- Validation Section
         $rules = [
+                'position' => 'required',
                'photo'      => 'mimes:jpeg,jpg,png,svg',
                 ];
 

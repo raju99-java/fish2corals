@@ -44,17 +44,108 @@
             </div>
             </div>
 
+                <input type="hidden" id="product_price" value="{{ round($productt->vendorPrice() * $curr->value,2) }}">
+                <input type="hidden" id="curr_pos" value="{{ $gs->currency_format }}">
+                <input type="hidden" id="curr_sign" value="{{ $curr->sign }}">
+                <input type="hidden" id="product_prv_price" value="{{ round($productt->vendorPreviousPrice() * $curr->value,2) }}">
+
             <div class="col-xl-6 wow fadeInUp" data-wow-delay="0.1s">
             <div class="right-box-contain">
-                <h6 class="offer-top">{{ round($productt->offPercentage() )}}% Off</h6>
-                <h2 class="name">{{ $productt->name }}</h2>
-                <div class="price-rating">
-                    <h3 class="theme-color price">{{ $productt->showPrice() }} <del class="text-content">{{ $productt->showPreviousPrice() }}</del> <span
-                            class="offer theme-color">({{ round($productt->offPercentage() )}}% off)</span></h3>
-                </div>
+
+                @if (!empty($productt->attributes))
+                    @php
+                    $attrArr = json_decode($productt->attributes, true);
+                    @endphp
+                @endif
+
+
+                @if (!empty($attrArr))
+                    
+                    <?php 
+                    
+                        $previous_price = 0;
+                        $discount = 0;
+                    
+                    ?>
+                
+                        @foreach ($attrArr as $attrKey => $attrVal)
+                        @if (array_key_exists("details_status",$attrVal) && $attrVal['details_status'] == 1)
+                            @foreach ($attrVal['values'] as $optionKey => $optionVal)
+                                
+                                @if($optionKey == 0)
+                                    <?php  
+                                        
+                                        $previous_price += $attrVal['previous_prices'][$optionKey] * $curr->value;
+                                        $discount += $attrVal['discounts'][$optionKey];
+                                        
+                                    ?>
+                                @endif
+                            
+                            @endforeach
+                        @endif
+                        @endforeach
+                
+                
+                    <!--<h6 class="offer-top" id="off-h">({{ round($discount )}}% off)</h6>-->
+                    <h2 class="name">{{ $productt->name }}</h2>
+                    <div class="price-rating">
+                        <h3 class="theme-color price">
+                            <span class="sizeprice">{{ $productt->showPrice() }}</span>  
+                            
+                            <del class="sizeprvprice text-content"  > {{ $curr->sign."".$previous_price }} </del> 
+                            <span class="off offer theme-color">({{ round($discount )}}% off)</span>
+                            
+                        </h3>
+                    </div>
+                    
+                @else
+
+                    <!-- <h6 class="offer-top">{{ round($productt->offPercentage() )}}% Off</h6> -->
+                    <h2 class="name">{{ $productt->name }}</h2>
+                    <div class="price-rating">
+                        <h3 class="theme-color price">
+                            <span class="sizeprice">{{ $productt->showPrice() }}</span>  
+                            <del class="sizeprvprice text-content"  > {{ $productt->showPreviousPrice() }} </del> 
+                            <span class="off offer theme-color">({{ round($productt->offPercentage() )}}% off)</span>
+                        </h3>
+                    </div>
+
+                @endif
+
+                    @if (!empty($attrArr))
+                        <div class="product-attributes my-4">
+                          <div class="row gy-4">
+                          @foreach ($attrArr as $attrKey => $attrVal)
+                            @if (array_key_exists("details_status",$attrVal) && $attrVal['details_status'] == 1)
+
+                          <div class="col-lg-6">
+                              <div class="form-group">
+                                <strong class="text-capitalize mb-2 d-block">{{ str_replace("_", " ", $attrKey) }} :</strong>
+                                <div class="">
+                                @foreach ($attrVal['values'] as $optionKey => $optionVal)
+                                  <div class="custom-control custom-radio form-check">
+                                    <input type="hidden" class="keys" value="">
+                                    <input type="hidden" class="values" value="">
+                                    <input type="radio" id="{{$attrKey}}{{ $optionKey }}" name="{{ $attrKey }}" class="form-check-input custom-control-input product-attr"  data-key="{{ $attrKey }}" data-price = "{{ $attrVal['prices'][$optionKey] * $curr->value }}" data-previous_price = "{{ $attrVal['previous_prices'][$optionKey] * $curr->value }}" data-discount = "{{ $attrVal['discounts'][$optionKey] }}" value="{{ $optionVal }}" {{ $loop->first ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="{{$attrKey}}{{ $optionKey }}">{{ $optionVal }}
+
+                                    @if (!empty($attrVal['prices'][$optionKey]))
+                                      <!--+ {{$curr->sign}} {{$attrVal['prices'][$optionKey] * $curr->value}}-->
+                                    @endif
+                                    </label>
+                                  </div>
+                                @endforeach
+                                </div>
+                              </div>
+                          </div>
+                            @endif
+                          @endforeach
+                          </div>
+                        </div>
+                    @endif
 
                 <div class="procuct-contain">
-                    <p>{{ substr($productt->details,0,200) }}</p>
+                    {!! $productt->short_desc !!}
                 </div>
 
                 <div class="note-box product-packege">
@@ -222,7 +313,7 @@
                             aria-labelledby="description-tab">
                             <div class="product-description">
                                 <div class="nav-desh">
-                                    <p>{{ $productt->details }}</p>
+                                    {!! $productt->details !!}
                                 </div>
 
                                 

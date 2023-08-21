@@ -97,7 +97,11 @@ public function currency($id)
 
 
 
-        $data['arrivals']=ArrivalSection::where('status',1)->get();
+        $data['arrivals']=ArrivalSection::where('position',1)->where('status',1)->get();
+        $data['arrivals2']=ArrivalSection::where('position',2)->where('status',1)->get();
+        $data['arrivals3']=ArrivalSection::where('position',3)->where('status',1)->get();
+        $data['arrivals4']=ArrivalSection::where('position',4)->where('status',1)->get();
+
         $data['products']=Product::get();
         $data['ratings']=Rating::get();
 

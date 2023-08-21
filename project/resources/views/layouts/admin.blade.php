@@ -5,7 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    	<meta name="author" content="GeniusOcean">
+    	<meta name="author" content="Fish2Corals">
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<!-- Title -->
 		<title>{{$gs->title}}</title>
@@ -55,7 +55,7 @@
 					<div class="container-fluid">
 						<div class="d-flex mobile-menu-check justify-content-between">
 							<a class="admin-logo" href="{{ route('front.index') }}" target="_blank">
-								<img src="{{asset('assets/images/'.$gs->logo)}}" alt="">
+								<img src="{{asset('assets/images/'.$gs->invoice_logo)}}" alt="">
 							</a>
 							<div class="menu-toggle-button">
 								<a class="nav-link" href="javascript:;" id="sidebarCollapse">

@@ -222,7 +222,7 @@
 
       	$(function() {
         $(".btn-area").append('<div class="col-sm-4 table-contents">'+
-        	'<a class="add-btn" href="{{route('admin-prod-types')}}">'+
+        	'<a class="add-btn" href="{{ route('admin-prod-create','physical') }}">'+
           '<i class="fas fa-plus"></i> <span class="remove-mobile">{{ __("Add Product") }}<span>'+
           '</a>'+
           '</div>');

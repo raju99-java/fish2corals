@@ -11,7 +11,7 @@ use DB;
 class Product extends Model
 {
 
-  protected $fillable = ['user_id','category_id','brand','product_type','affiliate_link','sku', 'subcategory_id', 'childcategory_id', 'attributes', 'name', 'photo', 'size','size_qty','size_price', 'color', 'details','price','previous_price','stock','policy','status', 'views','tags','featured','best','top','hot','latest','big','trending','sale','features','colors','product_condition','ship','meta_tag','meta_description','youtube','type','file','license','license_qty','link','platform','region','licence_type','measure','discount_date','is_discount','whole_sell_qty','whole_sell_discount','catalog_id','slug','language_id','flash_count','hot_count','new_count','sale_count','best_seller_count','popular_count','top_rated_count','big_save_count','trending_count','page_count','seller_product_count','wishlist_count','vendor_page_count','min_price','max_price','product_page','post_count','minimum_qty','preordered','language_id','color_all','size_all','stock_check'];
+  protected $fillable = ['user_id','category_id','brand','product_type','affiliate_link','sku', 'subcategory_id', 'childcategory_id', 'attributes', 'name', 'photo', 'size','size_qty','size_price', 'color', 'short_desc','details','price','previous_price','stock','policy','status', 'views','tags','featured','best','top','hot','latest','big','trending','sale','features','colors','product_condition','ship','meta_tag','meta_description','youtube','type','file','license','license_qty','link','platform','region','licence_type','measure','discount_date','is_discount','whole_sell_qty','whole_sell_discount','catalog_id','slug','language_id','flash_count','hot_count','new_count','sale_count','best_seller_count','popular_count','top_rated_count','big_save_count','trending_count','page_count','seller_product_count','wishlist_count','vendor_page_count','min_price','max_price','product_page','post_count','minimum_qty','preordered','language_id','color_all','size_all','stock_check'];
 
     public $selectable = ['id','user_id','name','slug','features','colors','thumbnail','price','previous_price','attributes','size','size_price','discount_date','color_all','size_all','stock_check','category_id','details'];
 
@@ -99,6 +99,19 @@ class Product extends Model
         }
 
         return $price;
+    }
+
+    public function vendorPreviousPrice() {
+        $gs = cache()->remember('generalsettings', now()->addDay(), function () {
+            return DB::table('generalsettings')->first();
+        });
+        $previous_price = $this->previous_price;
+        if($this->user_id != 0){
+        $previous_price = $this->previous_price + $gs->fixed_commission + ($this->previous_price/100) * $gs->percentage_commission ;
+        }
+
+        $previous_price = 0;
+        return $previous_price;
     }
 
     public function vendorSizePrice() {
@@ -242,28 +255,29 @@ class Product extends Model
             $price += $this->size_price[0];
         }
 
-    // Attribute Section
+        // Attribute Section
 
-    $attributes = $this->attributes["attributes"];
+        $attributes = $this->attributes["attributes"];
       if(!empty($attributes)) {
           $attrArr = json_decode($attributes, true);
       }
       // dd($attrArr);
-      if (!empty($attrArr)) {
+        if (!empty($attrArr)) {
+          $price = 0;
           foreach ($attrArr as $attrKey => $attrVal) {
             if (is_array($attrVal) && array_key_exists("details_status",$attrVal) && $attrVal['details_status'] == 1) {
 
                 foreach ($attrVal['values'] as $optionKey => $optionVal) {
-                  $price += $attrVal['prices'][$optionKey];
+                  $price += $attrVal['previous_prices'][$optionKey];
                   // only the first price counts
                   break;
                 }
 
             }
           }
-      }
+        }
 
-    // Attribute Section Ends
+        // Attribute Section Ends
 
         if (Session::has('currency'))
         {

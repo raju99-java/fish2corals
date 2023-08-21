@@ -61,8 +61,25 @@
                                     <label for="image-upload" class="img-label" id="image-label"><i class="icofont-upload-alt"></i>{{ __('Upload Image') }}</label>
                                     <input type="file" name="photo" class="img-upload" id="image-upload">
                                   </div>
-                                  <p class="text">{{ __('Prefered Size: (600x770) or Square Sized Image') }}</p>
+                                  <!-- <p class="text">{{ __('Prefered Size: (600x770) or Square Sized Image') }}</p> -->
                             </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Arrival Position') }}*</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                              <select  name="position" required="">
+                                  <option disabled selected>{{ __('Select Position') }}</option>
+                                  <option value="1" {{ $data->position == '1' ? 'selected':'' }}>{{ __('Section 1') }}</option>
+                                  <option value="2" {{ $data->position == '2' ? 'selected':'' }}>{{ __('Section 2') }}</option>
+                                  <option value="3" {{ $data->position == '3' ? 'selected':'' }}>{{ __('Section 3') }}</option>
+                                  <option value="4" {{ $data->position == '4' ? 'selected':'' }}>{{ __('Section 4') }}</option>
+                                </select>
                           </div>
                         </div>
 

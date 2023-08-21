@@ -115,11 +115,23 @@
 			total = total.toFixed(2);
 			var pos = $("#curr_pos").val();
 			var sign = $("#curr_sign").val();
+			
+			var previous_price = getPreviousAmount();
+			
+            //	alert(previous_price);
+			
 			if (pos == "0") {
-				$("#sizeprice").html(sign + total);
+				$(".sizeprice").html(sign + total);
+				$(".sizeprvprice").html(sign + previous_price);
 			} else {
-				$("#sizeprice").html(total + sign);
+				$(".sizeprice").html(total + sign);
+				$(".sizeprvprice").html(previous_price + sign);
 			}
+			
+			var discount = "("+discountOff()+"% off)";
+			$("#off-h").html(discount);
+			$(".off").html(discount);
+			
 		});
 
 		// Date Counting
@@ -517,6 +529,39 @@
 				total += parseFloat(datas[data]);
 			}
 			total += value;
+			return total;
+		}
+
+		function getPreviousAmount() {
+			var total = 0;
+			var value = parseFloat($("#product_prv_price").val());
+			var datas = $(".product-attr:checked")
+				.map(function () {
+					return $(this).data("previous_price");
+				})
+				.get();
+
+			var data;
+			for (data in datas) {
+				total += parseFloat(datas[data]);
+			}
+			total += value;
+			return total;
+		}
+
+		function discountOff() {
+			var total = 0;
+			var datas = $(".product-attr:checked")
+				.map(function () {
+					return $(this).data("discount");
+				})
+				.get();
+
+            console.log(datas);
+			var data;
+			for (data in datas) {
+				total += parseFloat(datas[data]);
+			}
 			return total;
 		}
 

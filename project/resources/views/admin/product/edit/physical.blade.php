@@ -20,9 +20,9 @@
 						<li>
 							<a href="{{ route('admin-prod-index') }}">{{ __('Products') }} </a>
 						</li>
-						<li>
-							<a href="javascript:;">{{ __('Physical Product') }}</a>
-						</li>
+						<!--<li>-->
+						<!--	<a href="javascript:;">{{ __('Physical Product') }}</a>-->
+						<!--</li>-->
 						<li>
 							<a href="javascript:;">{{ __('Edit') }}</a>
 						</li>
@@ -117,29 +117,7 @@
 										</div>
 									</div>
 
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="left-area">
-												<h4 class="heading">{{ __('Child Category') }}*</h4>
-											</div>
-										</div>
-										<div class="col-lg-12">
-											<select id="childcat" name="childcategory_id" {{$data->subcategory_id == null ? "disabled":""}}>
-													<option value="">{{ __('Select Child Category') }}</option>
-													@if($data->subcategory_id != null)
-													@if($data->childcategory_id == null)
-													@foreach($data->subcategory->childs as $child)
-													<option value="{{$child->id}}" >{{$child->name}}</option>
-													@endforeach
-													@else
-													@foreach($data->subcategory->childs as $child)
-													<option value="{{$child->id}} " {{$child->id == $data->childcategory_id ? "selected":""}}>{{$child->name}}</option>
-													@endforeach
-													@endif
-													@endif
-											</select>
-										</div>
-									</div>
+									
 
 								@php
 									$selectedAttrs = json_decode($data->attributes, true);
@@ -169,7 +147,7 @@
 															$checked = 0;
 															@endphp
 															<div class="row">
-																<div class="col-lg-5">
+																<div class="col-lg-2">
 																	<div class="custom-control custom-checkbox">
 																		<input type="checkbox" id="{{ $catAttribute->input_name }}{{$option->id}}" name="{{ $catAttribute->input_name }}[]" value="{{$option->name}}" class="custom-control-input attr-checkbox"
 																		@if (is_array($selectedAttrs) && array_key_exists($catAttribute->input_name,$selectedAttrs))
@@ -185,17 +163,35 @@
 																	</div>
 																</div>
 
-																<div class="col-lg-7 {{ $catAttribute->price_status == 0 ? 'd-none' : '' }}">
+																<div class="col-lg-10 {{ $catAttribute->price_status == 0 ? 'd-none' : '' }}">
 																	<div class="row">
-																			<div class="col-2">
+																			<div class="col-1">
 																				+
 																			</div>
-																			<div class="col-10">
-																			<div class="price-container">
-																					<span class="price-curr">{{ $sign->sign }}</span>
-																					<input type="text" class="input-field price-input" id="{{ $catAttribute->input_name }}{{$option->id}}_price" data-name="{{ $catAttribute->input_name }}_price[]" placeholder="0.00 (Additional Price)" value="{{ !empty($selectedAttrs["$inName"]['prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['prices'][$i] : '' }}">
+																			<div class="col-3">
+																			    <span>Current Price + *</span>
+    																			<div class="price-container">
+    																					<span class="price-curr">{{ $sign->sign }}</span>
+    																					<input type="text" class="input-field price-input" id="{{ $catAttribute->input_name }}{{$option->id}}_price" data-name="{{ $catAttribute->input_name }}_price[]" placeholder="Price" value="{{ !empty($selectedAttrs["$inName"]['prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['prices'][$i] : '' }}">
+    																			</div>
 																			</div>
+																			
+																			<div class="col-3">
+																			    <span>Previous Price</span>
+    																			<div class="price-container">
+    																					<span class="price-curr">{{ $sign->sign }}</span>
+    																					<input type="text" class="input-field price-input" id="{{ $catAttribute->input_name }}{{$option->id}}_previous_price" data-name="{{ $catAttribute->input_name }}_previous_price[]" placeholder="Previous Price" value="{{ !empty($selectedAttrs["$inName"]['previous_prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['previous_prices'][$i] : '' }}">
+    																			</div>
 																			</div>
+																			
+																			<div class="col-3">
+																			    <span>Discount</span>
+    																			<div class="price-container">
+    																					<span class="price-curr"> % </span>
+    																					<input type="text" class="input-field price-input" id="{{ $catAttribute->input_name }}{{$option->id}}_discount" data-name="{{ $catAttribute->input_name }}_discount[]" placeholder="Discount" value="{{ !empty($selectedAttrs["$inName"]['discounts'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['discounts'][$i] : '' }}">
+    																			</div>
+																			</div>
+																			
 																	</div>
 																</div>
 															</div>
@@ -236,7 +232,7 @@
 														@endphp
 
 														<div class="row">
-															<div class="col-lg-5">
+															<div class="col-lg-2">
 															<div class="custom-control custom-checkbox">
 																<input type="checkbox" id="{{ $subAttribute->input_name }}{{$option->id}}" name="{{ $subAttribute->input_name }}[]" value="{{$option->name}}" class="custom-control-input attr-checkbox"
 																@if (is_array($selectedAttrs) && array_key_exists($subAttribute->input_name,$selectedAttrs))
@@ -255,17 +251,36 @@
 																<label class="custom-control-label" for="{{ $subAttribute->input_name }}{{$option->id}}">{{ $option->name }}</label>
 															</div>
 															</div>
-															<div class="col-lg-7 {{ $subAttribute->price_status == 0 ? 'd-none' : '' }}">
+															<div class="col-lg-10 {{ $subAttribute->price_status == 0 ? 'd-none' : '' }}">
 															<div class="row">
-																<div class="col-2">
+																<div class="col-1">
 																	+
 																</div>
-																<div class="col-10">
+																
+																<div class="col-3">
+																    <span>Current Price + *</span>
 																	<div class="price-container">
 																		<span class="price-curr">{{ $sign->sign }}</span>
-																		<input type="text" class="input-field price-input" id="{{ $subAttribute->input_name }}{{$option->id}}_price" data-name="{{ $subAttribute->input_name }}_price[]" placeholder="0.00 (Additional Price)" value="{{ !empty($selectedAttrs["$inName"]['prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['prices'][$i] : '' }}">
+																		<input type="text" class="input-field price-input" id="{{ $subAttribute->input_name }}{{$option->id}}_price" data-name="{{ $subAttribute->input_name }}_price[]" placeholder="Price" value="{{ !empty($selectedAttrs["$inName"]['prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['prices'][$i] : '' }}">
 																	</div>
 																</div>
+																
+																<div class="col-3">
+																    <span>Previous Price</span>
+																	<div class="price-container">
+																		<span class="price-curr">{{ $sign->sign }}</span>
+																		<input type="text" class="input-field price-input" id="{{ $subAttribute->input_name }}{{$option->id}}_previous_price" data-name="{{ $subAttribute->input_name }}_previous_price[]" placeholder="Previous Price" value="{{ !empty($selectedAttrs["$inName"]['previous_prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['previous_prices'][$i] : '' }}">
+																	</div>
+																</div>
+																
+																<div class="col-3">
+																    <span>Discount</span>
+																	<div class="price-container">
+																		<span class="price-curr">%</span>
+																		<input type="text" class="input-field price-input" id="{{ $subAttribute->input_name }}{{$option->id}}_discount" data-name="{{ $subAttribute->input_name }}_discount[]" placeholder="Discount" value="{{ !empty($selectedAttrs["$inName"]['discounts'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['discounts'][$i] : '' }}">
+																	</div>
+																</div>
+																
 															</div>
 															</div>
 														</div>
@@ -283,79 +298,10 @@
 								{{-- Attributes of subcategory ends --}}
 
 								{{-- Attributes of child category starts --}}
-									<div id="childcatAttributes">
-										@php
-											$childAttributes = !empty($data->childcategory->attributes) ? $data->childcategory->attributes : '';
-										@endphp
-										@if (!empty($childAttributes))
-											@foreach ($childAttributes as $childAttribute)
-												<div class="row">
-													<div class="col-lg-12 mb-2">
-															<div class="left-area">
-																<h4 class="heading">{{ $childAttribute->name }} *</h4>
-															</div>
-													</div>
-													<div class="col-lg-12">
-														@php
-															$i = 0;
-														@endphp
-														@foreach ($childAttribute->attribute_options as $optionKey => $option)
-															@php
-																$inName = $childAttribute->input_name;
-																$checked = 0;
-															@endphp
-															<div class="row">
-																<div class="col-lg-5">
-																	<div class="custom-control custom-checkbox">
-																		<input type="checkbox" id="{{ $childAttribute->input_name }}{{$option->id}}" name="{{ $childAttribute->input_name }}[]" value="{{$option->name}}" class="custom-control-input attr-checkbox"
-																		@if (is_array($selectedAttrs) && array_key_exists($childAttribute->input_name,$selectedAttrs))
-																			@php
-																				$inName = $childAttribute->input_name;
-																			@endphp
-																			@if (is_array($selectedAttrs["$inName"]["values"]) && in_array($option->name, $selectedAttrs["$inName"]["values"]))
-																				checked
-																				@php
-																					$checked = 1;
-																				@endphp
-																			@endif
-																		@endif																										
-																		
-																		>
-
-																		<label class="custom-control-label" for="{{ $childAttribute->input_name }}{{$option->id}}">{{ $option->name }}</label>
-																	</div>
-																</div>
-
-
-																<div class="col-lg-7 {{ $childAttribute->price_status == 0 ? 'd-none' : '' }}">
-																	<div class="row">
-																			<div class="col-2">
-																				+
-																			</div>
-																			<div class="col-10">
-																				<div class="price-container">
-																						<span class="price-curr">{{ $sign->sign }}</span>
-																						<input type="text" class="input-field price-input" id="{{ $childAttribute->input_name }}{{$option->id}}_price" data-name="{{ $childAttribute->input_name }}_price[]" placeholder="0.00 (Additional Price)" value="{{ !empty($selectedAttrs["$inName"]['prices'][$i]) && $checked == 1 ? $selectedAttrs["$inName"]['prices'][$i] : '' }}">
-																				</div>
-																			</div>
-																	</div>
-																</div>
-															</div>
-															@php
-																if ($checked == 1) {
-																	$i++;
-																}
-															@endphp
-														@endforeach
-													</div>
-
-												</div>
-											@endforeach
-										@endif
-									</div>
+									
 								{{-- Attributes of child category ends --}}
 
-							<div class="{{ !empty($data->size) ? "showbox":"" }}" id="stckprod">
+							<!-- <div class="{{ !empty($data->size) ? "showbox":"" }}" id="stckprod">
 								<div class="row">
 								
 									<div class="col-lg-12">
@@ -366,7 +312,7 @@
 									</div>
 								</div>
 
-							</div>
+							</div> -->
 							<div class="{{ $data->measure == null ? 'showbox' : '' }}">
 
 								<div class="row">
@@ -598,7 +544,7 @@
 								</div>
 							</div> -->
 
-							<div class="row">
+							<!--<div class="row">
 								<div class="col-lg-12">
 									<div class="left-area">
 
@@ -612,7 +558,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div>-->
 
 							<div class="{{ !empty($data->size_all) ? "":"showbox" }}">
 								@if(!empty($data->size_all))
@@ -668,7 +614,7 @@
 
 
 
-							<div class="{{ $data->measure == null ? 'showbox' : '' }}">
+							<!--<div class="{{ $data->measure == null ? 'showbox' : '' }}">
 								<div class="row">
 									<div class="col-lg-6">
 										<div class="left-area">
@@ -690,10 +636,10 @@
 										<input name="measure" type="text" id="measurement" class="input-field" placeholder="Enter Unit" value="{{$data->measure}}">
 									</div>
 								</div>
-							</div>
+							</div>-->
 
 
-							<div class="row">
+							<!-- <div class="row">
 								<div class="col-lg-12">
 									<div class="left-area">
 
@@ -707,7 +653,7 @@
 										</li>
 									</ul>
 								</div>
-							</div>
+							</div> -->
 
 							<div class="row {{ !empty($data->size) ? "d-none":"" }}" id="default_stock">
 								<div class="col-lg-12">
@@ -912,6 +858,21 @@
 									</div>
 								</div>
 							</div> -->
+							
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="left-area">
+										<h4 class="heading">
+											{{ __('Product Short Description (within 200 words)') }}*
+										</h4>
+									</div>
+								</div>
+								<div class="col-lg-12">
+									<div class="text-editor">
+										<textarea class="nic-edit-p" name="short_desc">{{$data->short_desc}}</textarea>
+									</div>
+								</div>
+							</div>
 
 							<div class="row">
 								<div class="col-lg-12">
@@ -928,20 +889,22 @@
 								</div>
 							</div>
 
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="left-area">
-										<h4 class="heading">
-												{{ __('Product Buy/Return Policy') }}*
-										</h4>
-									</div>
-								</div>
-								<div class="col-lg-12">
-									<div class="text-editor">
-										<textarea name="policy" class="nic-edit-p">{{$data->policy}}</textarea>
-									</div>
-								</div>
-							</div>
+							<!--<div class="row">-->
+							<!--	<div class="col-lg-12">-->
+							<!--		<div class="left-area">-->
+							<!--			<h4 class="heading">-->
+							<!--					{{ __('Product Buy/Return Policy') }}*-->
+							<!--			</h4>-->
+							<!--		</div>-->
+							<!--	</div>-->
+							<!--	<div class="col-lg-12">-->
+							<!--		<div class="text-editor">-->
+							<!--			<textarea name="policy" class="nic-edit-p">{{$data->policy}}</textarea>-->
+							<!--		</div>-->
+							<!--	</div>-->
+							<!--</div>-->
+							
+							<input type="hidden" name="policy" value="" />
 
 							<div class="row">
 								<div class="col-lg-12">
@@ -1032,7 +995,7 @@
 												</a>
 											</div>
 										</div>
-										<!-- <div class="row mb-4">
+										<div class="row mb-4">
 											<div class="col-lg-12 mb-2">
 												<div class="left-area">
 													<h4 class="heading">{{ __('Select Brand') }}</h4>
@@ -1046,7 +1009,7 @@
 													@endforeach
 												</select>
 											</div>
-										</div> -->
+										</div>
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="left-area">
@@ -1066,7 +1029,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="left-area">
-														<h4 class="heading">{{ __('Product Discount Price') }}*</h4>
+														<h4 class="heading">{{ __('Product Previous Price') }}*</h4>
 														<p class="sub-heading">{{ __('(Optional)') }}</p>
 												</div>
 											</div>

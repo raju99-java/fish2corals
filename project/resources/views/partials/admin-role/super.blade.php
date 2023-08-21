@@ -20,7 +20,7 @@
         </ul>
     </li>
 
-    <li>
+    <!-- <li>
         <a href="#menu1" class="accordion-toggle wave-effect" data-toggle="collapse" aria-expanded="false">
             <i class="fas fa-flag"></i>{{ __('Manage Country') }}
         </a>
@@ -32,7 +32,7 @@
                 <a href="{{ route('admin-country-tax') }}"><span>{{ __('Manage Tax') }}</span></a>
             </li>
         </ul>
-    </li>
+    </li> -->
 
 
 
@@ -74,9 +74,9 @@
                     <li class="@if(request()->is('admin/attribute/*/manage') && request()->input('type')=='subcategory') active @endif">
                         <a href="{{ route('admin-subcat-index') }}"><span>{{ __('Sub Category') }}</span></a>
                     </li>
-                    <li class="@if(request()->is('admin/attribute/*/manage') && request()->input('type')=='childcategory') active @endif">
+                    <!-- <li class="@if(request()->is('admin/attribute/*/manage') && request()->input('type')=='childcategory') active @endif">
                         <a href="{{ route('admin-childcat-index') }}"><span>{{ __('Child Category') }}</span></a>
-                    </li>
+                    </li> -->
             </ul>
     </li>
 
@@ -85,8 +85,11 @@
             <i class="icofont-cart"></i>{{ __('Products') }}
         </a>
         <ul class="collapse list-unstyled" id="menu2" data-parent="#accordion">
-            <li>
+            <!-- <li>
                 <a href="{{ route('admin-prod-types') }}"><span>{{ __('Add New Product') }}</span></a>
+            </li> -->
+            <li>
+                <a href="{{ route('admin-prod-create','physical') }}"><span>{{ __('Add New Product') }}</span></a>
             </li>
             <li>
                 <a href="{{ route('admin-prod-index') }}"><span>{{ __('All Products') }}</span></a>
@@ -96,12 +99,12 @@
             </li>
             <!-- <li>
                 <a href="{{ route('admin-prod-catalog-index') }}"><span>{{ __('Product Catalogs') }}</span></a>
-            </li>
+            </li> -->
 
-            <li>
+            <!-- <li>
                 <a href="{{ route('admin-gs-prod-settings') }}"><span>{{ __('Product Settings') }}</span></a>
-            </li>
-            <li>
+            </li> -->
+            <!-- <li>
                 <a href="{{ route('admin-brand-index') }}"><span>{{ __('Brands') }}</span></a>
             </li> -->
         </ul>

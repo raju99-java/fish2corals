@@ -361,6 +361,8 @@ class ProductController extends AdminBaseController
 
         }
 
+        
+
         // Check Seo
         if (empty($request->seo_check))
         {
@@ -373,6 +375,8 @@ class ProductController extends AdminBaseController
                 $input['meta_tag'] = implode(',', $request->meta_tag);
             }
         }
+        
+        
 
         // Check License
 
@@ -392,6 +396,7 @@ class ProductController extends AdminBaseController
 
         }
 
+    
         // Check Features
         if(in_array(null, $request->features) || in_array(null, $request->colors))
         {
@@ -403,6 +408,8 @@ class ProductController extends AdminBaseController
             $input['features'] = implode(',', str_replace(',',' ',$request->features));
             $input['colors'] = implode(',', str_replace(',',' ',$request->colors));
         }
+        
+        
 
         //tags
         if (!empty($request->tags))
@@ -424,6 +431,8 @@ class ProductController extends AdminBaseController
               if ($request->has("$in_name")) {
                 $attrArr["$in_name"]["values"] = $request["$in_name"];
                 $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+                $attrArr["$in_name"]["previous_prices"] = $request["$in_name"."_previous_price"];
+                $attrArr["$in_name"]["discounts"] = $request["$in_name"."_discount"];
                 if ($catAttr->details_status) {
                   $attrArr["$in_name"]["details_status"] = 1;
                 } else {
@@ -442,6 +451,8 @@ class ProductController extends AdminBaseController
               if ($request->has("$in_name")) {
                 $attrArr["$in_name"]["values"] = $request["$in_name"];
                 $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+                $attrArr["$in_name"]["previous_prices"] = $request["$in_name"."_previous_price"];
+                $attrArr["$in_name"]["discounts"] = $request["$in_name"."_discount"];
                 if ($subAttr->details_status) {
                   $attrArr["$in_name"]["details_status"] = 1;
                 } else {
@@ -452,23 +463,23 @@ class ProductController extends AdminBaseController
           }
         }
 
-        if (!empty($request->childcategory_id)) {
-          $childAttrs = Attribute::where('attributable_id', $request->childcategory_id)->where('attributable_type', 'App\Models\Childcategory')->get();
-          if (!empty($childAttrs)) {
-            foreach ($childAttrs as $key => $childAttr) {
-              $in_name = $childAttr->input_name;
-              if ($request->has("$in_name")) {
-                $attrArr["$in_name"]["values"] = $request["$in_name"];
-                $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
-                if ($childAttr->details_status) {
-                  $attrArr["$in_name"]["details_status"] = 1;
-                } else {
-                  $attrArr["$in_name"]["details_status"] = 0;
-                }
-              }
-            }
-          }
-        }
+        // if (!empty($request->childcategory_id)) {
+        //   $childAttrs = Attribute::where('attributable_id', $request->childcategory_id)->where('attributable_type', 'App\Models\Childcategory')->get();
+        //   if (!empty($childAttrs)) {
+        //     foreach ($childAttrs as $key => $childAttr) {
+        //       $in_name = $childAttr->input_name;
+        //       if ($request->has("$in_name")) {
+        //         $attrArr["$in_name"]["values"] = $request["$in_name"];
+        //         $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+        //         if ($childAttr->details_status) {
+        //           $attrArr["$in_name"]["details_status"] = 1;
+        //         } else {
+        //           $attrArr["$in_name"]["details_status"] = 0;
+        //         }
+        //       }
+        //     }
+        //   }
+        // }
 
         if (empty($attrArr)) {
           $input['attributes'] = NULL;
@@ -477,6 +488,10 @@ class ProductController extends AdminBaseController
           $input['attributes'] = $jsonAttr;
         }
 
+        $input['childcategory_id'] = NULL;
+        
+        
+        
         // Save Data
         $data->fill($input)->save();
 
@@ -925,6 +940,8 @@ class ProductController extends AdminBaseController
                if ($request->has("$in_name")) {
                  $attrArr["$in_name"]["values"] = $request["$in_name"];
                  $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+                 $attrArr["$in_name"]["previous_prices"] = $request["$in_name"."_previous_price"];
+                 $attrArr["$in_name"]["discounts"] = $request["$in_name"."_discount"];
                  if ($catAttr->details_status) {
                    $attrArr["$in_name"]["details_status"] = 1;
                  } else {
@@ -943,6 +960,8 @@ class ProductController extends AdminBaseController
                if ($request->has("$in_name")) {
                  $attrArr["$in_name"]["values"] = $request["$in_name"];
                  $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+                 $attrArr["$in_name"]["previous_prices"] = $request["$in_name"."_previous_price"];
+                 $attrArr["$in_name"]["discounts"] = $request["$in_name"."_discount"];
                  if ($subAttr->details_status) {
                    $attrArr["$in_name"]["details_status"] = 1;
                  } else {
@@ -952,23 +971,41 @@ class ProductController extends AdminBaseController
              }
            }
          }
-         if (!empty($request->childcategory_id)) {
-           $childAttrs = Attribute::where('attributable_id', $request->childcategory_id)->where('attributable_type', 'App\Models\Childcategory')->get();
-           if (!empty($childAttrs)) {
-             foreach ($childAttrs as $key => $childAttr) {
-               $in_name = $childAttr->input_name;
-               if ($request->has("$in_name")) {
-                 $attrArr["$in_name"]["values"] = $request["$in_name"];
-                 $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
-                 if ($childAttr->details_status) {
-                   $attrArr["$in_name"]["details_status"] = 1;
-                 } else {
-                   $attrArr["$in_name"]["details_status"] = 0;
-                 }
-               }
-             }
-           }
-         }
+        //  if (!empty($request->childcategory_id)) {
+        //   $childAttrs = Attribute::where('attributable_id', $request->childcategory_id)->where('attributable_type', 'App\Models\Childcategory')->get();
+        //   if (!empty($childAttrs)) {
+        //      foreach ($childAttrs as $key => $childAttr) {
+        //       $in_name = $childAttr->input_name;
+        //       if ($request->has("$in_name")) {
+        //          $attrArr["$in_name"]["values"] = $request["$in_name"];
+        //          $attrArr["$in_name"]["prices"] = $request["$in_name"."_price"];
+        //          if ($childAttr->details_status) {
+        //           $attrArr["$in_name"]["details_status"] = 1;
+        //          } else {
+        //           $attrArr["$in_name"]["details_status"] = 0;
+        //          }
+        //       }
+        //      }
+        //   }
+        //  }
+        
+        // Add To Gallery If any
+        $lastid = $data->id;
+        if ($files = $request->file('gallery')){
+            foreach ($files as  $key => $file){
+                if(in_array($key, $request->galval))
+                {
+                    
+                    $gallery = new Gallery;
+                    
+                    $name = time().\Str::random(8).str_replace(' ', '', $file->getClientOriginalExtension());
+                    $file->move('assets/images/galleries',$name);
+                    $gallery['photo'] = $name;
+                    $gallery['product_id'] = $lastid;
+                    $gallery->save();
+                }
+            }
+        }
 
          if (empty($attrArr)) {
            $input['attributes'] = NULL;
@@ -976,6 +1013,8 @@ class ProductController extends AdminBaseController
            $jsonAttr = json_encode($attrArr);
            $input['attributes'] = $jsonAttr;
          }
+         
+         $input['childcategory_id'] = NULL;
 
          $data->slug = Str::slug($data->name,'-').'-'.strtolower($data->sku);
 

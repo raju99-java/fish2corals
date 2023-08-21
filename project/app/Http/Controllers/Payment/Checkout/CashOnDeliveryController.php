@@ -20,6 +20,7 @@ class CashOnDeliveryController extends CheckoutBaseControlller
 {
     public function store(Request $request)
     {
+        
         $input = $request->all();
         if($request->pass_check) {
             $auth = OrderHelper::auth_check($input); // For Authentication Checking
@@ -27,14 +28,16 @@ class CashOnDeliveryController extends CheckoutBaseControlller
                 return redirect()->back()->with('unsuccess',$auth['error_message']);
             }
         }
+        
 
         if (!Session::has('cart')) {
             return redirect()->route('front.cart')->with('success',__("You don't have any product to checkout."));
         }
-
+        
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
         OrderHelper::license_check($cart); // For License Checking
+        
         $t_oldCart = Session::get('cart');
         $t_cart = new Cart($t_oldCart);
         $new_cart = [];
@@ -44,22 +47,33 @@ class CashOnDeliveryController extends CheckoutBaseControlller
         $new_cart = json_encode($new_cart);
         $temp_affilate_users = OrderHelper::product_affilate_check($cart); // For Product Based Affilate Checking
         $affilate_users = $temp_affilate_users == null ? null : json_encode($temp_affilate_users);
-
+        
         $order = new Order;
+        
         $success_url = route('front.payment.return');
+        
         $input['user_id'] = Auth::check() ? Auth::user()->id : NULL;
+        
         $input['cart'] = $new_cart;
         $input['affilate_users'] = $affilate_users;
         $input['pay_amount'] = $request->total / $this->curr->value;
         $input['order_number'] = Str::random(4).time();
         $input['wallet_price'] = $request->wallet_price / $this->curr->value;
-        if($input['tax_type'] == 'state_tax'){
-            $input['tax_location'] = State::findOrFail($input['tax'])->state;
-        }else{
-            $input['tax_location'] = Country::findOrFail($input['tax'])->country_name;
-        }
-        $input['tax'] = Session::get('current_tax');
 
+        
+        
+        // if($input['tax_type'] == 'state_tax'){
+        //     $input['tax_location'] = State::findOrFail($input['tax'])->state;
+        // }else{
+        //     $input['tax_location'] = Country::findOrFail($input['tax'])->country_name;
+        // }
+        
+        // $input['tax'] = Session::get('current_tax');
+
+        $input['tax'] = '0';
+
+        // print_r(1);exit;
+        
         if (Session::has('affilate')) {
             $val = $request->total / $this->curr->value;
             $val = $val / 100;
@@ -78,7 +92,7 @@ class CashOnDeliveryController extends CheckoutBaseControlller
             }
 
         }
-
+        
         $order->fill($input)->save();
         $order->tracks()->create(['title' => 'Pending', 'text' => 'You have successfully placed your order.' ]);
         $order->notifications()->create();

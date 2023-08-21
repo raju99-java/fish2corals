@@ -20,7 +20,7 @@
 												{{csrf_field()}}
 
 
-												<div class="row">
+													<!-- <div class="row">
 														<div class="col-lg-8">
 															<div class="left-area">
 																	<h4 class="heading">{{ __("Highlight in") }} {{ __('Flash Deal')}} *</h4>
@@ -47,7 +47,7 @@
 	
 															</div>
 														</div>
-													</div>
+													</div> -->
 
 													<div class="row">
 														<div class="col-lg-8">
@@ -137,7 +137,7 @@
 									                  </div>
 												</div>
 
-												<div class="row">
+												<!-- <div class="row">
 													<div class="col-lg-8">
 														<div class="left-area">
 															<h4 class="heading">{{ __("Highlight in") }}  {{ __('Big Save') }} *</h4>
@@ -149,7 +149,7 @@
 									                      <span class="slider round"></span>
 									                    </label>
 									                  </div>
-												</div>
+												</div> -->
 
 												<div class="row">
 													<div class="col-lg-8">

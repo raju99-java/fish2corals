@@ -111,8 +111,53 @@
                            <img src="{{asset('assets/images/products/'.$productt->photo)}}" class="img-fluid blur-up lazyload"
                               alt="">
                            <div class="content">
-                              <h5>{{ $productt->name }}</h5>
-                              <h6>{{ $productt->showPrice() }}<del class="text-danger">{{ $productt->showPreviousPrice() }}</del><span>{{ round($productt->offPercentage() )}}% off</span></h6>
+
+                              @if (!empty($productt->attributes))
+                                 @php
+                                 $attrArr = json_decode($productt->attributes, true);
+                                 @endphp
+                              @endif
+
+                              @if (!empty($attrArr))
+
+                                 <?php 
+                     
+                                    $previous_price = 0;
+                                    $discount = 0;
+                                 
+                                 ?>
+                           
+                                 @foreach ($attrArr as $attrKey => $attrVal)
+                                 @if (array_key_exists("details_status",$attrVal) && $attrVal['details_status'] == 1)
+                                       @foreach ($attrVal['values'] as $optionKey => $optionVal)
+                                          
+                                          @if($optionKey == 0)
+                                             <?php  
+                                                   
+                                                   $previous_price += $attrVal['previous_prices'][$optionKey] * $curr->value;
+                                                   $discount += $attrVal['discounts'][$optionKey];
+                                                   
+                                             ?>
+                                          @endif
+                                       
+                                       @endforeach
+                                 @endif
+                                 @endforeach
+
+                                 <h5>{{ $productt->name }}</h5>
+                                 <h6>
+                                    <span class="sizeprice">{{ $productt->showPrice() }}</span>
+                                    <del class="sizeprvprice text-content">{{ $curr->sign."".$previous_price }}</del>
+                                    <span class="off">({{ round($discount )}}% off)</span>
+                                 </h6>
+                              @else
+                                 <h5>{{ $productt->name }}</h5>
+                                 <h6>
+                                    <span class="sizeprice">{{ $productt->showPrice() }}</span>
+                                    <del class="sizeprvprice text-content">{{ $productt->showPreviousPrice() }}</del>
+                                    <span class="off">({{ round($productt->offPercentage() )}}% off)</span>
+                                 </h6>
+                              @endif
                            </div>
                      </div>
 

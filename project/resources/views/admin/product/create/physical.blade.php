@@ -12,7 +12,7 @@
 	<div class="mr-breadcrumb">
 		<div class="row">
 			<div class="col-lg-12">
-					<h4 class="heading">{{ __('Physical Product') }} <a class="add-btn" href="{{ route('admin-prod-types') }}"><i class="fas fa-arrow-left"></i> {{ __('Back') }}</a></h4>
+					<h4 class="heading"><a class="add-btn" href="{{ route('admin-prod-index') }}"><i class="fas fa-arrow-left"></i> {{ __('Back') }}</a></h4>
 					<ul class="links">
 						<li>
 							<a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }} </a>
@@ -23,12 +23,15 @@
 					<li>
 						<a href="{{ route('admin-prod-index') }}">{{ __('All Products') }}</a>
 					</li>
-						<li>
-							<a href="{{ route('admin-prod-types') }}">{{ __('Add Product') }}</a>
-						</li>
-						<li>
-							<a href="{{ route('admin-prod-create','physical') }}">{{ __('Physical Product') }}</a>
-						</li>
+						<!--<li>-->
+						<!--	<a href="{{ route('admin-prod-types') }}">{{ __('Add Product') }}</a>-->
+						<!--</li>-->
+					<li>
+						<a href="{{ route('admin-prod-create','physical') }}">{{ __('Add Product') }}</a>
+					</li>
+						<!--<li>-->
+						<!--	<a href="{{ route('admin-prod-create','physical') }}">{{ __('Physical Product') }}</a>-->
+						<!--</li>-->
 					</ul>
 			</div>
 		</div>
@@ -112,23 +115,12 @@
 										</div>
 									</div>
 
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="left-area">
-												<h4 class="heading">{{ __('Child Category') }}*</h4>
-											</div>
-										</div>
-										<div class="col-lg-12">
-											<select id="childcat" name="childcategory_id" disabled="">
-													<option value="">{{ __('Select Child Category') }}</option>
-											</select>
-										</div>
-									</div>
+									
 
 
 									<div id="catAttributes"></div>
 									<div id="subcatAttributes"></div>
-									<div id="childcatAttributes"></div>
+									<!--<div id="childcatAttributes"></div>-->
 
 								
 
@@ -308,7 +300,7 @@
 
 									</div> -->
 
-									<div class="row">
+									<!--<div class="row">
 										<div class="col-lg-12">
 											<div class="left-area">
 
@@ -322,7 +314,7 @@
 												</li>
 											</ul>
 										</div>
-									</div>
+									</div>-->
 
 									<div class="showbox">
 										<div class="row">
@@ -397,7 +389,7 @@
 									</div> -->
 
 
-									<div class="row">
+									<!--<div class="row">
 										<div class="col-lg-12">
 											<div class="left-area">
 
@@ -411,7 +403,7 @@
 												</li>
 											</ul>
 										</div>
-									</div>
+									</div>-->
 
 
 									<div class="showbox">
@@ -521,6 +513,21 @@
 											<input name="stock"  type="number" class="input-field" placeholder="e.g 20" value="" min="0">
 										</div>
 									</div>
+									
+									<div class="row">
+										<div class="col-lg-12">
+											<div class="left-area">
+												<h4 class="heading">
+													{{ __('Product Short Description (within 200 words)') }}*
+												</h4>
+											</div>
+										</div>
+										<div class="col-lg-12">
+											<div class="text-editor">
+												<textarea class="nic-edit-p" name="short_desc"></textarea>
+											</div>
+										</div>
+									</div>
 
 									<div class="row">
 										<div class="col-lg-12">
@@ -537,20 +544,21 @@
 										</div>
 									</div>
 
-									<div class="row">
-										<div class="col-lg-12">
-											<div class="left-area">
-												<h4 class="heading">
-													{{ __('Product Buy/Return Policy') }}*
-												</h4>
-											</div>
-										</div>
-										<div class="col-lg-12">
-											<div class="text-editor">
-												<textarea class="nic-edit-p" name="policy"></textarea>
-											</div>
-										</div>
-									</div>
+									<!--<div class="row">-->
+									<!--	<div class="col-lg-12">-->
+									<!--		<div class="left-area">-->
+									<!--			<h4 class="heading">-->
+									<!--				{{ __('Product Buy/Return Policy') }}*-->
+									<!--			</h4>-->
+									<!--		</div>-->
+									<!--	</div>-->
+									<!--	<div class="col-lg-12">-->
+									<!--		<div class="text-editor">-->
+									<!--			<textarea class="nic-edit-p" name="policy"></textarea>-->
+									<!--		</div>-->
+									<!--	</div>-->
+									<!--</div>-->
+									<input type="hidden" name="policy" value="" />
 
 									<div class="row">
 										<div class="col-lg-12">
@@ -640,7 +648,7 @@
 											</a>
 										</div>
 									</div>
-									<!-- <div class="row mb-4">
+									<div class="row mb-4">
 										<div class="col-lg-12 mb-2">
 										<div class="left-area">
 											<h4 class="heading">{{ __('Select Brand') }}</h4>
@@ -654,7 +662,7 @@
 												@endforeach
 											</select>
 										</div>
-									</div> -->
+									</div>
 
 									<div class="row">
 										<div class="col-lg-12">
@@ -675,7 +683,7 @@
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="left-area">
-													<h4 class="heading">{{ __('Product Discount Price') }}*</h4>
+													<h4 class="heading">{{ __('Product Previous Price') }}*</h4>
 													<p class="sub-heading">{{ __('(Optional)') }}</p>
 											</div>
 										</div>

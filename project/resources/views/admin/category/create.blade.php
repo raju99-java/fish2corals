@@ -83,7 +83,7 @@
                                     <label for="image-upload" class="img-label"><i class="icofont-upload-alt"></i>{{ __('Upload Banner') }}</label>
                                     <input type="file" name="image" class="img-upload">
                                   </div>
-                                  <p class="text">{{__('Prefered Size: (1230x267) or Square Sized Image')}}</p>
+                                  <p class="text">{{__('Prefered Size: (130x130) or Square Sized Image')}}</p>
                                 </div>
                               </div>
                             </div>
