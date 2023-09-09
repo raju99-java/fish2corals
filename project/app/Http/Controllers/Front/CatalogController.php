@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Session;
 
 class CatalogController extends FrontBaseController
 {
+    
+        public function search()
+      {
+    
+          return view('frontend.search');
+      }
 
     // CATEGORIES SECTOPN
 

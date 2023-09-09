@@ -50,7 +50,7 @@
 
                 <div class="col-xxl-2 col-xl-4 col-sm-6">
                     <div class="footer-title">
-                        <h4 class="text-white">Useful Link</h4>
+                        <h4 class="text-white">Usefull Link</h4>
                     </div>
                     <ul class="footer-list footer-list-light footer-contact">
                         <li>
@@ -62,6 +62,19 @@
                         <li>
                             <a href="{{ route('front.faq') }}" class="light-text">FAQ</a>
                         </li>
+                        
+                        <li>
+                            <a href="{{ route('front.privacy-policy') }}" class="light-text">Privacy Policy</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ route('front.terms-conditions') }}" class="light-text">Terms & Conditions</a>
+                        </li>
+                        
+                        <li>
+                            <a href="{{ route('front.return-refund-policy') }}" class="light-text">Return & Refund Policy</a>
+                        </li>
+                        
                     </ul>
                 </div>
 

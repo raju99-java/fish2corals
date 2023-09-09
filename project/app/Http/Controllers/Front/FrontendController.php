@@ -118,6 +118,24 @@ public function currency($id)
         $data=[];
         return view('frontend.about',$data);
     }
+    
+     public function privacy_policy()
+    {
+        
+        return view('frontend.privacy-policy');
+    }
+    
+    public function terms_conditions()
+    {
+        
+        return view('frontend.terms-conditions');
+    }
+    
+    public function return_refund_policy()
+    {
+        
+        return view('frontend.return-refund-policy');
+    }
 
     // Home Page Ajax Display
 

@@ -48,6 +48,14 @@
                                               </div>
                                             </div>
                                       {{-- Sub Title Section Ends--}}
+                                      
+                                                <div class="form-group">
+                                                  <div class="col-sm-12">
+                                                    <label class="control-label" for="details_text">{{ __('Description') }}*</label>
+
+                                                    <textarea class="form-control" name="details_text" id="details_text" rows="5"  placeholder="{{ __('Enter Description') }}"></textarea>
+                                                    </div>
+                                                 </div>
                         <div class="row mt-5">
                           <div class="col-lg-4">
                             <div class="left-area">
@@ -62,6 +70,17 @@
                                   </div>
                                   <!-- <p class="text">{{ __('Prefered Size: (600x770) or Square Sized Image') }}</p> -->
                             </div>
+                          </div>
+                        </div>
+                        
+                        <div class="row">
+                          <div class="col-lg-4">
+                            <div class="left-area">
+                                <h4 class="heading">{{ __('Link') }} *</h4>
+                            </div>
+                          </div>
+                          <div class="col-lg-7">
+                            <input type="text" class="input-field" name="link" placeholder="{{ __('Link') }}" required="" value="">
                           </div>
                         </div>
 

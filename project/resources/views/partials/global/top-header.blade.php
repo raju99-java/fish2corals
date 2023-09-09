@@ -53,8 +53,8 @@
                                     <button class="btn search-icon" type="button">
                                        <i class="iconly-Search icli"></i>
                                     </button>
-                                    <input type="text" id="prod_name" class="form-control" name="search" placeholder="Search for products, category,brands..." value="{{ request()->input('search') }}" />
-                                    <button class="btn search-button" type="button">Search</button>
+                                    <input type="text" id="prod_name" class="form-control" name="search" placeholder="Search for products..." value="{{ request()->input('search') }}" />
+                                    <button class="btn search-button" type="submit">Search</button>
                                  
                               </div>
                            </form>

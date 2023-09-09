@@ -14,7 +14,7 @@ class MaintenanceMode
         
 
             if($gs->is_maintain == 1) {
-// dd($gs);
+            // dd($gs);
                     return redirect()->route('front-maintenance');
 
             }

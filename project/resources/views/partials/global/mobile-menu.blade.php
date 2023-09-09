@@ -16,25 +16,25 @@
         </li>
 
         <li>
-            <a href="#" class="search-box">
+            <a href="{{ route('front.search') }}" class="search-box">
                 <i class="iconly-Search icli"></i>
                 <span>Search</span>
             </a>
         </li>
 
-        <li>
-            @if (Auth::check())
-                <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            @else
-                <a href="{{ route('user.login') }}" class="notifi-wishlist">
-                    <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
-                </a>
-            @endif
-        </li>
+        <!--<li>-->
+        <!--    @if (Auth::check())-->
+        <!--        <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">-->
+        <!--            <i class="iconly-Heart icli"></i>-->
+        <!--            <span>My Wish</span>-->
+        <!--        </a>-->
+        <!--    @else-->
+        <!--        <a href="{{ route('user.login') }}" class="notifi-wishlist">-->
+        <!--            <i class="iconly-Heart icli"></i>-->
+        <!--            <span>My Wish</span>-->
+        <!--        </a>-->
+        <!--    @endif-->
+        <!--</li>-->
 
         <li>
             <a href="{{ route('front.cart') }}">

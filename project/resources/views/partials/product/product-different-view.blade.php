@@ -23,22 +23,28 @@
                      <a href="{{ route('front.product', $product->slug) }}">
                         <h5 class="name">{{ $product->showName() }}</h5>
                      </a>
-                     <p class="text-content mt-1 mb-2 product-content">{{ $product->details }}</p>
+                     <p class="text-content mt-1 mb-2 product-content">{!! $product->details !!}</p>
                      <h5 class="price"><span class="theme-color"> {{ $product->setCurrency() }}</span> <del>{{ $product->showPreviousPrice() }}</del>
                      </h5>
                      <div class="add-to-cart-box bg-white">
 
-                        @if($product->emptyStock())
-                           <div class="closed">
-                              <a class="cart-out-of-stock button add_to_cart_button" href="#" title="{{ __('Out Of Stock') }}" ><i class="flaticon-cancel flat-mini mx-auto"></i></a>
-                           </div>
-                        @else
-                           <a href="javascript:;" data-href="{{ route('product.cart.add',$product->id) }}"  class="btn btn-add-cart addcart-button add-cart button add_to_cart_button">Add to Cart
+                        <!--@if($product->emptyStock())-->
+                        <!--   <div class="closed">-->
+                        <!--      <a class="cart-out-of-stock button add_to_cart_button" href="#" title="{{ __('Out Of Stock') }}" ><i class="flaticon-cancel flat-mini mx-auto"></i></a>-->
+                        <!--   </div>-->
+                        <!--@else-->
+                        <!--   <a href="javascript:;" data-href="{{ route('product.cart.add',$product->id) }}"  class="btn btn-add-cart addcart-button add-cart button add_to_cart_button">Add to Cart-->
+                        <!--      <span class="add-icon bg-light-gray">-->
+                        <!--            <i class="fa-solid fa-plus"></i>-->
+                        <!--      </span>-->
+                        <!--   </a>-->
+                        <!--@endif-->
+                        
+                           <a href="{{ route('front.product', $product->slug) }}" class="btn btn-add-cart addcart-button">Shop Now
                               <span class="add-icon bg-light-gray">
-                                    <i class="fa-solid fa-plus"></i>
+                                    <i class="fas fa-angle-right"></i>
                               </span>
                            </a>
-                        @endif
                         
                      </div>
                </div>

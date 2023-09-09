@@ -937,642 +937,646 @@ Route::group(['middleware'=>'permissions:super'],function(){
 
 Route::group(['middleware'=>'maintenance'],function(){
 
-// ************************************ VENDOR SECTION **********************************************
-
-Route::prefix('vendor')->group(function() {
-
-    Route::group(['middleware'=>'vendor'],function(){
-
-    // VENDOR DASHBOARD
-
-    Route::get('/dashboard', 'Vendor\VendorController@index')->name('vendor.dashboard');
-
-    //------------ ORDER SECTION ------------
-
-    Route::get('/orders/datatables', 'Vendor\OrderController@datatables')->name('vendor-order-datatables');
-    Route::get('/orders', 'Vendor\OrderController@index')->name('vendor-order-index');
-    Route::get('/order/{id}/show', 'Vendor\OrderController@show')->name('vendor-order-show');
-    Route::get('/order/{id}/invoice', 'Vendor\OrderController@invoice')->name('vendor-order-invoice');
-    Route::get('/order/{id}/print', 'Vendor\OrderController@printpage')->name('vendor-order-print');
-    Route::get('/order/{id1}/status/{status}', 'Vendor\OrderController@status')->name('vendor-order-status');
-    Route::post('/order/email/', 'Vendor\OrderController@emailsub')->name('vendor-order-emailsub');
-    Route::post('/order/{slug}/license', 'Vendor\OrderController@license')->name('vendor-order-license');
-
-    //------------ ORDER SECTION ENDS------------
-
-    //------------ SUBCATEGORY SECTION ------------
-
-    Route::get('/load/subcategories/{id}/', 'Vendor\VendorController@subcatload')->name('vendor-subcat-load'); //JSON REQUEST
-
-    //------------ SUBCATEGORY SECTION ENDS------------
-
-    //------------ CHILDCATEGORY SECTION ------------
-
-    Route::get('/load/childcategories/{id}/', 'Vendor\VendorController@childcatload')->name('vendor-childcat-load'); //JSON REQUEST
-
-    //------------ CHILDCATEGORY SECTION ENDS------------
-
-    //------------ PRODUCT SECTION ------------
-
-    Route::get('/products/datatables', 'Vendor\ProductController@datatables')->name('vendor-prod-datatables'); //JSON REQUEST
-    Route::get('/products', 'Vendor\ProductController@index')->name('vendor-prod-index');
-
-    Route::post('/products/upload/update/{id}', 'Vendor\ProductController@uploadUpdate')->name('vendor-prod-upload-update');
-
-    // CREATE SECTION
-    Route::get('/products/types', 'Vendor\ProductController@types')->name('vendor-prod-types');
-    Route::get('/products/{slug}/create', 'Vendor\ProductController@create')->name('vendor-prod-create');
-    Route::post('/products/store', 'Vendor\ProductController@store')->name('vendor-prod-store');
-    Route::get('/getattributes', 'Vendor\ProductController@getAttributes')->name('vendor-prod-getattributes');
-    Route::get('/products/import', 'Vendor\ProductController@import')->name('vendor-prod-import');
-    Route::post('/products/import-submit', 'Vendor\ProductController@importSubmit')->name('vendor-prod-importsubmit');
-
+    // ************************************ VENDOR SECTION **********************************************
     
-
-    // CREATE SECTION
-
-    // EDIT SECTION
-    Route::get('/products/edit/{id}', 'Vendor\ProductController@edit')->name('vendor-prod-edit');
-    Route::post('/products/edit/{id}', 'Vendor\ProductController@update')->name('vendor-prod-update');
-
-    Route::get('/products/catalog/{id}', 'Vendor\ProductController@catalogedit')->name('vendor-prod-catalog-edit');
-    Route::post('/products/catalog/{id}', 'Vendor\ProductController@catalogupdate')->name('vendor-prod-catalog-update');
-
-    // EDIT SECTION ENDS
-
-    // IMPORT SECTION
-
-    Route::get('/products/import/create-product', 'Vendor\ImportController@createImport')->name('vendor-import-create');
-    Route::get('/products/import/edit/{id}', 'Vendor\ImportController@edit')->name('vendor-import-edit');
-    Route::get('/products/import/csv', 'Vendor\ImportController@importCSV')->name('vendor-import-csv');
-    Route::get('/products/import/datatables', 'Vendor\ImportController@datatables')->name('vendor-import-datatables');
-    Route::get('/products/import/index', 'Vendor\ImportController@index')->name('vendor-import-index');
-    Route::post('/products/import/store', 'Vendor\ImportController@store')->name('vendor-import-store');
-    Route::post('/products/import/update/{id}', 'Vendor\ImportController@update')->name('vendor-import-update');
-    Route::post('/products/import/csv/store', 'Vendor\ImportController@importStore')->name('vendor-import-csv-store');
-
-    // IMPORT SECTION
-
-
-
-    // STATUS SECTION
-    Route::get('/products/status/{id1}/{id2}', 'Vendor\ProductController@status')->name('vendor-prod-status');
-    // STATUS SECTION ENDS
-
-    // DELETE SECTION
-    Route::delete('/products/delete/{id}', 'Vendor\ProductController@destroy')->name('vendor-prod-delete');
-    // DELETE SECTION ENDS
-
-    //------------ VENDOR PRODUCT SECTION ENDS------------
-
-    //------------ VENDOR GALLERY SECTION ------------
-
-    Route::get('/gallery/show', 'Vendor\GalleryController@show')->name('vendor-gallery-show');
-    Route::post('/gallery/store', 'Vendor\GalleryController@store')->name('vendor-gallery-store');
-    Route::get('/gallery/delete', 'Vendor\GalleryController@destroy')->name('vendor-gallery-delete');
-
-    //------------ VENDOR GALLERY SECTION ENDS------------
-
-    //------------ ADMIN SHIPPING ------------
-
-    Route::get('/shipping/datatables', 'Vendor\ShippingController@datatables')->name('vendor-shipping-datatables');
-    Route::get('/shipping', 'Vendor\ShippingController@index')->name('vendor-shipping-index');
-    Route::get('/shipping/create', 'Vendor\ShippingController@create')->name('vendor-shipping-create');
-    Route::post('/shipping/create', 'Vendor\ShippingController@store')->name('vendor-shipping-store');
-    Route::get('/shipping/edit/{id}', 'Vendor\ShippingController@edit')->name('vendor-shipping-edit');
-    Route::post('/shipping/edit/{id}', 'Vendor\ShippingController@update')->name('vendor-shipping-update');
-    Route::delete('/shipping/delete/{id}', 'Vendor\ShippingController@destroy')->name('vendor-shipping-delete');
-
-    //------------ ADMIN SHIPPING ENDS ------------
-
-    //------------ ADMIN PACKAGE ------------
-
-    Route::get('/package/datatables', 'Vendor\PackageController@datatables')->name('vendor-package-datatables');
-    Route::get('/package', 'Vendor\PackageController@index')->name('vendor-package-index');
-    Route::get('/package/create', 'Vendor\PackageController@create')->name('vendor-package-create');
-    Route::post('/package/create', 'Vendor\PackageController@store')->name('vendor-package-store');
-    Route::get('/package/edit/{id}', 'Vendor\PackageController@edit')->name('vendor-package-edit');
-    Route::post('/package/edit/{id}', 'Vendor\PackageController@update')->name('vendor-package-update');
-    Route::delete('/package/delete/{id}', 'Vendor\PackageController@destroy')->name('vendor-package-delete');
-
-    //------------ ADMIN PACKAGE ENDS------------
-
-    //------------ VENDOR NOTIFICATION SECTION ------------
-
-    Route::get('/order/notf/show/{id}', 'Vendor\NotificationController@order_notf_show')->name('vendor-order-notf-show');
-    Route::get('/order/notf/count/{id}','Vendor\NotificationController@order_notf_count')->name('vendor-order-notf-count');
-    Route::get('/order/notf/clear/{id}','Vendor\NotificationController@order_notf_clear')->name('vendor-order-notf-clear');
-
-    //------------ VENDOR NOTIFICATION SECTION ENDS ------------
-
-    // Vendor Profile
-    Route::get('/profile', 'Vendor\VendorController@profile')->name('vendor-profile');
-    Route::post('/profile', 'Vendor\VendorController@profileupdate')->name('vendor-profile-update');
-    // Vendor Profile Ends
-
-    // Vendor Shipping Cost
-    Route::get('/banner', 'Vendor\VendorController@banner')->name('vendor-banner');
-
-    // Vendor Social
-    Route::get('/social', 'Vendor\VendorController@social')->name('vendor-social-index');
-    Route::post('/social/update', 'Vendor\VendorController@socialupdate')->name('vendor-social-update');
-
-    Route::get('/withdraw/datatables', 'Vendor\WithdrawController@datatables')->name('vendor-wt-datatables');
-    Route::get('/withdraw', 'Vendor\WithdrawController@index')->name('vendor-wt-index');
-    Route::get('/withdraw/create', 'Vendor\WithdrawController@create')->name('vendor-wt-create');
-    Route::post('/withdraw/create', 'Vendor\WithdrawController@store')->name('vendor-wt-store');
-
-    //------------ VENDOR SERVICE ------------
-
-    Route::get('/service/datatables', 'Vendor\ServiceController@datatables')->name('vendor-service-datatables');
-    Route::get('/service', 'Vendor\ServiceController@index')->name('vendor-service-index');
-    Route::get('/service/create', 'Vendor\ServiceController@create')->name('vendor-service-create');
-    Route::post('/service/create', 'Vendor\ServiceController@store')->name('vendor-service-store');
-    Route::get('/service/edit/{id}', 'Vendor\ServiceController@edit')->name('vendor-service-edit');
-    Route::post('/service/edit/{id}', 'Vendor\ServiceController@update')->name('vendor-service-update');
-    Route::delete('/service/delete/{id}', 'Vendor\ServiceController@destroy')->name('vendor-service-delete');
-
-    //------------ VENDOR SERVICE ENDS ------------
-
-    //------------ VENDOR SOCIAL LINK ------------
-
-    Route::get('/social-link/datatables', 'Vendor\SocialLinkController@datatables')->name('vendor-sociallink-datatables'); //JSON REQUEST
-    Route::get('/social-link', 'Vendor\SocialLinkController@index')->name('vendor-sociallink-index');
-    Route::get('/social-link/create', 'Vendor\SocialLinkController@create')->name('vendor-sociallink-create');
-    Route::post('/social-link/create', 'Vendor\SocialLinkController@store')->name('vendor-sociallink-store');
-    Route::get('/social-link/edit/{id}', 'Vendor\SocialLinkController@edit')->name('vendor-sociallink-edit');
-    Route::post('/social-link/edit/{id}', 'Vendor\SocialLinkController@update')->name('vendor-sociallink-update');
-    Route::delete('/social-link/delete/{id}', 'Vendor\SocialLinkController@destroy')->name('vendor-sociallink-delete');
-    Route::get('/social-link/status/{id1}/{id2}', 'Vendor\SocialLinkController@status')->name('vendor-sociallink-status');
-
-    //------------ VENDOR SOCIAL LINK ENDS ------------
-  // -------------------------- Vendor Income ------------------------------------//
-    Route::get('earning/datatables',"Vendor\IncomeController@datatables")->name('vendor.income.datatables');
-    Route::get('total/earning',"Vendor\IncomeController@index")->name('vendor.income');
-
-    Route::get('/verify', 'Vendor\VendorController@verify')->name('vendor-verify');
-    Route::get('/warning/verify/{id}', 'Vendor\VendorController@warningVerify')->name('vendor-warning');
-    Route::post('/verify', 'Vendor\VendorController@verifysubmit')->name('vendor-verify-submit');
-
-  });
-
-});
-
-// ************************************ VENDOR SECTION ENDS**********************************************
-
-// ************************************ USER SECTION **********************************************
-
-Route::prefix('user')->group(function() {
-
-
-  // USER AUTH SECION
-    Route::get('/login','User\LoginController@showLoginForm')->name('user.login');
-    Route::get('/vendor-login','User\LoginController@showVendorLoginForm')->name('vendor.login');
-
-    Route::get('/register','User\RegisterController@showRegisterForm')->name('user.register');
-    Route::get('/vendor-register','User\RegisterController@showVendorRegisterForm')->name('vendor.register');
-    // User Login
-    Route::post('/login', 'Auth\User\LoginController@login')->name('user.login.submit');
-    // User Login End
-
-    // User Register
-    Route::post('/register', 'Auth\User\RegisterController@register')->name('user-register-submit');
-    Route::get('/register/verify/{token}', 'Auth\User\RegisterController@token')->name('user-register-token');
-    // User Register End
-
-  //------------ USER FORGOT SECTION ------------
-Route::get('/forgot','Auth\User\ForgotController@index')->name('user.forgot');
-    Route::post('/forgot', 'Auth\User\ForgotController@forgot')->name('user.forgot.submit');
-    Route::get('/change-password/{token}', 'Auth\User\ForgotController@showChangePassForm')->name('user.change.token');
-    Route::post('/change-password', 'Auth\User\ForgotController@changepass')->name('user.change.password');
-
-  //------------ USER FORGOT SECTION ENDS ------------
-
-  //  --------------------- Reward Point Route ------------------------------//
-  Route::get('reward/points','User\RewardController@rewards')->name('user-reward-index');
-  Route::get('reward/convert','User\RewardController@convert')->name('user-reward-convernt');
-  Route::post('reward/convert/submit','User\RewardController@convertSubmit')->name('user-reward-convert-submit');
-
-
-
-    // User Logout
-    Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
-    // User Logout Ends
-
-  // USER AUTH AUCTION ENDS
-
-    // User Dashboard
-    Route::get('/dashboard', 'User\UserController@index')->name('user-dashboard');
-
-    // User Reset
-    Route::get('/reset', 'User\UserController@resetform')->name('user-reset');
-    Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');
-    // User Reset End
-
-    // User Profile
-    Route::get('/profile', 'User\UserController@profile')->name('user-profile');
-    Route::post('/profile', 'User\UserController@profileupdate')->name('user-profile-update');
-    // User Profile Ends
-
-    // Display important Codes For Payment Gatweways
-    Route::get('/payment/{slug1}/{slug2}','User\UserController@loadpayment')->name('user.load.payment');
-    Route::get('/country/wise/state/{country_id}','Front\CheckoutController@getState')->name('country.wise.state');
-
-    // User Wishlist
-    Route::get('/wishlists','User\WishlistController@wishlists')->name('user-wishlists');
-    Route::get('/wishlist/add/{id}','User\WishlistController@addwish')->name('user-wishlist-add');
-    Route::get('/wishlist/remove/{id}','User\WishlistController@removewish')->name('user-wishlist-remove');
-    // User Wishlist Ends
-
-    // User Review
-    Route::post('/review/submit','User\UserController@reviewsubmit')->name('front.review.submit');
-    // User Review Ends
-
-    // User Orders
-
-    Route::get('/orders', 'User\OrderController@orders')->name('user-orders');
-    Route::get('/order/tracking', 'User\OrderController@ordertrack')->name('user-order-track');
-    Route::get('/order/trackings/{id}', 'User\OrderController@trackload')->name('user-order-track-search');
-    Route::get('/order/{id}', 'User\OrderController@order')->name('user-order');
-    Route::get('/download/order/{slug}/{id}', 'User\OrderController@orderdownload')->name('user-order-download');
-    Route::get('print/order/print/{id}', 'User\OrderController@orderprint')->name('user-order-print');
-    Route::get('/json/trans','User\OrderController@trans');
-
-    // User Orders Ends
-
-    // USER SUBSCRIPTION
-
-    // Subscription Package
-    Route::get('/package', 'User\SubscriptionController@package')->name('user-package');
-    Route::get('/subscription/{id}', 'User\SubscriptionController@vendorrequest')->name('user-vendor-request');
-    Route::post('/vendor-request', 'User\SubscriptionController@vendorrequestsub')->name('user-vendor-request-submit');
-
-    // Subscription Payment Redirect
-    Route::get('/payment/cancle', 'User\SubscriptionController@paycancle')->name('user.payment.cancle');
-    Route::get('/payment/return', 'User\SubscriptionController@payreturn')->name('user.payment.return');
-    Route::get('/shop/check', 'User\SubscriptionController@check')->name('user.shop.check');
-    // Paypal
-    Route::post('/paypal-submit', 'Payment\Subscription\PaypalController@store')->name('user.paypal.submit');
-    Route::get('/paypal-notify', 'Payment\Subscription\PaypalController@notify')->name('user.paypal.notify');
-
-    // Stripe
-    Route::post('/stripe-submit', 'Payment\Subscription\StripeController@store')->name('user.stripe.submit');
-
-    // Instamojo
-    Route::post('/instamojo-submit', 'Payment\Subscription\InstamojoController@store')->name('user.instamojo.submit');
-    Route::get('/instamojo-notify', 'Payment\Subscription\InstamojoController@notify')->name('user.instamojo.notify');
-
-    // Paystack
-    Route::post('/paystack-submit', 'Payment\Subscription\PaystackController@store')->name('user.paystack.submit');
-
-    // PayTM
-    Route::post('/paytm-submit', 'Payment\Subscription\PaytmController@store')->name('user.paytm.submit');;
-    Route::post('/paytm-notify', 'Payment\Subscription\PaytmController@notify')->name('user.paytm.notify');
-
-    // Molly
-    Route::post('/molly-submit', 'Payment\Subscription\MollieController@store')->name('user.molly.submit');
-    Route::get('/molly-notify', 'Payment\Subscription\MollieController@notify')->name('user.molly.notify');
-
-    // RazorPay
-    Route::post('/razorpay-submit', 'Payment\Subscription\RazorpayController@store')->name('user.razorpay.submit');
-    Route::post('/razorpay-notify', 'Payment\Subscription\RazorpayController@notify')->name('user.razorpay.notify');
-
-    // Authorize.Net
-    Route::post('/authorize-submit', 'Payment\Subscription\AuthorizeController@store')->name('user.authorize.submit');
-
-    // Mercadopago
-    Route::post('/mercadopago-submit', 'Payment\Subscription\MercadopagoController@store')->name('user.mercadopago.submit');
-
-    // Flutter Wave
-    Route::post('/flutter-submit', 'Payment\Subscription\FlutterwaveController@store')->name('user.flutter.submit');
-
-    // 2checkout
-    Route::post('/twocheckout-submit', 'Payment\Subscription\TwoCheckoutController@store')->name('user.twocheckout.submit');
-
-    // SSLCommerz
-    Route::post('/ssl-submit', 'Payment\Subscription\SslController@store')->name('user.ssl.submit');
-    Route::post('/ssl-notify', 'Payment\Subscription\SslController@notify')->name('user.ssl.notify');
-
-    // Voguepay
-    Route::post('/voguepay-submit', 'Payment\Subscription\VoguepayController@store')->name('user.voguepay.submit');
-
-    // Manual
-    Route::post('/manual-submit', 'Payment\Subscription\ManualPaymentController@store')->name('user.manual.submit');
-
-    // USER SUBSCRIPTION ENDS
-
-    // USER DEPOSIT
-
-    // Deposit & Transaction
-
-    Route::get('/deposit/transactions', 'User\DepositController@transactions')->name('user-transactions-index');
-    Route::get('/deposit/transactions/{id}/show', 'User\DepositController@transhow')->name('user-trans-show');
-    Route::get('/deposit/index', 'User\DepositController@index')->name('user-deposit-index');
-    Route::get('/deposit/create', 'User\DepositController@create')->name('user-deposit-create');
-
-    // Subscription Payment Redirect
-    Route::get('/deposit/payment/cancle', 'User\DepositController@paycancle')->name('deposit.payment.cancle');
-    Route::get('/deposit/payment/return', 'User\DepositController@payreturn')->name('deposit.payment.return');
-
-    // Paypal
-    Route::post('/deposit/paypal-submit', 'Payment\Deposit\PaypalController@store')->name('deposit.paypal.submit');
-    Route::get('/deposit/paypal-notify', 'Payment\Deposit\PaypalController@notify')->name('deposit.paypal.notify');
-
-    // Stripe
-    Route::post('/deposit/stripe-submit', 'Payment\Deposit\StripeController@store')->name('deposit.stripe.submit');
-
-    // Instamojo
-    Route::post('/deposit/instamojo-submit', 'Payment\Deposit\InstamojoController@store')->name('deposit.instamojo.submit');
-    Route::get('/deposit/instamojo-notify', 'Payment\Deposit\InstamojoController@notify')->name('deposit.instamojo.notify');
-
-    // Paystack
-    Route::post('/deposit/paystack-submit', 'Payment\Deposit\PaystackController@store')->name('deposit.paystack.submit');
-
-    // PayTM
-    Route::post('/deposit/paytm-submit', 'Payment\Deposit\PaytmController@store')->name('deposit.paytm.submit');;
-    Route::post('/deposit/paytm-notify', 'Payment\Deposit\PaytmController@notify')->name('deposit.paytm.notify');
-
-    // Molly
-    Route::post('/deposit/molly-submit', 'Payment\Deposit\MollieController@store')->name('deposit.molly.submit');
-    Route::get('/deposit/molly-notify', 'Payment\Deposit\MollieController@notify')->name('deposit.molly.notify');
-
-    // RazorPay
-    Route::post('/deposit/razorpay-submit', 'Payment\Deposit\RazorpayController@store')->name('deposit.razorpay.submit');
-    Route::post('/deposit/razorpay-notify', 'Payment\Deposit\RazorpayController@notify')->name('deposit.razorpay.notify');
-
-    // Authorize.Net
-    Route::post('/deposit/authorize-submit', 'Payment\Deposit\AuthorizeController@store')->name('deposit.authorize.submit');
-
-    // Mercadopago
-    Route::post('/deposit/mercadopago-submit', 'Payment\Deposit\MercadopagoController@store')->name('deposit.mercadopago.submit');
-
-    // Flutter Wave
-    Route::post('/deposit/flutter-submit', 'Payment\Deposit\FlutterwaveController@store')->name('deposit.flutter.submit');
-
-    // 2checkout
-    Route::post('/deposit/twocheckout-submit', 'Payment\Deposit\TwoCheckoutController@store')->name('deposit.twocheckout.submit');
-
-    // SSLCommerz
-    Route::post('/deposit/ssl-submit', 'Payment\Deposit\SslController@store')->name('deposit.ssl.submit');
-    Route::post('/deposit/ssl-notify', 'Payment\Deposit\SslController@notify')->name('deposit.ssl.notify');
-
-    // Voguepay
-    Route::post('/deposit/voguepay-submit', 'Payment\Deposit\VoguepayController@store')->name('deposit.voguepay.submit');
-
-    // Manual
-    Route::post('/deposit/manual-submit', 'Payment\Deposit\ManualPaymentController@store')->name('deposit.manual.submit');
-
-    // USER DEPOSIT ENDS
-
-    // User Vendor Send Message
-
-      Route::post('/user/contact', 'User\MessageController@usercontact');
-      Route::get('/messages', 'User\MessageController@messages')->name('user-messages');
-      Route::get('/message/{id}', 'User\MessageController@message')->name('user-message');
-      Route::post('/message/post', 'User\MessageController@postmessage')->name('user-message-post');
-      Route::get('/message/{id}/delete', 'User\MessageController@messagedelete')->name('user-message-delete');
-      Route::get('/message/load/{id}', 'User\MessageController@msgload')->name('user-vendor-message-load');
-
-    // User Vendor Send Message Ends
-
-    // User Admin Send Message
-
-    // Tickets
-      Route::get('admin/tickets', 'User\MessageController@adminmessages')->name('user-message-index');
-    // Disputes
-      Route::get('admin/disputes', 'User\MessageController@adminDiscordmessages')->name('user-dmessage-index');
-
-      Route::get('admin/message/{id}', 'User\MessageController@adminmessage')->name('user-message-show');
-      Route::post('admin/message/post', 'User\MessageController@adminpostmessage')->name('user-message-store');
-      Route::get('admin/message/{id}/delete', 'User\MessageController@adminmessagedelete')->name('user-message-delete1');
-      Route::post('admin/user/send/message', 'User\MessageController@adminusercontact')->name('user-send-message');
-      Route::get('admin/message/load/{id}', 'User\MessageController@messageload')->name('user-message-load');
-    // User Admin Send Message Ends
-
-      Route::get('/affilate/program', 'User\UserController@affilate_code')->name('user-affilate-program');
-      Route::get('/affilate/history', 'User\UserController@affilate_history')->name('user-affilate-history');
-
-      Route::get('/affilate/withdraw', 'User\WithdrawController@index')->name('user-wwt-index');
-      Route::get('/affilate/withdraw/create', 'User\WithdrawController@create')->name('user-wwt-create');
-      Route::post('/affilate/withdraw/create', 'User\WithdrawController@store')->name('user-wwt-store');
-
-    // User Favorite Seller
-
-      Route::get('/favorite/seller', 'User\UserController@favorites')->name('user-favorites');
-      Route::get('/favorite/{id1}/{id2}', 'User\UserController@favorite')->name('user-favorite');
-      Route::get('/favorite/seller/{id}/delete', 'User\UserController@favdelete')->name('user-favorite-delete');
-
-  });
-
-  // ************************************ USER SECTION ENDS**********************************************
-
-// ************************************ FRONT SECTION **********************************************
-
-Route::post('/item/report', 'Front\CatalogController@report')->name('product.report');
-
-    Route::get('/', 'Front\FrontendController@index')->name('front.index');
-    Route::get('/about-us', 'Front\FrontendController@about')->name('front.about');
-
-    Route::get('/view','Front\CartController@view_cart')->name('front.cart-view');
-    Route::get('/extras', 'Front\FrontendController@extraIndex')->name('front.extraIndex');
-    Route::get('/currency/{id}', 'Front\FrontendController@currency')->name('front.currency');
-    Route::get('/language/{id}', 'Front\FrontendController@language')->name('front.language');
-    Route::get('/order/track/{id}','Front\FrontendController@trackload')->name('front.track.search');
-    // BLOG SECTION
-    Route::get('/blog','Front\FrontendController@blog')->name('front.blog');
-    Route::get('/blog/{slug}','Front\FrontendController@blogshow')->name('front.blogshow');
-    Route::get('/blog/category/{slug}','Front\FrontendController@blogcategory')->name('front.blogcategory');
-    Route::get('/blog/tag/{slug}','Front\FrontendController@blogtags')->name('front.blogtags');
-    Route::get('/blog-search','Front\FrontendController@blogsearch')->name('front.blogsearch');
-    Route::get('/blog/archive/{slug}','Front\FrontendController@blogarchive')->name('front.blogarchive');
-    // BLOG SECTION ENDS
-
-    // FAQ SECTION
-    Route::get('/faq','Front\FrontendController@faq')->name('front.faq');
-    // FAQ SECTION ENDS
-
-    // CONTACT SECTION
-    Route::get('/contact','Front\FrontendController@contact')->name('front.contact');
-    Route::post('/contact','Front\FrontendController@contactemail')->name('front.contact.submit');
-    Route::get('/contact/refresh_code','Front\FrontendController@refresh_code');
-    // CONTACT SECTION  ENDS
-
-    // PRODCT AUTO SEARCH SECTION
-    Route::get('/autosearch/product/{slug}','Front\FrontendController@autosearch');
-    // PRODCT AUTO SEARCH SECTION ENDS
-
-    // CATEGORY SECTION
-    Route::get('/categories','Front\CatalogController@categories')->name('front.categories');
-    Route::get('/category/{category?}/{subcategory?}/{childcategory?}','Front\CatalogController@category')->name('front.category');
-    // CATEGORY SECTION ENDS
-
-    // TAG SECTION
-    Route::get('/tag/{slug}','Front\CatalogController@tag')->name('front.tag');
-    // TAG SECTION ENDS
-
-    // TAG SECTION
-    Route::get('/search','Front\CatalogController@search')->name('front.search');
-    // TAG SECTION ENDS
-
-    // PRODCT SECTION
-
-    Route::get('/item/{slug}','Front\ProductDetailsController@product')->name('front.product');
-    Route::get('/afbuy/{slug}','Front\ProductDetailsController@affProductRedirect')->name('affiliate.product');
-    Route::get('/item/quick/view/{id}/','Front\ProductDetailsController@quick')->name('product.quick');
-    Route::post('/item/review','Front\ProductDetailsController@reviewsubmit')->name('front.review.submit');
-    Route::get('/item/view/review/{id}','Front\ProductDetailsController@reviews')->name('front.reviews');
-    Route::get('/item/view/side/review/{id}','Front\ProductDetailsController@sideReviews')->name('front.side.reviews');
-    // PRODCT SECTION ENDS
-
-    // COMMENT SECTION
-    Route::post('/item/comment/store', 'Front\ProductDetailsController@comment')->name('product.comment');
-    Route::post('/item/comment/edit/{id}', 'Front\ProductDetailsController@commentedit')->name('product.comment.edit');
-    Route::get('/item/comment/delete/{id}', 'Front\ProductDetailsController@commentdelete')->name('product.comment.delete');
-    // COMMENT SECTION ENDS
-
-    // REPORT SECTION
-    Route::post('/item/report', 'Front\ProductDetailsController@report')->name('product.report');
-    // REPORT SECTION ENDS
-
-    // REPLY SECTION
-    Route::post('/item/reply/{id}', 'Front\ProductDetailsController@reply')->name('product.reply');
-    Route::post('/item/reply/edit/{id}', 'Front\ProductDetailsController@replyedit')->name('product.reply.edit');
-    Route::get('/item/reply/delete/{id}', 'Front\ProductDetailsController@replydelete')->name('product.reply.delete');
-    // REPLY SECTION ENDS
-
-    // CART SECTION
-    Route::get('/carts/view','Front\CartController@cartview');
-    Route::get('/carts','Front\CartController@cart')->name('front.cart');
-    Route::get('/addcart/{id}','Front\CartController@addcart')->name('product.cart.add');
-    Route::get('/addtocart/{id}','Front\CartController@addtocart')->name('product.cart.quickadd');
-    Route::get('/addnumcart','Front\CartController@addnumcart')->name('details.cart');
-    Route::get('/addtonumcart','Front\CartController@addtonumcart');
-    Route::get('/addbyone','Front\CartController@addbyone');
-    Route::get('/reducebyone','Front\CartController@reducebyone');
-    Route::get('/upcolor','Front\CartController@upcolor');
-    Route::get('/removecart/{id}','Front\CartController@removecart')->name('product.cart.remove');
-    Route::get('/carts/coupon','Front\CouponController@coupon');
-    // CART SECTION ENDS
-
-    // COMPARE SECTION
-    Route::get('/item/compare/view', 'Front\CompareController@compare')->name('product.compare');
-    Route::get('/item/compare/add/{id}', 'Front\CompareController@addcompare')->name('product.compare.add');
-    Route::get('/item/compare/remove/{id}', 'Front\CompareController@removecompare')->name('product.compare.remove');
-    // COMPARE SECTION ENDS
-
-  // CHECKOUT SECTION
-    Route::get('/buy-now/{id}','Front\CheckoutController@buynow')->name('front.buynow');
-    // Checkout
-    Route::get('/checkout','Front\CheckoutController@checkout')->name('front.checkout');
-    Route::get('/carts/coupon/check','Front\CouponController@couponcheck');
-    Route::get('/checkout/payment/{slug1}/{slug2}','Front\CheckoutController@loadpayment')->name('front.load.payment');
-    Route::get('/checkout/payment/return', 'Front\CheckoutController@payreturn')->name('front.payment.return');
-    Route::get('/checkout/payment/cancle', 'Front\CheckoutController@paycancle')->name('front.payment.cancle');
-    Route::get('/checkout/payment/wallet-check','Front\CheckoutController@walletcheck')->name('front.wallet.check');
-
-    // Paypal
-    Route::post('/checkout/payment/paypal-submit', 'Payment\Checkout\PaypalController@store')->name('front.paypal.submit');
-    Route::get('/checkout/payment/paypal-notify', 'Payment\Checkout\PaypalController@notify')->name('front.paypal.notify');
-
-    // Stripe
-    Route::post('/checkout/payment/stripe-submit', 'Payment\Checkout\StripeController@store')->name('front.stripe.submit');
-
-    // Instamojo
-    Route::post('/checkout/payment/instamojo-submit', 'Payment\Checkout\InstamojoController@store')->name('front.instamojo.submit');
-    Route::get('/checkout/payment/instamojo-notify', 'Payment\Checkout\InstamojoController@notify')->name('front.instamojo.notify');
-
-    // Paystack
-    Route::post('/checkout/payment/paystack-submit', 'Payment\Checkout\PaystackController@store')->name('front.paystack.submit');
-
-    // PayTM
-    Route::post('/checkout/payment/paytm-submit', 'Payment\Checkout\PaytmController@store')->name('front.paytm.submit');;
-    Route::post('/checkout/payment/paytm-notify', 'Payment\Checkout\PaytmController@notify')->name('front.paytm.notify');
-
-    // Molly
-    Route::post('/checkout/payment/molly-submit', 'Payment\Checkout\MollieController@store')->name('front.molly.submit');
-    Route::get('/checkout/payment/molly-notify', 'Payment\Checkout\MollieController@notify')->name('front.molly.notify');
-
-    // RazorPay
-    Route::post('/checkout/payment/razorpay-submit', 'Payment\Checkout\RazorpayController@store')->name('front.razorpay.submit');
-    Route::post('/checkout/payment/razorpay-notify', 'Payment\Checkout\RazorpayController@notify')->name('front.razorpay.notify');
-
-    // Authorize.Net
-    Route::post('/checkout/payment/authorize-submit', 'Payment\Checkout\AuthorizeController@store')->name('front.authorize.submit');
-
-    // Mercadopago
-    Route::post('/checkout/payment/mercadopago-submit', 'Payment\Checkout\MercadopagoController@store')->name('front.mercadopago.submit');
-
-    // Flutter Wave
-    Route::post('/checkout/payment/flutter-submit', 'Payment\Checkout\FlutterwaveController@store')->name('front.flutter.submit');
-
-    // 2checkout
-    Route::post('/checkout/payment/twocheckout-submit', 'Payment\Checkout\TwoCheckoutController@store')->name('front.twocheckout.submit');
-
-    // SSLCommerz
-    Route::post('/checkout/payment/ssl-submit', 'Payment\Checkout\SslController@store')->name('front.ssl.submit');
-    Route::post('/checkout/payment/ssl-notify', 'Payment\Checkout\SslController@notify')->name('front.ssl.notify');
-
-    // Voguepay
-    Route::post('/checkout/payment/voguepay-submit', 'Payment\Checkout\VoguepayController@store')->name('front.voguepay.submit');
-
-    // Wallet
-    Route::post('/checkout/payment/wallet-submit', 'Payment\Checkout\WalletPaymentController@store')->name('front.wallet.submit');
-
-    // Manual
-    Route::post('/checkout/payment/manual-submit', 'Payment\Checkout\ManualPaymentController@store')->name('front.manual.submit');
-
-    // Cash On Delivery
-    Route::post('/checkout/payment/cod-submit', 'Payment\Checkout\CashOnDeliveryController@store')->name('front.cod.submit');
-
-    // Flutterwave Notify Routes
-
-    // Deposit
-    Route::post('/dflutter/notify', 'Payment\Deposit\FlutterwaveController@notify')->name('deposit.flutter.notify');
-
-    // Subscription
-    Route::post('/uflutter/notify', 'Payment\Subscription\FlutterwaveController@notify')->name('user.flutter.notify');
-
-    // Checkout
-    Route::post('/cflutter/notify', 'Payment\Checkout\FlutterwaveController@notify')->name('front.flutter.notify');
-
-    // CHECKOUT SECTION ENDS
-
-    // VENDOR SECTION
-
-    Route::post('/vendor/contact','Front\VendorController@vendorcontact')->name('front.vendor.contact');
-
-    // VENDOR SECTION ENDS
-
-    // SUBSCRIBE SECTION
-
-    Route::post('/subscriber/store', 'Front\FrontendController@subscribe')->name('front.subscribe');
-
-    // SUBSCRIBE SECTION ENDS
-
-    // LOGIN WITH FACEBOOK OR GOOGLE SECTION
-    Route::get('auth/{provider}', 'Auth\User\SocialRegisterController@redirectToProvider')->name('social-provider');
-    Route::get('auth/{provider}/callback', 'Auth\User\SocialRegisterController@handleProviderCallback');
-    // LOGIN WITH FACEBOOK OR GOOGLE SECTION ENDS
-
-    //  CRONJOB
-
-    Route::get('/vendor/subscription/check','Front\FrontendController@subcheck');
-
-    // CRONJOB ENDS
-
-    Route::post('the/genius/ocean/2441139', 'Front\FrontendController@subscription');
-    Route::get('finalize', 'Front\FrontendController@finalize');
-    Route::get('update-finalize', 'Front\FrontendController@updateFinalize');
-
-    Route::get('/under-maintenance', 'Front\FrontendController@maintenance')->name('front-maintenance');
-
-    // VENDOR AND PAGE SECTION
-    Route::get('/country/tax/check','Front\CartController@country_tax');
-    Route::get('/{slug}','Front\VendorController@index')->name('front.vendor');
-
-    // VENDOR AND PAGE SECTION ENDS
-
-// ************************************ FRONT SECTION ENDS**********************************************
+    Route::prefix('vendor')->group(function() {
+    
+        Route::group(['middleware'=>'vendor'],function(){
+    
+        // VENDOR DASHBOARD
+    
+        Route::get('/dashboard', 'Vendor\VendorController@index')->name('vendor.dashboard');
+    
+        //------------ ORDER SECTION ------------
+    
+        Route::get('/orders/datatables', 'Vendor\OrderController@datatables')->name('vendor-order-datatables');
+        Route::get('/orders', 'Vendor\OrderController@index')->name('vendor-order-index');
+        Route::get('/order/{id}/show', 'Vendor\OrderController@show')->name('vendor-order-show');
+        Route::get('/order/{id}/invoice', 'Vendor\OrderController@invoice')->name('vendor-order-invoice');
+        Route::get('/order/{id}/print', 'Vendor\OrderController@printpage')->name('vendor-order-print');
+        Route::get('/order/{id1}/status/{status}', 'Vendor\OrderController@status')->name('vendor-order-status');
+        Route::post('/order/email/', 'Vendor\OrderController@emailsub')->name('vendor-order-emailsub');
+        Route::post('/order/{slug}/license', 'Vendor\OrderController@license')->name('vendor-order-license');
+    
+        //------------ ORDER SECTION ENDS------------
+    
+        //------------ SUBCATEGORY SECTION ------------
+    
+        Route::get('/load/subcategories/{id}/', 'Vendor\VendorController@subcatload')->name('vendor-subcat-load'); //JSON REQUEST
+    
+        //------------ SUBCATEGORY SECTION ENDS------------
+    
+        //------------ CHILDCATEGORY SECTION ------------
+    
+        Route::get('/load/childcategories/{id}/', 'Vendor\VendorController@childcatload')->name('vendor-childcat-load'); //JSON REQUEST
+    
+        //------------ CHILDCATEGORY SECTION ENDS------------
+    
+        //------------ PRODUCT SECTION ------------
+    
+        Route::get('/products/datatables', 'Vendor\ProductController@datatables')->name('vendor-prod-datatables'); //JSON REQUEST
+        Route::get('/products', 'Vendor\ProductController@index')->name('vendor-prod-index');
+    
+        Route::post('/products/upload/update/{id}', 'Vendor\ProductController@uploadUpdate')->name('vendor-prod-upload-update');
+    
+        // CREATE SECTION
+        Route::get('/products/types', 'Vendor\ProductController@types')->name('vendor-prod-types');
+        Route::get('/products/{slug}/create', 'Vendor\ProductController@create')->name('vendor-prod-create');
+        Route::post('/products/store', 'Vendor\ProductController@store')->name('vendor-prod-store');
+        Route::get('/getattributes', 'Vendor\ProductController@getAttributes')->name('vendor-prod-getattributes');
+        Route::get('/products/import', 'Vendor\ProductController@import')->name('vendor-prod-import');
+        Route::post('/products/import-submit', 'Vendor\ProductController@importSubmit')->name('vendor-prod-importsubmit');
+    
+        
+    
+        // CREATE SECTION
+    
+        // EDIT SECTION
+        Route::get('/products/edit/{id}', 'Vendor\ProductController@edit')->name('vendor-prod-edit');
+        Route::post('/products/edit/{id}', 'Vendor\ProductController@update')->name('vendor-prod-update');
+    
+        Route::get('/products/catalog/{id}', 'Vendor\ProductController@catalogedit')->name('vendor-prod-catalog-edit');
+        Route::post('/products/catalog/{id}', 'Vendor\ProductController@catalogupdate')->name('vendor-prod-catalog-update');
+    
+        // EDIT SECTION ENDS
+    
+        // IMPORT SECTION
+    
+        Route::get('/products/import/create-product', 'Vendor\ImportController@createImport')->name('vendor-import-create');
+        Route::get('/products/import/edit/{id}', 'Vendor\ImportController@edit')->name('vendor-import-edit');
+        Route::get('/products/import/csv', 'Vendor\ImportController@importCSV')->name('vendor-import-csv');
+        Route::get('/products/import/datatables', 'Vendor\ImportController@datatables')->name('vendor-import-datatables');
+        Route::get('/products/import/index', 'Vendor\ImportController@index')->name('vendor-import-index');
+        Route::post('/products/import/store', 'Vendor\ImportController@store')->name('vendor-import-store');
+        Route::post('/products/import/update/{id}', 'Vendor\ImportController@update')->name('vendor-import-update');
+        Route::post('/products/import/csv/store', 'Vendor\ImportController@importStore')->name('vendor-import-csv-store');
+    
+        // IMPORT SECTION
+    
+    
+    
+        // STATUS SECTION
+        Route::get('/products/status/{id1}/{id2}', 'Vendor\ProductController@status')->name('vendor-prod-status');
+        // STATUS SECTION ENDS
+    
+        // DELETE SECTION
+        Route::delete('/products/delete/{id}', 'Vendor\ProductController@destroy')->name('vendor-prod-delete');
+        // DELETE SECTION ENDS
+    
+        //------------ VENDOR PRODUCT SECTION ENDS------------
+    
+        //------------ VENDOR GALLERY SECTION ------------
+    
+        Route::get('/gallery/show', 'Vendor\GalleryController@show')->name('vendor-gallery-show');
+        Route::post('/gallery/store', 'Vendor\GalleryController@store')->name('vendor-gallery-store');
+        Route::get('/gallery/delete', 'Vendor\GalleryController@destroy')->name('vendor-gallery-delete');
+    
+        //------------ VENDOR GALLERY SECTION ENDS------------
+    
+        //------------ ADMIN SHIPPING ------------
+    
+        Route::get('/shipping/datatables', 'Vendor\ShippingController@datatables')->name('vendor-shipping-datatables');
+        Route::get('/shipping', 'Vendor\ShippingController@index')->name('vendor-shipping-index');
+        Route::get('/shipping/create', 'Vendor\ShippingController@create')->name('vendor-shipping-create');
+        Route::post('/shipping/create', 'Vendor\ShippingController@store')->name('vendor-shipping-store');
+        Route::get('/shipping/edit/{id}', 'Vendor\ShippingController@edit')->name('vendor-shipping-edit');
+        Route::post('/shipping/edit/{id}', 'Vendor\ShippingController@update')->name('vendor-shipping-update');
+        Route::delete('/shipping/delete/{id}', 'Vendor\ShippingController@destroy')->name('vendor-shipping-delete');
+    
+        //------------ ADMIN SHIPPING ENDS ------------
+    
+        //------------ ADMIN PACKAGE ------------
+    
+        Route::get('/package/datatables', 'Vendor\PackageController@datatables')->name('vendor-package-datatables');
+        Route::get('/package', 'Vendor\PackageController@index')->name('vendor-package-index');
+        Route::get('/package/create', 'Vendor\PackageController@create')->name('vendor-package-create');
+        Route::post('/package/create', 'Vendor\PackageController@store')->name('vendor-package-store');
+        Route::get('/package/edit/{id}', 'Vendor\PackageController@edit')->name('vendor-package-edit');
+        Route::post('/package/edit/{id}', 'Vendor\PackageController@update')->name('vendor-package-update');
+        Route::delete('/package/delete/{id}', 'Vendor\PackageController@destroy')->name('vendor-package-delete');
+    
+        //------------ ADMIN PACKAGE ENDS------------
+    
+        //------------ VENDOR NOTIFICATION SECTION ------------
+    
+        Route::get('/order/notf/show/{id}', 'Vendor\NotificationController@order_notf_show')->name('vendor-order-notf-show');
+        Route::get('/order/notf/count/{id}','Vendor\NotificationController@order_notf_count')->name('vendor-order-notf-count');
+        Route::get('/order/notf/clear/{id}','Vendor\NotificationController@order_notf_clear')->name('vendor-order-notf-clear');
+    
+        //------------ VENDOR NOTIFICATION SECTION ENDS ------------
+    
+        // Vendor Profile
+        Route::get('/profile', 'Vendor\VendorController@profile')->name('vendor-profile');
+        Route::post('/profile', 'Vendor\VendorController@profileupdate')->name('vendor-profile-update');
+        // Vendor Profile Ends
+    
+        // Vendor Shipping Cost
+        Route::get('/banner', 'Vendor\VendorController@banner')->name('vendor-banner');
+    
+        // Vendor Social
+        Route::get('/social', 'Vendor\VendorController@social')->name('vendor-social-index');
+        Route::post('/social/update', 'Vendor\VendorController@socialupdate')->name('vendor-social-update');
+    
+        Route::get('/withdraw/datatables', 'Vendor\WithdrawController@datatables')->name('vendor-wt-datatables');
+        Route::get('/withdraw', 'Vendor\WithdrawController@index')->name('vendor-wt-index');
+        Route::get('/withdraw/create', 'Vendor\WithdrawController@create')->name('vendor-wt-create');
+        Route::post('/withdraw/create', 'Vendor\WithdrawController@store')->name('vendor-wt-store');
+    
+        //------------ VENDOR SERVICE ------------
+    
+        Route::get('/service/datatables', 'Vendor\ServiceController@datatables')->name('vendor-service-datatables');
+        Route::get('/service', 'Vendor\ServiceController@index')->name('vendor-service-index');
+        Route::get('/service/create', 'Vendor\ServiceController@create')->name('vendor-service-create');
+        Route::post('/service/create', 'Vendor\ServiceController@store')->name('vendor-service-store');
+        Route::get('/service/edit/{id}', 'Vendor\ServiceController@edit')->name('vendor-service-edit');
+        Route::post('/service/edit/{id}', 'Vendor\ServiceController@update')->name('vendor-service-update');
+        Route::delete('/service/delete/{id}', 'Vendor\ServiceController@destroy')->name('vendor-service-delete');
+    
+        //------------ VENDOR SERVICE ENDS ------------
+    
+        //------------ VENDOR SOCIAL LINK ------------
+    
+        Route::get('/social-link/datatables', 'Vendor\SocialLinkController@datatables')->name('vendor-sociallink-datatables'); //JSON REQUEST
+        Route::get('/social-link', 'Vendor\SocialLinkController@index')->name('vendor-sociallink-index');
+        Route::get('/social-link/create', 'Vendor\SocialLinkController@create')->name('vendor-sociallink-create');
+        Route::post('/social-link/create', 'Vendor\SocialLinkController@store')->name('vendor-sociallink-store');
+        Route::get('/social-link/edit/{id}', 'Vendor\SocialLinkController@edit')->name('vendor-sociallink-edit');
+        Route::post('/social-link/edit/{id}', 'Vendor\SocialLinkController@update')->name('vendor-sociallink-update');
+        Route::delete('/social-link/delete/{id}', 'Vendor\SocialLinkController@destroy')->name('vendor-sociallink-delete');
+        Route::get('/social-link/status/{id1}/{id2}', 'Vendor\SocialLinkController@status')->name('vendor-sociallink-status');
+    
+        //------------ VENDOR SOCIAL LINK ENDS ------------
+      // -------------------------- Vendor Income ------------------------------------//
+        Route::get('earning/datatables',"Vendor\IncomeController@datatables")->name('vendor.income.datatables');
+        Route::get('total/earning',"Vendor\IncomeController@index")->name('vendor.income');
+    
+        Route::get('/verify', 'Vendor\VendorController@verify')->name('vendor-verify');
+        Route::get('/warning/verify/{id}', 'Vendor\VendorController@warningVerify')->name('vendor-warning');
+        Route::post('/verify', 'Vendor\VendorController@verifysubmit')->name('vendor-verify-submit');
+    
+      });
+    
+    });
+    
+    // ************************************ VENDOR SECTION ENDS**********************************************
+
+    // ************************************ USER SECTION **********************************************
+    
+    Route::prefix('user')->group(function() {
+    
+    
+      // USER AUTH SECION
+        Route::get('/login','User\LoginController@showLoginForm')->name('user.login');
+        Route::get('/vendor-login','User\LoginController@showVendorLoginForm')->name('vendor.login');
+    
+        Route::get('/register','User\RegisterController@showRegisterForm')->name('user.register');
+        Route::get('/vendor-register','User\RegisterController@showVendorRegisterForm')->name('vendor.register');
+        // User Login
+        Route::post('/login', 'Auth\User\LoginController@login')->name('user.login.submit');
+        // User Login End
+    
+        // User Register
+        Route::post('/register', 'Auth\User\RegisterController@register')->name('user-register-submit');
+        Route::get('/register/verify/{token}', 'Auth\User\RegisterController@token')->name('user-register-token');
+        // User Register End
+    
+      //------------ USER FORGOT SECTION ------------
+    Route::get('/forgot','Auth\User\ForgotController@index')->name('user.forgot');
+        Route::post('/forgot', 'Auth\User\ForgotController@forgot')->name('user.forgot.submit');
+        Route::get('/change-password/{token}', 'Auth\User\ForgotController@showChangePassForm')->name('user.change.token');
+        Route::post('/change-password', 'Auth\User\ForgotController@changepass')->name('user.change.password');
+    
+      //------------ USER FORGOT SECTION ENDS ------------
+    
+      //  --------------------- Reward Point Route ------------------------------//
+      Route::get('reward/points','User\RewardController@rewards')->name('user-reward-index');
+      Route::get('reward/convert','User\RewardController@convert')->name('user-reward-convernt');
+      Route::post('reward/convert/submit','User\RewardController@convertSubmit')->name('user-reward-convert-submit');
+    
+    
+    
+        // User Logout
+        Route::get('/logout', 'User\LoginController@logout')->name('user-logout');
+        // User Logout Ends
+    
+      // USER AUTH AUCTION ENDS
+    
+        // User Dashboard
+        Route::get('/dashboard', 'User\UserController@index')->name('user-dashboard');
+    
+        // User Reset
+        Route::get('/reset', 'User\UserController@resetform')->name('user-reset');
+        Route::post('/reset', 'User\UserController@reset')->name('user-reset-submit');
+        // User Reset End
+    
+        // User Profile
+        Route::get('/profile', 'User\UserController@profile')->name('user-profile');
+        Route::post('/profile', 'User\UserController@profileupdate')->name('user-profile-update');
+        // User Profile Ends
+    
+        // Display important Codes For Payment Gatweways
+        Route::get('/payment/{slug1}/{slug2}','User\UserController@loadpayment')->name('user.load.payment');
+        Route::get('/country/wise/state/{country_id}','Front\CheckoutController@getState')->name('country.wise.state');
+    
+        // User Wishlist
+        Route::get('/wishlists','User\WishlistController@wishlists')->name('user-wishlists');
+        Route::get('/wishlist/add/{id}','User\WishlistController@addwish')->name('user-wishlist-add');
+        Route::get('/wishlist/remove/{id}','User\WishlistController@removewish')->name('user-wishlist-remove');
+        // User Wishlist Ends
+    
+        // User Review
+        Route::post('/review/submit','User\UserController@reviewsubmit')->name('front.review.submit');
+        // User Review Ends
+    
+        // User Orders
+    
+        Route::get('/orders', 'User\OrderController@orders')->name('user-orders');
+        Route::get('/order/tracking', 'User\OrderController@ordertrack')->name('user-order-track');
+        Route::get('/order/trackings/{id}', 'User\OrderController@trackload')->name('user-order-track-search');
+        Route::get('/order/{id}', 'User\OrderController@order')->name('user-order');
+        Route::get('/download/order/{slug}/{id}', 'User\OrderController@orderdownload')->name('user-order-download');
+        Route::get('print/order/print/{id}', 'User\OrderController@orderprint')->name('user-order-print');
+        Route::get('/json/trans','User\OrderController@trans');
+    
+        // User Orders Ends
+    
+        // USER SUBSCRIPTION
+    
+        // Subscription Package
+        Route::get('/package', 'User\SubscriptionController@package')->name('user-package');
+        Route::get('/subscription/{id}', 'User\SubscriptionController@vendorrequest')->name('user-vendor-request');
+        Route::post('/vendor-request', 'User\SubscriptionController@vendorrequestsub')->name('user-vendor-request-submit');
+    
+        // Subscription Payment Redirect
+        Route::get('/payment/cancle', 'User\SubscriptionController@paycancle')->name('user.payment.cancle');
+        Route::get('/payment/return', 'User\SubscriptionController@payreturn')->name('user.payment.return');
+        Route::get('/shop/check', 'User\SubscriptionController@check')->name('user.shop.check');
+        // Paypal
+        Route::post('/paypal-submit', 'Payment\Subscription\PaypalController@store')->name('user.paypal.submit');
+        Route::get('/paypal-notify', 'Payment\Subscription\PaypalController@notify')->name('user.paypal.notify');
+    
+        // Stripe
+        Route::post('/stripe-submit', 'Payment\Subscription\StripeController@store')->name('user.stripe.submit');
+    
+        // Instamojo
+        Route::post('/instamojo-submit', 'Payment\Subscription\InstamojoController@store')->name('user.instamojo.submit');
+        Route::get('/instamojo-notify', 'Payment\Subscription\InstamojoController@notify')->name('user.instamojo.notify');
+    
+        // Paystack
+        Route::post('/paystack-submit', 'Payment\Subscription\PaystackController@store')->name('user.paystack.submit');
+    
+        // PayTM
+        Route::post('/paytm-submit', 'Payment\Subscription\PaytmController@store')->name('user.paytm.submit');;
+        Route::post('/paytm-notify', 'Payment\Subscription\PaytmController@notify')->name('user.paytm.notify');
+    
+        // Molly
+        Route::post('/molly-submit', 'Payment\Subscription\MollieController@store')->name('user.molly.submit');
+        Route::get('/molly-notify', 'Payment\Subscription\MollieController@notify')->name('user.molly.notify');
+    
+        // RazorPay
+        Route::post('/razorpay-submit', 'Payment\Subscription\RazorpayController@store')->name('user.razorpay.submit');
+        Route::post('/razorpay-notify', 'Payment\Subscription\RazorpayController@notify')->name('user.razorpay.notify');
+    
+        // Authorize.Net
+        Route::post('/authorize-submit', 'Payment\Subscription\AuthorizeController@store')->name('user.authorize.submit');
+    
+        // Mercadopago
+        Route::post('/mercadopago-submit', 'Payment\Subscription\MercadopagoController@store')->name('user.mercadopago.submit');
+    
+        // Flutter Wave
+        Route::post('/flutter-submit', 'Payment\Subscription\FlutterwaveController@store')->name('user.flutter.submit');
+    
+        // 2checkout
+        Route::post('/twocheckout-submit', 'Payment\Subscription\TwoCheckoutController@store')->name('user.twocheckout.submit');
+    
+        // SSLCommerz
+        Route::post('/ssl-submit', 'Payment\Subscription\SslController@store')->name('user.ssl.submit');
+        Route::post('/ssl-notify', 'Payment\Subscription\SslController@notify')->name('user.ssl.notify');
+    
+        // Voguepay
+        Route::post('/voguepay-submit', 'Payment\Subscription\VoguepayController@store')->name('user.voguepay.submit');
+    
+        // Manual
+        Route::post('/manual-submit', 'Payment\Subscription\ManualPaymentController@store')->name('user.manual.submit');
+    
+        // USER SUBSCRIPTION ENDS
+    
+        // USER DEPOSIT
+    
+        // Deposit & Transaction
+    
+        Route::get('/deposit/transactions', 'User\DepositController@transactions')->name('user-transactions-index');
+        Route::get('/deposit/transactions/{id}/show', 'User\DepositController@transhow')->name('user-trans-show');
+        Route::get('/deposit/index', 'User\DepositController@index')->name('user-deposit-index');
+        Route::get('/deposit/create', 'User\DepositController@create')->name('user-deposit-create');
+    
+        // Subscription Payment Redirect
+        Route::get('/deposit/payment/cancle', 'User\DepositController@paycancle')->name('deposit.payment.cancle');
+        Route::get('/deposit/payment/return', 'User\DepositController@payreturn')->name('deposit.payment.return');
+    
+        // Paypal
+        Route::post('/deposit/paypal-submit', 'Payment\Deposit\PaypalController@store')->name('deposit.paypal.submit');
+        Route::get('/deposit/paypal-notify', 'Payment\Deposit\PaypalController@notify')->name('deposit.paypal.notify');
+    
+        // Stripe
+        Route::post('/deposit/stripe-submit', 'Payment\Deposit\StripeController@store')->name('deposit.stripe.submit');
+    
+        // Instamojo
+        Route::post('/deposit/instamojo-submit', 'Payment\Deposit\InstamojoController@store')->name('deposit.instamojo.submit');
+        Route::get('/deposit/instamojo-notify', 'Payment\Deposit\InstamojoController@notify')->name('deposit.instamojo.notify');
+    
+        // Paystack
+        Route::post('/deposit/paystack-submit', 'Payment\Deposit\PaystackController@store')->name('deposit.paystack.submit');
+    
+        // PayTM
+        Route::post('/deposit/paytm-submit', 'Payment\Deposit\PaytmController@store')->name('deposit.paytm.submit');;
+        Route::post('/deposit/paytm-notify', 'Payment\Deposit\PaytmController@notify')->name('deposit.paytm.notify');
+    
+        // Molly
+        Route::post('/deposit/molly-submit', 'Payment\Deposit\MollieController@store')->name('deposit.molly.submit');
+        Route::get('/deposit/molly-notify', 'Payment\Deposit\MollieController@notify')->name('deposit.molly.notify');
+    
+        // RazorPay
+        Route::post('/deposit/razorpay-submit', 'Payment\Deposit\RazorpayController@store')->name('deposit.razorpay.submit');
+        Route::post('/deposit/razorpay-notify', 'Payment\Deposit\RazorpayController@notify')->name('deposit.razorpay.notify');
+    
+        // Authorize.Net
+        Route::post('/deposit/authorize-submit', 'Payment\Deposit\AuthorizeController@store')->name('deposit.authorize.submit');
+    
+        // Mercadopago
+        Route::post('/deposit/mercadopago-submit', 'Payment\Deposit\MercadopagoController@store')->name('deposit.mercadopago.submit');
+    
+        // Flutter Wave
+        Route::post('/deposit/flutter-submit', 'Payment\Deposit\FlutterwaveController@store')->name('deposit.flutter.submit');
+    
+        // 2checkout
+        Route::post('/deposit/twocheckout-submit', 'Payment\Deposit\TwoCheckoutController@store')->name('deposit.twocheckout.submit');
+    
+        // SSLCommerz
+        Route::post('/deposit/ssl-submit', 'Payment\Deposit\SslController@store')->name('deposit.ssl.submit');
+        Route::post('/deposit/ssl-notify', 'Payment\Deposit\SslController@notify')->name('deposit.ssl.notify');
+    
+        // Voguepay
+        Route::post('/deposit/voguepay-submit', 'Payment\Deposit\VoguepayController@store')->name('deposit.voguepay.submit');
+    
+        // Manual
+        Route::post('/deposit/manual-submit', 'Payment\Deposit\ManualPaymentController@store')->name('deposit.manual.submit');
+    
+        // USER DEPOSIT ENDS
+    
+        // User Vendor Send Message
+    
+          Route::post('/user/contact', 'User\MessageController@usercontact');
+          Route::get('/messages', 'User\MessageController@messages')->name('user-messages');
+          Route::get('/message/{id}', 'User\MessageController@message')->name('user-message');
+          Route::post('/message/post', 'User\MessageController@postmessage')->name('user-message-post');
+          Route::get('/message/{id}/delete', 'User\MessageController@messagedelete')->name('user-message-delete');
+          Route::get('/message/load/{id}', 'User\MessageController@msgload')->name('user-vendor-message-load');
+    
+        // User Vendor Send Message Ends
+    
+        // User Admin Send Message
+    
+        // Tickets
+          Route::get('admin/tickets', 'User\MessageController@adminmessages')->name('user-message-index');
+        // Disputes
+          Route::get('admin/disputes', 'User\MessageController@adminDiscordmessages')->name('user-dmessage-index');
+    
+          Route::get('admin/message/{id}', 'User\MessageController@adminmessage')->name('user-message-show');
+          Route::post('admin/message/post', 'User\MessageController@adminpostmessage')->name('user-message-store');
+          Route::get('admin/message/{id}/delete', 'User\MessageController@adminmessagedelete')->name('user-message-delete1');
+          Route::post('admin/user/send/message', 'User\MessageController@adminusercontact')->name('user-send-message');
+          Route::get('admin/message/load/{id}', 'User\MessageController@messageload')->name('user-message-load');
+        // User Admin Send Message Ends
+    
+          Route::get('/affilate/program', 'User\UserController@affilate_code')->name('user-affilate-program');
+          Route::get('/affilate/history', 'User\UserController@affilate_history')->name('user-affilate-history');
+    
+          Route::get('/affilate/withdraw', 'User\WithdrawController@index')->name('user-wwt-index');
+          Route::get('/affilate/withdraw/create', 'User\WithdrawController@create')->name('user-wwt-create');
+          Route::post('/affilate/withdraw/create', 'User\WithdrawController@store')->name('user-wwt-store');
+    
+        // User Favorite Seller
+    
+          Route::get('/favorite/seller', 'User\UserController@favorites')->name('user-favorites');
+          Route::get('/favorite/{id1}/{id2}', 'User\UserController@favorite')->name('user-favorite');
+          Route::get('/favorite/seller/{id}/delete', 'User\UserController@favdelete')->name('user-favorite-delete');
+    
+      });
+    
+      // ************************************ USER SECTION ENDS**********************************************
+
+    // ************************************ FRONT SECTION **********************************************
+
+        Route::post('/item/report', 'Front\CatalogController@report')->name('product.report');
+    
+        Route::get('/', 'Front\FrontendController@index')->name('front.index');
+        Route::get('/about-us', 'Front\FrontendController@about')->name('front.about');
+    
+        Route::get('/view','Front\CartController@view_cart')->name('front.cart-view');
+        Route::get('/extras', 'Front\FrontendController@extraIndex')->name('front.extraIndex');
+        Route::get('/currency/{id}', 'Front\FrontendController@currency')->name('front.currency');
+        Route::get('/language/{id}', 'Front\FrontendController@language')->name('front.language');
+        Route::get('/order/track/{id}','Front\FrontendController@trackload')->name('front.track.search');
+        // BLOG SECTION
+        Route::get('/blog','Front\FrontendController@blog')->name('front.blog');
+        Route::get('/blog/{slug}','Front\FrontendController@blogshow')->name('front.blogshow');
+        Route::get('/blog/category/{slug}','Front\FrontendController@blogcategory')->name('front.blogcategory');
+        Route::get('/blog/tag/{slug}','Front\FrontendController@blogtags')->name('front.blogtags');
+        Route::get('/blog-search','Front\FrontendController@blogsearch')->name('front.blogsearch');
+        Route::get('/blog/archive/{slug}','Front\FrontendController@blogarchive')->name('front.blogarchive');
+        // BLOG SECTION ENDS
+    
+        // FAQ SECTION
+        Route::get('/faq','Front\FrontendController@faq')->name('front.faq');
+        // FAQ SECTION ENDS
+    
+        // CONTACT SECTION
+        Route::get('/contact','Front\FrontendController@contact')->name('front.contact');
+        Route::post('/contact','Front\FrontendController@contactemail')->name('front.contact.submit');
+        Route::get('/contact/refresh_code','Front\FrontendController@refresh_code');
+        // CONTACT SECTION  ENDS
+        
+        Route::get('/privacy-policy','Front\FrontendController@privacy_policy')->name('front.privacy-policy');
+        Route::get('/terms-conditions','Front\FrontendController@terms_conditions')->name('front.terms-conditions');
+        Route::get('/return-refund-policy','Front\FrontendController@return_refund_policy')->name('front.return-refund-policy');
+        
+        // PRODCT AUTO SEARCH SECTION
+        Route::get('/autosearch/product/{slug}','Front\FrontendController@autosearch');
+        // PRODCT AUTO SEARCH SECTION ENDS
+    
+        // CATEGORY SECTION
+        Route::get('/categories','Front\CatalogController@categories')->name('front.categories');
+        Route::get('/category/{category?}/{subcategory?}/{childcategory?}','Front\CatalogController@category')->name('front.category');
+        // CATEGORY SECTION ENDS
+    
+        // TAG SECTION
+        Route::get('/tag/{slug}','Front\CatalogController@tag')->name('front.tag');
+        // TAG SECTION ENDS
+    
+        // TAG SECTION
+        Route::get('/search','Front\CatalogController@search')->name('front.search');
+        // TAG SECTION ENDS
+    
+        // PRODCT SECTION
+    
+        Route::get('/item/{slug}','Front\ProductDetailsController@product')->name('front.product');
+        Route::get('/afbuy/{slug}','Front\ProductDetailsController@affProductRedirect')->name('affiliate.product');
+        Route::get('/item/quick/view/{id}/','Front\ProductDetailsController@quick')->name('product.quick');
+        Route::post('/item/review','Front\ProductDetailsController@reviewsubmit')->name('front.review.submit');
+        Route::get('/item/view/review/{id}','Front\ProductDetailsController@reviews')->name('front.reviews');
+        Route::get('/item/view/side/review/{id}','Front\ProductDetailsController@sideReviews')->name('front.side.reviews');
+        // PRODCT SECTION ENDS
+    
+        // COMMENT SECTION
+        Route::post('/item/comment/store', 'Front\ProductDetailsController@comment')->name('product.comment');
+        Route::post('/item/comment/edit/{id}', 'Front\ProductDetailsController@commentedit')->name('product.comment.edit');
+        Route::get('/item/comment/delete/{id}', 'Front\ProductDetailsController@commentdelete')->name('product.comment.delete');
+        // COMMENT SECTION ENDS
+    
+        // REPORT SECTION
+        Route::post('/item/report', 'Front\ProductDetailsController@report')->name('product.report');
+        // REPORT SECTION ENDS
+    
+        // REPLY SECTION
+        Route::post('/item/reply/{id}', 'Front\ProductDetailsController@reply')->name('product.reply');
+        Route::post('/item/reply/edit/{id}', 'Front\ProductDetailsController@replyedit')->name('product.reply.edit');
+        Route::get('/item/reply/delete/{id}', 'Front\ProductDetailsController@replydelete')->name('product.reply.delete');
+        // REPLY SECTION ENDS
+    
+        // CART SECTION
+        Route::get('/carts/view','Front\CartController@cartview');
+        Route::get('/carts','Front\CartController@cart')->name('front.cart');
+        Route::get('/addcart/{id}','Front\CartController@addcart')->name('product.cart.add');
+        Route::get('/addtocart/{id}','Front\CartController@addtocart')->name('product.cart.quickadd');
+        Route::get('/addnumcart','Front\CartController@addnumcart')->name('details.cart');
+        Route::get('/addtonumcart','Front\CartController@addtonumcart');
+        Route::get('/addbyone','Front\CartController@addbyone');
+        Route::get('/reducebyone','Front\CartController@reducebyone');
+        Route::get('/upcolor','Front\CartController@upcolor');
+        Route::get('/removecart/{id}','Front\CartController@removecart')->name('product.cart.remove');
+        Route::get('/carts/coupon','Front\CouponController@coupon');
+        // CART SECTION ENDS
+    
+        // COMPARE SECTION
+        Route::get('/item/compare/view', 'Front\CompareController@compare')->name('product.compare');
+        Route::get('/item/compare/add/{id}', 'Front\CompareController@addcompare')->name('product.compare.add');
+        Route::get('/item/compare/remove/{id}', 'Front\CompareController@removecompare')->name('product.compare.remove');
+        // COMPARE SECTION ENDS
+    
+        // CHECKOUT SECTION
+        Route::get('/buy-now/{id}','Front\CheckoutController@buynow')->name('front.buynow');
+        // Checkout
+        Route::get('/checkout','Front\CheckoutController@checkout')->name('front.checkout');
+        Route::get('/carts/coupon/check','Front\CouponController@couponcheck');
+        Route::get('/checkout/payment/{slug1}/{slug2}','Front\CheckoutController@loadpayment')->name('front.load.payment');
+        Route::get('/checkout/payment/return', 'Front\CheckoutController@payreturn')->name('front.payment.return');
+        Route::get('/checkout/payment/cancle', 'Front\CheckoutController@paycancle')->name('front.payment.cancle');
+        Route::get('/checkout/payment/wallet-check','Front\CheckoutController@walletcheck')->name('front.wallet.check');
+    
+        // Paypal
+        Route::post('/checkout/payment/paypal-submit', 'Payment\Checkout\PaypalController@store')->name('front.paypal.submit');
+        Route::get('/checkout/payment/paypal-notify', 'Payment\Checkout\PaypalController@notify')->name('front.paypal.notify');
+    
+        // Stripe
+        Route::post('/checkout/payment/stripe-submit', 'Payment\Checkout\StripeController@store')->name('front.stripe.submit');
+    
+        // Instamojo
+        Route::post('/checkout/payment/instamojo-submit', 'Payment\Checkout\InstamojoController@store')->name('front.instamojo.submit');
+        Route::get('/checkout/payment/instamojo-notify', 'Payment\Checkout\InstamojoController@notify')->name('front.instamojo.notify');
+    
+        // Paystack
+        Route::post('/checkout/payment/paystack-submit', 'Payment\Checkout\PaystackController@store')->name('front.paystack.submit');
+    
+        // PayTM
+        Route::post('/checkout/payment/paytm-submit', 'Payment\Checkout\PaytmController@store')->name('front.paytm.submit');;
+        Route::post('/checkout/payment/paytm-notify', 'Payment\Checkout\PaytmController@notify')->name('front.paytm.notify');
+    
+        // Molly
+        Route::post('/checkout/payment/molly-submit', 'Payment\Checkout\MollieController@store')->name('front.molly.submit');
+        Route::get('/checkout/payment/molly-notify', 'Payment\Checkout\MollieController@notify')->name('front.molly.notify');
+    
+        // RazorPay
+        Route::post('/checkout/payment/razorpay-submit', 'Payment\Checkout\RazorpayController@store')->name('front.razorpay.submit');
+        Route::post('/checkout/payment/razorpay-notify', 'Payment\Checkout\RazorpayController@notify')->name('front.razorpay.notify');
+    
+        // Authorize.Net
+        Route::post('/checkout/payment/authorize-submit', 'Payment\Checkout\AuthorizeController@store')->name('front.authorize.submit');
+    
+        // Mercadopago
+        Route::post('/checkout/payment/mercadopago-submit', 'Payment\Checkout\MercadopagoController@store')->name('front.mercadopago.submit');
+    
+        // Flutter Wave
+        Route::post('/checkout/payment/flutter-submit', 'Payment\Checkout\FlutterwaveController@store')->name('front.flutter.submit');
+    
+        // 2checkout
+        Route::post('/checkout/payment/twocheckout-submit', 'Payment\Checkout\TwoCheckoutController@store')->name('front.twocheckout.submit');
+    
+        // SSLCommerz
+        Route::post('/checkout/payment/ssl-submit', 'Payment\Checkout\SslController@store')->name('front.ssl.submit');
+        Route::post('/checkout/payment/ssl-notify', 'Payment\Checkout\SslController@notify')->name('front.ssl.notify');
+    
+        // Voguepay
+        Route::post('/checkout/payment/voguepay-submit', 'Payment\Checkout\VoguepayController@store')->name('front.voguepay.submit');
+    
+        // Wallet
+        Route::post('/checkout/payment/wallet-submit', 'Payment\Checkout\WalletPaymentController@store')->name('front.wallet.submit');
+    
+        // Manual
+        Route::post('/checkout/payment/manual-submit', 'Payment\Checkout\ManualPaymentController@store')->name('front.manual.submit');
+    
+        // Cash On Delivery
+        Route::post('/checkout/payment/cod-submit', 'Payment\Checkout\CashOnDeliveryController@store')->name('front.cod.submit');
+    
+        // Flutterwave Notify Routes
+    
+        // Deposit
+        Route::post('/dflutter/notify', 'Payment\Deposit\FlutterwaveController@notify')->name('deposit.flutter.notify');
+    
+        // Subscription
+        Route::post('/uflutter/notify', 'Payment\Subscription\FlutterwaveController@notify')->name('user.flutter.notify');
+    
+        // Checkout
+        Route::post('/cflutter/notify', 'Payment\Checkout\FlutterwaveController@notify')->name('front.flutter.notify');
+    
+        // CHECKOUT SECTION ENDS
+    
+        // VENDOR SECTION
+    
+        Route::post('/vendor/contact','Front\VendorController@vendorcontact')->name('front.vendor.contact');
+    
+        // VENDOR SECTION ENDS
+    
+        // SUBSCRIBE SECTION
+    
+        Route::post('/subscriber/store', 'Front\FrontendController@subscribe')->name('front.subscribe');
+    
+        // SUBSCRIBE SECTION ENDS
+    
+        // LOGIN WITH FACEBOOK OR GOOGLE SECTION
+        Route::get('auth/{provider}', 'Auth\User\SocialRegisterController@redirectToProvider')->name('social-provider');
+        Route::get('auth/{provider}/callback', 'Auth\User\SocialRegisterController@handleProviderCallback');
+        // LOGIN WITH FACEBOOK OR GOOGLE SECTION ENDS
+    
+        //  CRONJOB
+    
+        Route::get('/vendor/subscription/check','Front\FrontendController@subcheck');
+    
+        // CRONJOB ENDS
+    
+        Route::post('the/genius/ocean/2441139', 'Front\FrontendController@subscription');
+        Route::get('finalize', 'Front\FrontendController@finalize');
+        Route::get('update-finalize', 'Front\FrontendController@updateFinalize');
+    
+        Route::get('/under-maintenance', 'Front\FrontendController@maintenance')->name('front-maintenance');
+    
+        // VENDOR AND PAGE SECTION
+        Route::get('/country/tax/check','Front\CartController@country_tax');
+        Route::get('/{slug}','Front\VendorController@index')->name('front.vendor');
+    
+        // VENDOR AND PAGE SECTION ENDS
+
+    // ************************************ FRONT SECTION ENDS**********************************************
 
   });
   Route::get('/under-maintenance', 'Front\FrontendController@maintenance')->name('front-maintenance');

@@ -1,7 +1,85 @@
 <div class="container-fluid-lg sticky-header">
     <div class="row">
         <div class="col-12 position-relative">
-            <div class="main-nav nav-left-align">
+            
+            <div class="header-nav">
+                
+                <div class="header-nav-left">
+                    <button class="dropdown-category">
+                        <i data-feather="align-left"></i>
+                        <span>All Categories</span>
+                    </button>
+
+                    <div class="category-dropdown">
+                        <div class="category-title">
+                            <h5>Categories</h5>
+                            <button type="button" class="btn p-0 close-button text-content">
+                                <i class="fa-solid fa-xmark"></i>
+                            </button>
+                        </div>
+
+                        <!-- new category list -->
+                        <ul class="category-list mobile-cat-list">
+                            @foreach (App\Models\Category::where('language_id',$langg->id)->where('status',1)->take(7)->orderBy('id','desc')->get() as $category)
+
+                                <li class="onhover-category-list">
+
+                                    @if($category->subs->count() > 0)
+
+                                        <a href="javascript:void(0)" class="category-name">
+                                            <img src="{{ asset('assets/images/categories/'.$category->photo)}}" alt="">
+                                            <h6>{{ $category->name }}</h6>
+                                            <i class="fa-solid fa-angle-right"></i>
+                                        </a>
+
+                                    @else
+
+                                        <a href="{{route('front.category', $category->slug)}}" class="category-name">
+                                            <img src="{{ asset('assets/images/categories/'.$category->photo)}}" alt="">
+                                            <h6>{{ $category->name }}</h6>
+                                        </a>
+
+                                    @endif
+
+                                    @if($category->subs->count() > 0)
+
+                                        <div class="onhover-category-box w-100">
+
+                                            <div class="list">
+
+                                                <div class="category-title-box">
+                                                    <h5><a href="{{route('front.category', $category->slug)}}">{{ $category->name }}</a></h5>
+                                                </div>
+
+                                                <ul>
+
+                                                    @foreach (App\Models\Subcategory::where('category_id',$category->id)->get() as $subcategory)
+
+                                                        <li>
+                                                            <a href="{{route('front.category', [$category->slug, $subcategory->slug])}}">{{$subcategory->name}}</a>
+                                                        </li>
+
+                                                    @endforeach
+                                                    
+                                                </ul>
+
+                                            </div>
+
+                                        </div>
+
+                                    @endif
+
+                                </li>
+
+                            @endforeach
+
+                        </ul>      
+                        
+                    </div>
+                </div>
+                
+                <div class="header-nav-middle">
+                    <div class="main-nav nav-left-align">
                 <div class="main-nav navbar navbar-expand-xl navbar-light navbar-sticky p-0">
                     <div class="offcanvas offcanvas-collapse order-xl-2" id="primaryMenu">
                         <div class="offcanvas-header navbar-shadow">
@@ -11,30 +89,36 @@
                         <div class="offcanvas-body">
                             <ul class="navbar-nav">
                                 <!-- 1 -->
-                                @foreach (App\Models\Category::where('language_id',$langg->id)->where('status',1)->take(4)->get() as $category)
+                                @foreach (App\Models\Category::where('language_id',$langg->id)->where('status',1)->take(7)->orderBy('id','desc')->get() as $category)
 
-                                    <li class="nav-item dropdown dropdown-mega">
-                                        
-                                        <a class="nav-link dropdown-toggle ps-xl-2 ps-0" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $category->name }}</a>
-
-                                        <div class="dropdown-menu dropdown-menu-2 dropdown-menu-left">
-
-                                            <a class="d-inline-block  font-600 text-uppercase text-secondary pb-2" href="{{route('front.category', [$category->slug])}}" >{{ $category->name }}</a>
-
-                                            <div class="row">
-                                                @if($category->subs->count() > 0)
-                                                    <div class="dropdown-column col-xl-3">
-                                                        @foreach (App\Models\Subcategory::where('category_id',$category->id)->get() as $subcategory)
-
-                                                            <a class="dropdown-item" href="{{route('front.category', [$category->slug, $subcategory->slug])}}">{{$subcategory->name}}</a>
-                                                            
-                                                        @endforeach
-                                                    </div>
-                                                @endif
+                                    @if($category->subs->count() > 0)
+                                        <li class="nav-item dropdown dropdown-mega">
+                                            
+                                            <a class="nav-link dropdown-toggle ps-xl-2 ps-0" href="javascript:void(0)" data-bs-toggle="dropdown">{{ $category->name }}</a>
+    
+                                            <div class="dropdown-menu dropdown-menu-2 dropdown-menu-left">
+    
+                                                <a class="d-inline-block  font-600 text-uppercase text-secondary pb-2" href="{{route('front.category', [$category->slug])}}" >{{ $category->name }}</a>
+    
+                                                <div class="row">
+                                                    @if($category->subs->count() > 0)
+                                                        <div class="dropdown-column col-xl-3">
+                                                            @foreach (App\Models\Subcategory::where('category_id',$category->id)->get() as $subcategory)
+    
+                                                                <a class="dropdown-item" href="{{route('front.category', [$category->slug, $subcategory->slug])}}">{{$subcategory->name}}</a>
+                                                                
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
-
+                                        </li>
+                                    
+                                    @else
+                                        <li class="nav-item">
+                                            <a class="nav-link ps-xl-2 ps-0" href="{{route('front.category', [$category->slug])}}">{{ $category->name }}</a>
+                                        </li>
+                                    @endif
                                 @endforeach
                                 <!-- 1 -->
                                 
@@ -60,19 +144,19 @@
                             @include('load.cart')
                         </li>
 
-                        <li>
-                            @if (Auth::check())
-                                <a href="{{ route('user-wishlists') }}" class="header-icon swap-icon">
-                                    <small class="badge-number badge-light" id="wishlist-count">{{ Auth::user()->wishlistCount() }}</small>
-                                    <i class="iconly-Heart icli"></i>
-                                </a>
-                            @else
-                                <a href="{{ route('user.login') }}" class="header-icon swap-icon">
-                                    <small class="badge-number badge-light" id="wishlist-count">{{ 0 }}</small>
-                                    <i class="iconly-Heart icli"></i>
-                                </a>
-                            @endif
-                        </li>
+                        <!--<li>-->
+                        <!--    @if (Auth::check())-->
+                        <!--        <a href="{{ route('user-wishlists') }}" class="header-icon swap-icon">-->
+                        <!--            <small class="badge-number badge-light" id="wishlist-count">{{ Auth::user()->wishlistCount() }}</small>-->
+                        <!--            <i class="iconly-Heart icli"></i>-->
+                        <!--        </a>-->
+                        <!--    @else-->
+                        <!--        <a href="{{ route('user.login') }}" class="header-icon swap-icon">-->
+                        <!--            <small class="badge-number badge-light" id="wishlist-count">{{ 0 }}</small>-->
+                        <!--            <i class="iconly-Heart icli"></i>-->
+                        <!--        </a>-->
+                        <!--    @endif-->
+                        <!--</li>-->
                     </ul>
 
                     @if (Auth::user())
@@ -110,6 +194,9 @@
                     </a> -->
                 </div>
             </div>
+                </div>
+            </div>
+            
         </div>
     </div>
 </div>

@@ -9771,3 +9771,10 @@ select.form-control {
     padding-right: 5px;
 }
 
+button.btn.search-button {
+    border-radius: 0px !important;
+}
+
+button.btn.search-icon {
+    border-radius: 0px !important;
+}

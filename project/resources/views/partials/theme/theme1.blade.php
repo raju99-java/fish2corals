@@ -33,9 +33,9 @@
                                     @foreach($sliders as $data)
                                         <div>
                                             <div class="owl-text-overlay ">
-                                                <h2 class="owl-title w-100 text-uppercase poster-1">{{$data->title_text}} <span
-                                                    class="daily">{{$data->subtitle_text}}</span>
+                                                <h2 class="owl-title w-100 text-uppercase poster-1">{{$data->title_text}} 
                                                 </h2>
+                                                <h2 class="owl-title w-100 text-uppercase poster-1"><span class="daily">{{$data->subtitle_text}}</span></h2>
                                                 <p class="w-58 d-none d-sm-block text-white">{{$data->details_text}}</p>
                                                 <button onclick="location.href = '{{$data->link}}';" class="btn btn-animation mt-xxl-4 mt-2 home-button mend-auto">Shop Now <i class="fa-solid fa-right-long ms-2 icon"></i></button>    
                                             </div>
@@ -95,7 +95,7 @@
                                             <div>
                                                 <h5 class="fw-light mb-2">{{$arrival->title}}</h5>
                                                 <h4 class="fw-bold mb-0">{{$arrival->header}}</h4>
-                                                <button onclick="location.href = '{{ route('front.category') }}';" class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now 
+                                                <button onclick="location.href = '{{$arrival->link}}';" class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now 
                                                     <i class="fa-solid fa-chevron-right"></i>
                                                 </button>
                                             </div>
@@ -243,19 +243,19 @@
                                                         class="img-fluid blur-up lazyload" alt="">
                                                 </a>
 
-                                                <ul class="option">
-                                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                        @if (Auth::check())
-                                                            <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">
-                                                                <i class="iconly-Heart icli"></i>
-                                                            </a>
-                                                        @else
-                                                            <a href="{{ route('user.login') }}" class="notifi-wishlist">
-                                                                <i class="iconly-Heart icli"></i>
-                                                            </a>
-                                                        @endif
-                                                    </li>
-                                                </ul>
+                                                <!--<ul class="option">-->
+                                                <!--    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">-->
+                                                <!--        @if (Auth::check())-->
+                                                <!--            <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">-->
+                                                <!--                <i class="iconly-Heart icli"></i>-->
+                                                <!--            </a>-->
+                                                <!--        @else-->
+                                                <!--            <a href="{{ route('user.login') }}" class="notifi-wishlist">-->
+                                                <!--                <i class="iconly-Heart icli"></i>-->
+                                                <!--            </a>-->
+                                                <!--        @endif-->
+                                                <!--    </li>-->
+                                                <!--</ul>-->
 
 
                                                 <span class="featured-icon"><i class="fa fa-check"></i> Featured</span>
@@ -320,8 +320,8 @@
                                         <br>
                                         <h3 class="mb-1 fw-bold text-white">{{$arrival->header}}</h3>
                                         <br>
-                                        <!-- <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4> -->
-                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
+                                         <h4 class="text-content text-white">{{$arrival->details_text}}</h4> 
+                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{$arrival->link}}';">Shop Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -551,19 +551,19 @@
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
 
-                                                    <ul class="option">
-                                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                            @if (Auth::check())
-                                                                <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">
-                                                                    <i class="iconly-Heart icli"></i>
-                                                                </a>
-                                                            @else
-                                                                <a href="{{ route('user.login') }}" class="notifi-wishlist">
-                                                                    <i class="iconly-Heart icli"></i>
-                                                                </a>
-                                                            @endif
-                                                        </li>
-                                                    </ul>
+                                                    <!--<ul class="option">-->
+                                                    <!--    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">-->
+                                                    <!--        @if (Auth::check())-->
+                                                    <!--            <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">-->
+                                                    <!--                <i class="iconly-Heart icli"></i>-->
+                                                    <!--            </a>-->
+                                                    <!--        @else-->
+                                                    <!--            <a href="{{ route('user.login') }}" class="notifi-wishlist">-->
+                                                    <!--                <i class="iconly-Heart icli"></i>-->
+                                                    <!--            </a>-->
+                                                    <!--        @endif-->
+                                                    <!--    </li>-->
+                                                    <!--</ul>-->
                                                     <span class="featured-icon"><i class="fa fa-check"></i> Top Sell</span>
                                                 </div>
 
@@ -611,19 +611,19 @@
                                                             class="img-fluid blur-up lazyload" alt="">
                                                     </a>
 
-                                                    <ul class="option">
-                                                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                            @if (Auth::check())
-                                                                <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">
-                                                                    <i class="iconly-Heart icli"></i>
-                                                                </a>
-                                                            @else
-                                                                <a href="{{ route('user.login') }}" class="notifi-wishlist">
-                                                                    <i class="iconly-Heart icli"></i>
-                                                                </a>
-                                                            @endif
-                                                        </li>
-                                                    </ul>
+                                                    <!--<ul class="option">-->
+                                                    <!--    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">-->
+                                                    <!--        @if (Auth::check())-->
+                                                    <!--            <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">-->
+                                                    <!--                <i class="iconly-Heart icli"></i>-->
+                                                    <!--            </a>-->
+                                                    <!--        @else-->
+                                                    <!--            <a href="{{ route('user.login') }}" class="notifi-wishlist">-->
+                                                    <!--                <i class="iconly-Heart icli"></i>-->
+                                                    <!--            </a>-->
+                                                    <!--        @endif-->
+                                                    <!--    </li>-->
+                                                    <!--</ul>-->
                                                     <span class="featured-icon"><i class="fa fa-check"></i> Top Sell</span>
                                                 </div>
 
@@ -731,19 +731,19 @@
                                                     class="img-fluid blur-up lazyload" alt="">
                                             </a>
 
-                                            <ul class="option">
-                                                <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                                    @if (Auth::check())
-                                                        <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">
-                                                            <i class="iconly-Heart icli"></i>
-                                                        </a>
-                                                    @else
-                                                        <a href="{{ route('user.login') }}" class="notifi-wishlist">
-                                                            <i class="iconly-Heart icli"></i>
-                                                        </a>
-                                                    @endif
-                                                </li>
-                                            </ul>
+                                            <!--<ul class="option">-->
+                                            <!--    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">-->
+                                            <!--        @if (Auth::check())-->
+                                            <!--            <a href="{{ route('user-wishlists') }}" class="notifi-wishlist">-->
+                                            <!--                <i class="iconly-Heart icli"></i>-->
+                                            <!--            </a>-->
+                                            <!--        @else-->
+                                            <!--            <a href="{{ route('user.login') }}" class="notifi-wishlist">-->
+                                            <!--                <i class="iconly-Heart icli"></i>-->
+                                            <!--            </a>-->
+                                            <!--        @endif-->
+                                            <!--    </li>-->
+                                            <!--</ul>-->
                                             <span class="featured-icon"><i class="fa fa-check"></i> Sale Products</span>
                                         </div>
 
@@ -809,8 +809,8 @@
                                         <br>
                                         <h3 class="mb-1 fw-bold text-white">{{$arrival->header}}</h3>
                                         <br>
-                                        <!-- <h4 class="text-content text-white">Choose a Nutritious &amp; Healthy Breakfast.</h4> -->
-                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{route('front.category')}}';">Shop Now</button>
+                                         <h4 class="text-content text-white">{{$arrival->details_text}}</h4> 
+                                        <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{$arrival->link}}';">Shop Now</button>
                                     </div>
                                 </div>
                             </div>

@@ -219,6 +219,9 @@
 
         <!-- Quantity js -->
         <script src="{{ asset('assets/front-end/assets/js/quantity-2.js')}}"></script>
+        
+        <!-- sidebar open js -->
+        <script src="{{ asset('assets/front-end/assets/js/filter-sidebar.js')}}"></script>
 
         <!-- Fly Cart Js -->
         <script src="{{ asset('assets/front-end/assets/js/fly-cart.js')}}"></script>
