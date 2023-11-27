@@ -41,7 +41,7 @@
                             <div class="delivery-list">
                                 <h2><strong>Return & Refund Policy</strong></h2>
                                 
-                                <p>Thank you for shopping at <strong>https://fish2corals.com</strong></p>
+                                <p>Thank you for shopping at <strong>https://fish2coral.com</strong></p>
                                 <p>If, for any reason, You are not completely satisfied with a purchase, we invite You to review our Policy. </p>
                                 <p>The following terms are applicable for any products that you purchased with us.</p><br>
                                 
@@ -54,12 +54,12 @@
                                 <h3><strong>Definitions</strong></h3>
                                 <p>For the purposes of this Return and Exchange Policy:</p>
                                 
-                                <p><strong>Individual</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Fish2Corals</strong> Located at <strong></strong>, <strong>California</strong>, <strong>US</strong>.</p>
+                                <p><strong>Individual</strong> (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to <strong>Fish2Coral</strong> Located at <strong></strong>, <strong>California</strong>, <strong>US</strong>.</p>
                                 
                                 <p><strong>Goods</strong> refer to the items offered for sale on the Service.</p>
                                 <p><strong>Orders</strong> mean a request by You to purchase Goods from Us.</p>
                                 <p><strong>Service</strong> refers to the Website.</p>
-                                <p><strong>Website</strong> refers to My Site, accessible from <strong>https://fish2corals.com</strong></p>
+                                <p><strong>Website</strong> refers to My Site, accessible from <strong>https://fish2coral.com</strong></p>
                                 <p><strong>You</strong> means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.</p>
                                 
                                  
@@ -88,7 +88,7 @@
                                 <h3><strong>HOW TO INITIATE A RETURN</strong></h3>
                                 <p>If you have a request for Return, Refund or Exchange and if you have further clarification and questions, Please do not hesitate to contact us through our:</p>
                                 
-                                <p>Email Address: <span style="color: #000080;"><strong>info@fish2corals.com</strong></span></p>
+                                <p>Email Address: <span style="color: #000080;"><strong>info@fish2coral.com</strong></span></p>
                                 
                                 <p>You will be updated for their Return Status through their<strong> EMAIL,</strong> provided that contact information is recorded to us.</p>
                                 

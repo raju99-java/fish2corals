@@ -1,11 +1,4 @@
  /**=====================
      Copy Clipboard js
 ==========================**/
- (function ($) {
-     "use strict";
-     var clipboard = new ClipboardJS('.bank-coupon');
-     clipboard.on('success', function (e) {
-         e.clearSelection();
-     });
-     clipboard.on('error', function (e) {});
- })(jQuery);
+!function(n){"use strict";var c=new ClipboardJS(".bank-coupon");c.on("success",function(n){n.clearSelection()}),c.on("error",function(n){})}(jQuery);

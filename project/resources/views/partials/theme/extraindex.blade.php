@@ -71,9 +71,9 @@
                     <a href="{{ route('front.index') }}" class="foot-logo theme-logo text-white">
                         <img src="{{ asset('assets/images/'.$gs->footer_logo) }}" class="img-fluid blur-up lazyload" alt="">
                     </a>
-                    <p class="information-text information-text-2">it is a long established fact that a reader
-                        will
-                        be distracted by the readable content.</p>
+                    <p class="information-text information-text-2">
+                        At Fish2Coral, we're passionate about the mesmerizing world beneath the waves. Our mission is to bring the enchantment of the ocean to your doorstep, allowing you to create your very own aquatic haven.
+                    </p>
                     <ul class="social-icon">
 
                         @foreach(DB::table('social_links')->where('user_id',0)->where('status',1)->get() as $link)

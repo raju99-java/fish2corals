@@ -43,12 +43,7 @@
 	@endif
 
     <link rel="icon"  type="image/x-icon" href="{{asset('assets/images/'.$gs->favicon)}}"/>
-    <!-- Google Font -->
-    <!-- @if ($default_font->font_value)
-		<link href="https://fonts.googleapis.com/css?family={{ $default_font->font_value }}:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-	@else
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-	@endif -->
+    
 
      <!-- Google font -->
      <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -58,7 +53,10 @@
     <!-- new fornt-end -->
 
         <!-- bootstrap css -->
-        <link id="rtl-link" rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/bootstrap.css')}}">
+        <!--<link id="rtl-link" rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/bootstrap.css')}}">-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        
+        
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
 
@@ -66,13 +64,16 @@
         <link rel="stylesheet" href="{{ asset('assets/front-end/assets/css/animate.min.css')}}" />
 
         <!-- font-awesome css -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/font-awesome.css')}}">
+        <!--<link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/font-awesome.css')}}">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"  />
+        
 
         <!-- feather icon css -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/feather-icon.css')}}">
 
         <!-- Plugin CSS file with desired skin css -->
-        <link rel="stylesheet" href="{{ asset('assets/front-end/assets/css/vendors/ion.rangeSlider.min.css')}}">
+        <!--<link rel="stylesheet" href="{{ asset('assets/front-end/assets/css/vendors/ion.rangeSlider.min.css')}}">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.css"  />
 
         <!-- slick css -->
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/vendors/slick/slick.css')}}">
@@ -83,27 +84,16 @@
 
         <!-- Template css -->
         <link id="color-link" rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/style.css')}}">
+        
+        <!--select-->
+        
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/bootstrap-select.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/front-end/assets/css/select2.min.css')}}">
 
-        <link rel="stylesheet" href="{{ asset('assets/front/css/toastr.min.css') }}">
+        <!--<link rel="stylesheet" href="{{ asset('assets/front/css/toastr.min.css') }}">-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.css" />
 
-    <!-- new front-end  -->
-
-    <!-- <link rel="stylesheet" href="{{ asset('assets/front/css/styles.php?color='.str_replace('#','', $gs->colors).'&header_color='.$gs->header_color) }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/plugin.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/animate.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/webfonts/flaticon/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/template.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/style.css') }}">
-     <link rel="stylesheet" href="{{ asset('assets/front/css/category/default.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/front/css/toastr.min.css') }}">
-    @if ($default_font->font_family)
-			<link rel="stylesheet" id="colorr" href="{{ asset('assets/front/css/font.php?font_familly='.$default_font->font_family) }}">
-	@else
-			<link rel="stylesheet" id="colorr" href="{{ asset('assets/front/css/font.php?font_familly='."Open Sans") }}">
-	@endif -->
+    
 
     @if(!empty($seo->google_analytics))
 	<script>
@@ -182,22 +172,30 @@
     <!-- new front-end -->
 
     <!-- latest jquery-->
-        <script src="{{ asset('assets/front-end/assets/js/jquery-3.6.0.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/jquery-3.6.0.min.js')}}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 
         <!-- jquery ui-->
-        <script src="{{ asset('assets/front-end/assets/js/jquery-ui.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/jquery-ui.min.js')}}"></script>-->
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
+        
 
         <!-- Bootstrap js-->
-        <script src="{{ asset('assets/front-end/assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/bootstrap/bootstrap.bundle.min.js')}}"></script>-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" ></script>
+        
         <script src="{{ asset('assets/front-end/assets/js/bootstrap/bootstrap-notify.min.js')}}"></script>
-        <script src="{{ asset('assets/front-end/assets/js/bootstrap/popper.min.js')}}"></script>
+        
+        <!--<script src="{{ asset('assets/front-end/assets/js/bootstrap/popper.min.js')}}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js" ></script>
 
         <!-- feather icon js-->
         <script src="{{ asset('assets/front-end/assets/js/feather/feather.min.js')}}"></script>
         <script src="{{ asset('assets/front-end/assets/js/feather/feather-icon.js')}}"></script>
 
         <!-- Lazyload Js -->
-        <script src="{{ asset('assets/front-end/assets/js/lazysizes.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/lazysizes.min.js')}}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/3.0.0-rc3/lazysizes.min.js" ></script>
 
         <!-- Slick js-->
         <script src="{{ asset('assets/front-end/assets/js/slick/slick.js')}}"></script>
@@ -206,7 +204,8 @@
         <script src="{{ asset('assets/front-end/assets/js/slick/custom_slick.js')}}"></script>
 
         <!-- Range slider js -->
-        <script src="{{ asset('assets/front-end/assets/js/ion.rangeSlider.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/ion.rangeSlider.min.js')}}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.1.7/js/ion.rangeSlider.min.js" ></script>
 
         <!-- Auto Height Js -->
         <script src="{{ asset('assets/front-end/assets/js/auto-height.js')}}"></script>
@@ -215,7 +214,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
 
         <!-- Lazyload Js -->
-        <script src="{{ asset('assets/front-end/assets/js/lazysizes.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/lazysizes.min.js')}}"></script>-->
 
         <!-- Quantity js -->
         <script src="{{ asset('assets/front-end/assets/js/quantity-2.js')}}"></script>
@@ -227,39 +226,34 @@
         <script src="{{ asset('assets/front-end/assets/js/fly-cart.js')}}"></script>
 
         <!-- Timer Js -->
-        <script src="{{ asset('assets/front-end/assets/js/timer1.js')}}"></script>
-        <script src="{{ asset('assets/front-end/assets/js/timer2.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/timer1.js')}}"></script>-->
+        <!--<script src="{{ asset('assets/front-end/assets/js/timer2.js')}}"></script>-->
 
         <!-- Copy clipboard Js -->
-        <script src="{{ asset('assets/front-end/assets/js/clipboard.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/clipboard.min.js')}}"></script>-->
+         <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js" ></script>
         <script src="{{ asset('assets/front-end/assets/js/copy-clipboard.js')}}"></script>
+        
+       
 
         <!-- WOW js -->
-        <script src="{{ asset('assets/front-end/assets/js/wow.min.js')}}"></script>
+        <!--<script src="{{ asset('assets/front-end/assets/js/wow.min.js')}}"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js" ></script>
         <script src="{{ asset('assets/front-end/assets/js/custom-wow.js')}}"></script>
 
         <!-- script js -->
         <script src="{{ asset('assets/front-end/assets/js/script.js')}}"></script>
 
     <!-- new front-end -->
-
-
-     <!-- Include Scripts -->
-     <!-- <script src="{{ asset('assets/front/js/jquery.min.js') }}"></script>
-     <script src="{{ asset('assets/front/js/jquery-ui.min.js') }}"></script>
-     <script src="{{ asset('assets/front/js/popper.min.js') }}"></script>
-     <script src="{{ asset('assets/front/js/bootstrap.min.js') }}"></script>
-     <script src="{{ asset('assets/front/js/plugin.js') }}"></script>
-     <script src="{{ asset('assets/front/js/waypoint.js') }}"></script>
-     <script src="{{ asset('assets/front/js/owl.carousel.min.js') }}"></script>
-     <script src="{{ asset('assets/front/js/wow.js')}}"></script>
-     <script type="text/javascript" src="{{asset('assets/front/js/lazy.min.js')}}"></script>
-     <script type="text/javascript" src="{{asset('assets/front/js/lazy.plugin.js')}}"></script>
-     <script src="{{ asset('assets/front/js/jquery.countdown.js') }}"></script>
-     <script src="{{ asset('assets/front/js/paraxify.js') }}"></script> -->
+    
+     
+     <!--select-->
+     <script src="{{ asset('assets/front-end/assets/js/bootstrap-select.js')}}"></script>
+     <script src="{{ asset('assets/front-end/assets/js/select2.full.min.js')}}"></script>
 
      @yield('zoom')
-     <script src="{{ asset('assets/front/js/toastr.min.js') }}"></script>
+     <!--<script src="{{ asset('assets/front/js/toastr.min.js') }}"></script>-->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js" ></script>
      <script src="{{ asset('assets/front/js/custom.js') }}"></script>
      <script src="{{ asset('assets/front/js/main.js') }}"></script>
 
@@ -281,6 +275,52 @@
     </script>
 
 
+    <script>
+    
+        $(document).ready(function(){
+            
+            // for top search
+            $("#prod_name").on('input',function () {
+                var prod_name = $('#prod_name').val();
+    
+                $.ajax({  
+                    url : "{{route('search-product-list')}}",
+                    type:"GET",
+                    data: {"prod_name": prod_name},
+                    success: function(res){
+                        
+                        var filter_products = res.content.filter_products;
+                        $('#search_list').html(filter_products);
+    
+                    }     
+                });
+    
+            });
+            
+            // for search page
+            $("#prod_name_search").on('input',function () {
+                var prod_name = $('#prod_name_search').val();
+    
+                $.ajax({  
+                    url : "{{route('search-product-list')}}",
+                    type:"GET",
+                    data: {"prod_name": prod_name},
+                    success: function(res){
+                        
+                        var filter_products = res.content.filter_products;
+                        $('#search_list_search').html(filter_products);
+    
+                    }     
+                });
+    
+            });
+    
+    
+        }); 
+        
+    </script>
+
+    
 
 
      @php

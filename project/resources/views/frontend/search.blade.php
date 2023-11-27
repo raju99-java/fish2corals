@@ -40,8 +40,10 @@
                         <div class="middle-box">
                             <div class="search-box">
                                 <div class="input-group">
-                                    <input type="text" id="prod_name" class="form-control" name="search" placeholder="Search Product For" value="{{ request()->input('search') }}">
+                                    <input type="text" id="prod_name_search" class="form-control" name="search" placeholder="Search Product For" value="{{ request()->input('search') }}">
                                     <button class="btn theme-bg-color text-white m-0" type="submit" name="submit" id="button-addon1">Search</button>
+                                    <div id="search_list_search" class="search-dropdown-box">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -53,7 +55,25 @@
     </section>
     <!-- Search Bar Section End -->
 
-@includeIf('partials.global.common-footer')
+    @includeIf('partials.global.common-footer')
+    
+@stop
+
+@section('script')
+
+    // <script>
+    
+    //     $(function () {
+    //         //Initialize Select2 Elements
+    //         $('.select2').select2();
+    //     })
+        
+    // </script>
+
 @endsection
+
+
+
+
 
 

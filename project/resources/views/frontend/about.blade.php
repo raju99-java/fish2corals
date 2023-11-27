@@ -58,16 +58,11 @@
                         <div>
                             <div class="review-title">
                                 <h4>About Us</h4>
-                                <h2>We make Organic Food In Market</h2>
+                                <h2>Welcome to Fish2Coral - Your Gateway to Aquatic Bliss!</h2>
                             </div>
 
                             <div class="delivery-list">
-                                <p class="text-content">Just a few seconds to measure your body temperature. Up to 5
-                                    users! The battery lasts up to 2 years. There are many variations of passages of
-                                    Lorem Ipsum available.We started in 2019 and haven't stopped smashing it since. A
-                                    global brand that doesn't sleep, we are 24/7 and always bringing something new with
-                                    over 100 new products dropping on the monhtly, bringing you the latest looks for
-                                    less.</p>
+                                <p class="text-content">At Fish2Coral, we're passionate about the mesmerizing world beneath the waves. Our mission is to bring the enchantment of the ocean to your doorstep, allowing you to create your very own aquatic haven.</p>
 
                                 <ul class="delivery-box">
                                     <li>

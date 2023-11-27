@@ -67,24 +67,29 @@
                                           <h5 class="price"><span class="theme-color">{{ App\Models\Product::find($item->id)->showPrice()}}</span> <del>{{ App\Models\Product::find($item->id)->showPreviousPrice() }}</del>
                                           </h5>
 
-                                          <div class="addtocart_btn">
+                                          <!--<div class="addtocart_btn">-->
 
-                                                @if(App\Models\Product::where('id',$item->id)->first()->emptyStock())
+                                          <!--      @if(App\Models\Product::where('id',$item->id)->first()->emptyStock())-->
 
-                                                    <button onclick="location.href = '#';"
-                                                        class="btn btn-animation product-button btn-sm">Out Of Stock <i
-                                                        class="fa-solid fa-times icon"></i>
-                                                    </button>
+                                          <!--          <button onclick="location.href = '#';"-->
+                                          <!--              class="btn btn-animation product-button btn-sm">Out Of Stock <i-->
+                                          <!--              class="fa-solid fa-times icon"></i>-->
+                                          <!--          </button>-->
 
-                                                @else
+                                          <!--      @else-->
 
-                                                    <a href="javascript:;" data-href="{{ route('product.cart.add',$item->id) }}" class="text-light add-cart button add_to_cart_button btn btn-animation product-button btn-sm">
-                                                        <span>Add</span> <i class="fa-solid fa-plus"></i>
-                                                    </a>
+                                          <!--          <a href="javascript:;" data-href="{{ route('product.cart.add',$item->id) }}" class="text-light add-cart button add_to_cart_button btn btn-animation product-button btn-sm">-->
+                                          <!--              <span>Add</span> <i class="fa-solid fa-plus"></i>-->
+                                          <!--          </a>-->
 
-                                                @endif
+                                          <!--      @endif-->
 
-                                          </div>
+                                          <!--</div>-->
+                                          
+                                          <button onclick="location.href = '{{route('front.product',['slug'=>$item->slug])}}';" class="btn home-shop-button" tabindex="0">
+                                                <span>Shop Now </span>
+                                                <i class="fas fa-angle-right"></i>
+                                            </button>
 
                                     </div>
                                  </div>
@@ -185,7 +190,6 @@
                                  <i class="fa fa-plus" aria-hidden="true"></i>
                               </button>
 
-                              <!-- <input class="form-control input-number qty-input" type="text" name="quantity" value="0"> -->
 
                               <input class="form-control qttotal" type="text" id="order-qty" value="{{ $productt->minimum_qty == null ? '1' : (int)$productt->minimum_qty }}">
                               

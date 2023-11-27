@@ -1404,11 +1404,16 @@ Route::group(['middleware'=>'maintenance'],function(){
         // PRODCT AUTO SEARCH SECTION
         Route::get('/autosearch/product/{slug}','Front\FrontendController@autosearch');
         // PRODCT AUTO SEARCH SECTION ENDS
+        
+        Route::get('search-product-list', 'Front\FrontendController@get_filter_products')->name('search-product-list');
     
         // CATEGORY SECTION
         Route::get('/categories','Front\CatalogController@categories')->name('front.categories');
         Route::get('/category/{category?}/{subcategory?}/{childcategory?}','Front\CatalogController@category')->name('front.category');
         // CATEGORY SECTION ENDS
+        
+        Route::get('/categories','Front\CatalogController@categories')->name('front.categories');
+        
     
         // TAG SECTION
         Route::get('/tag/{slug}','Front\CatalogController@tag')->name('front.tag');

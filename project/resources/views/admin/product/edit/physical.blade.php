@@ -12,7 +12,7 @@
 	<div class="mr-breadcrumb">
 		<div class="row">
 			<div class="col-lg-12">
-					<h4 class="heading"> {{ __('Edit Product') }}<a class="add-btn" href="{{ url()->previous() }}"><i class="fas fa-arrow-left"></i> {{ __('Back') }}</a></h4>
+					<h4 class="heading"> {{ __('Edit Product    ') }}<a class="add-btn" href="{{ url()->previous() }}"><i class="fas fa-arrow-left"></i> {{ __('Back') }}</a></h4>
 					<ul class="links">
 						<li>
 							<a href="{{ route('admin.dashboard') }}">{{ __('Dashboard') }} </a>
@@ -995,21 +995,21 @@
 												</a>
 											</div>
 										</div>
-										<div class="row mb-4">
-											<div class="col-lg-12 mb-2">
-												<div class="left-area">
-													<h4 class="heading">{{ __('Select Brand') }}</h4>
-												</div>
-											</div>
-											<div class="col-lg-12">
-												<select name="brand">
-													<option value="">{{ __('Select Brand') }}</option>
-													@foreach(DB::table('brands')->get() as $brand_data)
-														<option value="{{ $brand_data->id }}" {{$brand_data->id == $data->brand ? "selected":""}}>{{ $brand_data->name }}</option>
-													@endforeach
-												</select>
-											</div>
-										</div>
+										<!--<div class="row mb-4">-->
+										<!--	<div class="col-lg-12 mb-2">-->
+										<!--		<div class="left-area">-->
+										<!--			<h4 class="heading">{{ __('Select Brand') }}</h4>-->
+										<!--		</div>-->
+										<!--	</div>-->
+										<!--	<div class="col-lg-12">-->
+										<!--		<select name="brand">-->
+										<!--			<option value="">{{ __('Select Brand') }}</option>-->
+										<!--			@foreach(DB::table('brands')->get() as $brand_data)-->
+										<!--				<option value="{{ $brand_data->id }}" {{$brand_data->id == $data->brand ? "selected":""}}>{{ $brand_data->name }}</option>-->
+										<!--			@endforeach-->
+										<!--		</select>-->
+										<!--	</div>-->
+										<!--</div>-->
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="left-area">

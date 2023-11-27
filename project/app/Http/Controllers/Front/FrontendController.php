@@ -14,6 +14,7 @@ use App\{
 use App\Models\ArrivalSection;
 use App\Models\Category;
 use App\Models\Rating;
+use App\Models\Enquiry;
 use Illuminate\{
     Http\Request,
     Support\Facades\DB,
@@ -425,8 +426,9 @@ public function currency($id)
 
 
     //Send email to admin
-    public function contactemail(Request $request)
+     public function contactemail(Request $request)
     {
+        // print_r(1);exit;
         $gs = $this->gs;
 
         if($gs->is_capcha == 1)
@@ -444,6 +446,19 @@ public function currency($id)
             }
         }
 
+        $input = [];
+        
+        $input['name'] = $request->name;
+        $input['phone'] = $request->phone;
+        $input['email'] = $request->email;
+        $input['address'] = $request->address;
+        $input['message'] = $request->message;
+        
+         
+
+        $data = new Enquiry();
+        
+        $data->fill($input)->save();
 
         // Logic Section
         $subject = "Email From Of ".$request->name;
@@ -451,7 +466,7 @@ public function currency($id)
         $name = $request->name;
         $phone = $request->phone;
         $from = $request->email;
-        $msg = "Name: ".$name."\nEmail: ".$from."\nPhone: ".$phone."\nMessage: ".$request->text;
+        $msg = "Name: ".$name."\nEmail: ".$from."\nPhone: ".$phone."\nMessage: ".$request->message;
         if($gs->is_smtp)
         {
         $data = [
@@ -614,6 +629,32 @@ public function currency($id)
 
         }
 
+    }
+    
+    function get_filter_products(Request $request){
+        if($request->ajax()){
+            $data_msg = [];
+
+            $prod_name = $request->input('prod_name');
+            
+            if($prod_name == ''){
+                $products = [];
+            }else{
+                $products = Product::select('name')->where('name','like',  '%' . $prod_name .'%')->where('status','1')->take(6)->get();
+            }
+
+            
+
+            // print_r($products);exit;
+            
+            $filter_products = view('frontend.filter-product', compact('products'))->render();
+
+
+            $data_msg['content'] = ['filter_products' => $filter_products];
+            
+            return response()->json($data_msg);
+            
+        }
     }
 
 }

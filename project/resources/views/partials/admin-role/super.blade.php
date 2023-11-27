@@ -386,12 +386,12 @@
         <a href="{{ route('admin-staff-index') }}" class=" wave-effect"><i class="fas fa-user-secret"></i>{{ __('Manage Staffs') }}</a>
     </li>
 
-    <!-- <li>
-        <a href="{{ route('admin-subs-index') }}" class=" wave-effect"><i class="fas fa-users-cog mr-2"></i>{{ __('Subscribers') }}</a>
-    </li>
+    <!-- <li>-->
+    <!--    <a href="{{ route('admin-subs-index') }}" class=" wave-effect"><i class="fas fa-users-cog mr-2"></i>{{ __('Subscribers') }}</a>-->
+    <!--</li>-->
     <li>
         <a href="{{ route('admin-enquiries-index') }}" class=" wave-effect"><i class="fas fa-users-cog mr-2"></i>{{ __('Enquiries') }}</a>
-    </li> -->
+    </li>
 
 
     <li>

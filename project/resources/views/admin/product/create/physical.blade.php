@@ -648,21 +648,21 @@
 											</a>
 										</div>
 									</div>
-									<div class="row mb-4">
-										<div class="col-lg-12 mb-2">
-										<div class="left-area">
-											<h4 class="heading">{{ __('Select Brand') }}</h4>
-										</div>
-										</div>
-										<div class="col-lg-12">
-											<select name="brand">
-												<option value="">{{ __('Select Brand') }}</option>
-												@foreach(DB::table('brands')->get() as $brand_data)
-													<option value="{{ $brand_data->id }}">{{ $brand_data->name }}</option>
-												@endforeach
-											</select>
-										</div>
-									</div>
+									<!--<div class="row mb-4">-->
+									<!--	<div class="col-lg-12 mb-2">-->
+									<!--	<div class="left-area">-->
+									<!--		<h4 class="heading">{{ __('Select Brand') }}</h4>-->
+									<!--	</div>-->
+									<!--	</div>-->
+									<!--	<div class="col-lg-12">-->
+									<!--		<select name="brand">-->
+									<!--			<option value="">{{ __('Select Brand') }}</option>-->
+									<!--			@foreach(DB::table('brands')->get() as $brand_data)-->
+									<!--				<option value="{{ $brand_data->id }}">{{ $brand_data->name }}</option>-->
+									<!--			@endforeach-->
+									<!--		</select>-->
+									<!--	</div>-->
+									<!--</div>-->
 
 									<div class="row">
 										<div class="col-lg-12">

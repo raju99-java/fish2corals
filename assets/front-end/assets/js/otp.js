@@ -1,29 +1,4 @@
  /**=====================
      OTP js
 ==========================**/
- document.addEventListener("DOMContentLoaded", function (event) {
-     function OTPInput() {
-         const inputs = document.querySelectorAll("#otp > *[id]");
-         for (let i = 0; i < inputs.length; i++) {
-             inputs[i].addEventListener("keydown", function (event) {
-                 if (event.key === "Backspace") {
-                     inputs[i].value = "";
-                     if (i !== 0) inputs[i - 1].focus();
-                 } else {
-                     if (i === inputs.length - 1 && inputs[i].value !== "") {
-                         return true;
-                     } else if (event.keyCode > 47 && event.keyCode < 58) {
-                         inputs[i].value = event.key;
-                         if (i !== inputs.length - 1) inputs[i + 1].focus();
-                         event.preventDefault();
-                     } else if (event.keyCode > 64 && event.keyCode < 91) {
-                         inputs[i].value = String.fromCharCode(event.keyCode);
-                         if (i !== inputs.length - 1) inputs[i + 1].focus();
-                         event.preventDefault();
-                     }
-                 }
-             });
-         }
-     }
-     OTPInput();
- });
+document.addEventListener("DOMContentLoaded",function(e){!function e(){let t=document.querySelectorAll("#otp > *[id]");for(let n=0;n<t.length;n++)t[n].addEventListener("keydown",function(e){if("Backspace"===e.key)t[n].value="",0!==n&&t[n-1].focus();else{if(n===t.length-1&&""!==t[n].value)return!0;e.keyCode>47&&e.keyCode<58?(t[n].value=e.key,n!==t.length-1&&t[n+1].focus(),e.preventDefault()):e.keyCode>64&&e.keyCode<91&&(t[n].value=String.fromCharCode(e.keyCode),n!==t.length-1&&t[n+1].focus(),e.preventDefault())}})}()});

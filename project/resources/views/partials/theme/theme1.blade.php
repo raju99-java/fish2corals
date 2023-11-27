@@ -93,7 +93,7 @@
                                         </a>
                                         <div class="banner-detail p-center-left w-75 banner-p-sm mend-auto">
                                             <div>
-                                                <h5 class="fw-light mb-2">{{$arrival->title}}</h5>
+                                                <p class="fw-light mb-2">{{$arrival->title}}</p>
                                                 <h4 class="fw-bold mb-0">{{$arrival->header}}</h4>
                                                 <button onclick="location.href = '{{$arrival->link}}';" class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now 
                                                     <i class="fa-solid fa-chevron-right"></i>
@@ -320,7 +320,7 @@
                                         <br>
                                         <h3 class="mb-1 fw-bold text-white">{{$arrival->header}}</h3>
                                         <br>
-                                         <h4 class="text-content text-white">{{$arrival->details_text}}</h4> 
+                                         <p class="text-content text-white">{{$arrival->details_text}}</p> 
                                         <button class="btn btn-md theme-bg-color text-dark mt-sm-3 mt-1 fw-bold mend-auto" onclick="location.href = '{{$arrival->link}}';">Shop Now</button>
                                     </div>
                                 </div>
@@ -711,12 +711,12 @@
             <section class="product-section-4">
                 <div class="container-fluid-lg">
                     <div class="title">
-                        <h2>Featured @ OceansGarden.com</h2>
-                        <p class="mb-4">Deep Blue Seas LLC, the parent company of Saltwaterfish.com has added a new brand to the
-                            family... Oceans' Garden Aquaculture. At OGA you can find the complete lineup of products from
-                            powerhouse aquaculturists like ORA, Proaquatix, Eye Catching Corals, ACI Aquaculture, and our own
-                            offerings at down to earth prices. We also offer select reef packages from local suppliers that
-                            promise to be the freshest and most cost-effective reef packages in the industry.</p>
+                        <h2>Featured</h2>
+                        <!--<p class="mb-4">Deep Blue Seas LLC, the parent company of Saltwaterfish.com has added a new brand to the-->
+                        <!--    family... Oceans' Garden Aquaculture. At OGA you can find the complete lineup of products from-->
+                        <!--    powerhouse aquaculturists like ORA, Proaquatix, Eye Catching Coral, ACI Aquaculture, and our own-->
+                        <!--    offerings at down to earth prices. We also offer select reef packages from local suppliers that-->
+                        <!--    promise to be the freshest and most cost-effective reef packages in the industry.</p>-->
                     </div>
                     <div class="row">
                         <div class="col-12">

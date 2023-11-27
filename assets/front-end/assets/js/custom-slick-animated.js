@@ -1,10 +1,4 @@
  /**=====================
      Custom Slick Animated js
 ==========================**/
- $('.slider-animate').slick({
-     autoplay: true,
-     speed: 1800,
-     lazyLoad: 'progressive',
-     fade: true,
-     dots: true,
- }).slickAnimation();
+$(".slider-animate").slick({autoplay:!0,speed:1800,lazyLoad:"progressive",fade:!0,dots:!0}).slickAnimation();

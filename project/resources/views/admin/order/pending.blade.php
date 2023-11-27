@@ -37,6 +37,7 @@
                                                             <th>{{ __('Order Number') }}</th>
                                                             <th>{{ __('Total Qty') }}</th>
                                                             <th>{{ __('Total Cost') }}</th>
+                                                            <th>{{ __('Order Status') }}</th>
                                                             <th>{{ __('Options') }}</th>
                                                         </tr>
                                                     </thead>
@@ -176,6 +177,7 @@
                         { data: 'id', name: 'id' },
                         { data: 'totalQty', name: 'totalQty' },
                         { data: 'pay_amount', name: 'pay_amount' },
+                        { data: 'status', name: 'status' },
                         { data: 'action', searchable: false, orderable: false }
                      ],
                language : {

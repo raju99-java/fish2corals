@@ -98,85 +98,87 @@
                </div>
 
                <div class="col-lg-6">
-                  <div class="title d-xxl-none d-block">
-                     <h2>Contact Us</h2>
-                  </div>
-                  <div class="right-sidebar-box">
-                  <!-- @include('includes.admin.form-login') -->
-                  <form class="contactform"  id="contact-form" action="#" method="POST">
-                     @csrf
-                     <div class="row">
-                           <div class="col-xxl-6 col-lg-12 col-sm-6">
-                              <div class="mb-md-4 mb-3 custom-form">
-                                 <label for="exampleFormControlInput" class="form-label">First Name</label>
-                                 <div class="custom-input">
-                                       <input type="text" class="form-control" id="exampleFormControlInput"
-                                       name="first_name" placeholder="{{ __('First Name *') }}" required="">
-                                       <i class="fa-solid fa-user"></i>
-                                 </div>
+                    <div class="title d-xxl-none d-block">
+                        <h2>Contact Us</h2>
+                    </div>
+                    <div class="right-sidebar-box">
+                     <form class="contactform"  id="contact-form" action="{{route('front.contact.submit')}}" method="POST">
+                        @csrf
+                        <div class="row">
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="exampleFormControlInput" class="form-label">Name</label>
+                                    <div class="custom-input">
+                                        <input type="text" class="form-control" id="exampleFormControlInput"
+                                        name="name" placeholder="{{ __('Name *') }}" required="">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="exampleFormControlInput2" class="form-label">Email Address</label>
+                                    <div class="custom-input">
+                                        <input type="email" class="form-control" id="exampleFormControlInput2"
+                                        name="email" placeholder="{{ __('Email Address *') }}" required="">
+                                        <i class="fa-solid fa-envelope"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="exampleFormControlInput3" class="form-label">Phone Number</label>
+                                    <div class="custom-input">
+                                        <input type="text" class="form-control" id="exampleFormControlInput3"
+                                        name="phone" placeholder="{{ __('Phone Number *') }}" required="">
+                                        <i class="fa-solid fa-mobile-screen-button"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-xxl-6 col-lg-12 col-sm-6">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="exampleFormControlInput5" class="form-label">Address</label>
+                                    <div class="custom-input">
+                                        <input type="text" class="form-control" id="exampleFormControlInput5"
+                                        name="address" placeholder="{{ __('Address *') }}" required="">
+                                        <i class="fa-solid fa-map"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="mb-md-4 mb-3 custom-form">
+                                    <label for="exampleFormControlTextarea" class="form-label">Message</label>
+                                    <div class="custom-textarea">
+                                        <textarea class="form-control" id="exampleFormControlTextarea"
+                                        name="message" rows="6" placeholder="{{ __('Your Message *') }}" required=""></textarea>
+                                        <i class="fa-solid fa-message"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if($gs->is_capcha == 1)
+                              <div class="form-input">
+                                 {!! NoCaptcha::display() !!}
+                                 {!! NoCaptcha::renderJs() !!}
+                                 @error('g-recaptcha-response')
+                                 <p class="my-2">{{$message}}</p>
+                                 @enderror
                               </div>
-                           </div>
+                            @endif
 
-                           <div class="col-xxl-6 col-lg-12 col-sm-6">
-                              <div class="mb-md-4 mb-3 custom-form">
-                                 <label for="exampleFormControlInput1" class="form-label">Last Name</label>
-                                 <div class="custom-input">
-                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                       name="last_name" placeholder="{{ __('Last Name *') }}" required="">
-                                       <i class="fa-solid fa-user"></i>
-                                 </div>
-                              </div>
-                           </div>
-
-                           <div class="col-xxl-6 col-lg-12 col-sm-6">
-                              <div class="mb-md-4 mb-3 custom-form">
-                                 <label for="exampleFormControlInput2" class="form-label">Email Address</label>
-                                 <div class="custom-input">
-                                       <input type="email" class="form-control" id="exampleFormControlInput2"
-                                       name="email" placeholder="{{ __('Email Address *') }}" required="">
-                                       <i class="fa-solid fa-envelope"></i>
-                                 </div>
-                              </div>
-                           </div>
-
-                           <div class="col-xxl-6 col-lg-12 col-sm-6">
-                              <div class="mb-md-4 mb-3 custom-form">
-                                 <label for="exampleFormControlInput3" class="form-label">Phone Number</label>
-                                 <div class="custom-input">
-                                       <input type="text" class="form-control" id="exampleFormControlInput3"
-                                       name="phone" placeholder="{{ __('Phone Number *') }}" required="">
-                                       <i class="fa-solid fa-mobile-screen-button"></i>
-                                 </div>
-                              </div>
-                           </div>
-
-                           <div class="col-12">
-                              <div class="mb-md-4 mb-3 custom-form">
-                                 <label for="exampleFormControlTextarea" class="form-label">Message</label>
-                                 <div class="custom-textarea">
-                                       <textarea class="form-control" id="exampleFormControlTextarea"
-                                       name="text" rows="6" placeholder="{{ __('Your Message *') }}" required=""></textarea>
-                                       <i class="fa-solid fa-message"></i>
-                                 </div>
-                              </div>
-                           </div>
-
-                           @if($gs->is_capcha == 1)
-                           <div class="form-input">
-                              {!! NoCaptcha::display() !!}
-                              {!! NoCaptcha::renderJs() !!}
-                              @error('g-recaptcha-response')
-                              <p class="my-2">{{$message}}</p>
-                              @enderror
-                           </div>
-                           @endif
-
-                           <input type="hidden" name="to" value="{{ $ps->contact_email }}">
-                     </div>
-                     <button class="btn btn-animation btn-md fw-bold ms-auto" name="submit" type="submit">Send Message</button>
-                  </form>
-                  </div>
-               </div>
+                            <input type="hidden" name="to" value="{{ $ps->contact_email }}">
+                        </div>
+                        <button class="btn btn-animation btn-md fw-bold ms-auto" name="submit" type="submit">Send Message</button>
+                     </form>
+                    </div>
+                </div>
+               
          </div>
       </div>
    </section>

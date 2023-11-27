@@ -49,13 +49,12 @@
                         <div class="center-box">
                            <form id="searchForm" class="search-form form-inline search-pill-shape" action="{{ route('front.category', [Request::route('category'),Request::route('subcategory'),Request::route('childcategory')]) }}" method="GET">
                               <div class="searchbar-box-2 input-group d-xl-flex d-none">
-                                 
                                     <button class="btn search-icon" type="button">
                                        <i class="iconly-Search icli"></i>
                                     </button>
                                     <input type="text" id="prod_name" class="form-control" name="search" placeholder="Search for products..." value="{{ request()->input('search') }}" />
-                                    <button class="btn search-button" type="submit">Search</button>
-                                 
+                                    <button class="btn search-button" type="submit">Search</button> 
+                                    <div id="search_list" class="search-dropdown-box position-absolute"></div>    
                               </div>
                            </form>
                         </div>
@@ -79,3 +78,5 @@
          </div>
    </div>
 </div>
+
+
