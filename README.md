@@ -1,3 +1,3 @@
 # fish2corals
 
-Check it : https://fish.besthr.in/
+Check it : https://fish2coral.com/
